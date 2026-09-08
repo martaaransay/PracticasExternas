@@ -1,0 +1,10 @@
+name: pruebas
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10
+  - bioconda::integron_finder
+  # - conda-forge::ncbi-datasets-cli
+  - conda-forge::quarto

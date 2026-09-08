@@ -1,0 +1,13 @@
+project:
+  type: book
+
+book:
+  title: "Diario Prácticas"
+  chapters:
+    - index.qmd
+    - semana_01.qmd
+    - semana_02.qmd
+
+format:
+  html:
+    theme: cosmo
