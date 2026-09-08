@@ -1,0 +1,6 @@
+# Detalles del Proyecto {.unnumbered}
+
+* **Título:** Desarrollo de un pipeline bioinformático para la clasificación
+de integrones de clase 1 por especie y ambiente.
+* **Autora:** Marta Aransay Sáenz
+

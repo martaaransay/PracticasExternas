@@ -1,0 +1,9 @@
+# integron_finder 2.0.6 
+# cmd: integron_finder --promoter-attI --outdir results/prueba1_Klebsiella data/Klebsiella/ncbi_dataset/data/GCF_060059605.1/GCF_060059605.1_ASM6005960v1_genomic.fna
+ID_replicon	CALIN	complete	In0	topology	size
+NZ_CM189240.1	0	0	0	lin	5380807
+NZ_JCBPDJ010000002.1	0	0	0	lin	112549
+NZ_JCBPDJ010000003.1	0	1	0	lin	121549
+NZ_JCBPDJ010000004.1	0	0	0	lin	13254
+NZ_JCBPDJ010000005.1	0	0	0	lin	42742
+NZ_JCBPDJ010000006.1	0	0	0	lin	51478

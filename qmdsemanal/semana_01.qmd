@@ -1,10 +1,145 @@
 ---
 title: "07-11 Septiembre"
+number-sections: false
 ---
 
-## Lunes 7
--
+# Lunes 07/09
 
-## Martes 8
+Lectura inicial:
 
-prueba
+- [Néron, B., Littner, E., Haudiquet, M., Perrin, A., Cury, J., & Rocha, E. P. C. (2022). IntegronFinder 2.0: Identification and Analysis of Integrons across Bacteria, with a Focus on Antibiotic Resistance in Klebsiella. Microorganisms, 10(4), 700.](https://doi.org/10.3390/microorganisms10040700)
+- [Moura, A., Jové, T., Ploy, M. C., Henriques, I., & Correia, A. (2012). Diversity of gene cassette promoters in class 1 integrons from wastewater environments. Applied and environmental microbiology, 78(15), 5413–5416.](https://doi.org/10.1128/AEM.00042-12)
+- [Vinué, L., Jové, T., Torres, C., & Ploy, M. C. (2011). Diversity of class 1 integron gene cassette Pc promoter variants in clinical Escherichia coli strains and description of a new P2 promoter variant. International journal of antimicrobial agents, 38(6), 526–529.](https://doi.org/10.1016/j.ijantimicag.2011.07.007)
+
+# Martes 08/09
+
+### Organización inicial 
+Creación del [repositorio de github](https://github.com/martaaransay/PracticasExternas)
+
+Generación de un entorno de prueba: he hecho un environment_pruebas.yml para poder generar un entorno conda de pruebas.
+Comandos para actualizar el entorno (general)
+
+```bash
+# El archivo con el environment se llama así:
+conda env create -f environment_pruebas.yml
+# Activación del entorno creado (se pone en el nombre lo del name de la cabecera del archivo yml)
+conda activate pruebas
+# Para actualizar el entorno si se han cambiado los paquetes:
+conda env update -f environment_pruebas.yml --prune
+# --prune elimina del entorno los paquetes que hayas quitado del yml, sino no borra 
+
+``` 
+- **FIXME** He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)
+
+### Primeras pruebas con Integron_Finder
+
+Primero descargamos algunos genomas (los que sea) ej. Klebsiella, para ello metemos en el yml para descargar vía NCBI
+(  - conda-forge::ncbi-datasets-cli)
+
+Para descargar genomas:
+
+```bash
+###para limitar aun más el numeor de genomas que descarga, pongo solo los q se hayan subido a partir del lunes
+datasets download genome taxon "Klebsiella pneumoniae" \
+--dehydrated  \
+--assembly-level complete \
+--assembly-source RefSeq \
+--released-after "08/09/2026" \
+--filename Klebsiella_complete.zip
+
+# --dehydrated -> Cuando las descargas directas en formato .zip dan errores, NCBI recomienda descargar primero solo metadatos y luego rellenarlo (con rehydrate)
+
+
+# Descomprimimos el archivo
+unzip Klebsiella_complete.zip -d Klebsiella
+
+# Y ahora usamos el rehydrate:
+datasets rehydrate --directory Klebsiella
+
+# Se guardan los .fna en /Klebsiella/ncbi_dataset/data/<accession>/*.fna
+
+## HE HECHO LO DE MÁS ABAJO!!!!!!
+#Para ejecutar IntegronFinder:
+integron_finder --outdir results/prueba1_Klebsiella \
+Klebsiella/ncbi_dataset/data/*/*.fna
+
+# TENER EN CUENTA FLAGS QUE NO HE USADO AL SER UNA PRUEBA:
+# --local-max -> busqueda más sensitive (local detection, slower)
+# --func-annot -> anota funcionalmente las cassettes
+
+## PARA que tarde menos y al ser una prueba, hago un bucle con los primeros 5 genomas:
+counter=0
+for f in data/Klebsiella/ncbi_dataset/data/*/*.fna; do
+  if [ "$counter" -eq 5 ]; then
+    break
+  fi
+  integron_finder --promoter-attI --outdir results/prueba1_Klebsiella "$f"
+  ((counter=counter+1))
+done
+```
+
+OUTPUT DE IntegronFinder:
+- **mysequences.integrons** : A file with all integrons and their elements detected in all sequences in the input file.
+Ese es el archivo que interesa, de ahí hay que buscar la fila que tenga en element -> Pc_int1 que es el promotor
+
+#### Pasar del integronfinder -> sequencia que se corresponde con el promotor
+
+Usando la herramienta seqkit (añadida al .yml:   - bioconda::seqkit), descargamos esa zona del genoma:
+
+```bash
+# EJEMPLO DE ESA LINEA en el output de IntegronFinder
+# integron_01	NZ_PV022879.1	Pc_int1	29735	29761	-1	NA	Promoter	Pc_1	NA	complete	Yes	NA	lin
+## para dar alog más de margen se extraen -10 y +10 nt extra ####FIXME ->????
+fasta=data/Klebsiella/ncbi_dataset/data/GCF_059958715.2/GCF_059958715.2_ASM5995871v2_genomic.fna
+seqkit subseq --chr NZ_PV022879.1 -r 29725:29771 \
+  $fasta \
+  | seqkit seq -r -p  > pc_region.fasta
+
+```
+## FIXME
+
+aquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es
+
+## Clasificación de promotores
+Información obtenida de:
+https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000793
+
+- **PcS:**
+
+Acc Number or reference: U12441 -> 24.3% occurence
+
+TTGACA 17 TAAACT
+
+- **PcW:**
+
+Acc Number or reference: U49101 -> 41.7% occurence
+
+TGGACA 17 TAAGCT
+
+- **PcH1:**
+
+Acc Number or reference: M95287  -> 28% occurence
+
+TGGACA 17 TAAACT
+
+- **PcH2:**
+
+Acc Number or reference: M95U13880  -> 4.4% occurence
+
+TTGACA 17 TAAGCT
+
+- **P2:**
+
+Acc Number or reference: U42226  -> 8.7% occurence
+
+TTGTTA 17 TACAGT
+
+## Integrall
+
+He calculado la abundancia relativa de la primera sheet de la base de datos de Integrall:
+(PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23.xlsx)
+
+PERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por deleted (por eso el v2 en: 
+PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )
+
+Realizado en el script -> PracticasExternas/scripts/clasificacion_inicial_Integrall.py

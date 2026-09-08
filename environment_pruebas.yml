@@ -5,6 +5,13 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  - bioconda::integron_finder
-  # - conda-forge::ncbi-datasets-cli
   - conda-forge::quarto
+  - bioconda::integron_finder
+  - bioconda::seqkit
+  - conda-forge::ncbi-datasets-cli
+  - perl
+  - perl-net-ssleay
+  - perl-io-socket-ssl
+  - pandas
+  - conda-forge::openpyxl
+  - bioconda::entrez-direct # para efetch

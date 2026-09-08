@@ -1,0 +1,82 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Diario Prácticas",
+    "section": "",
+    "text": "Detalles del Proyecto\n\nTítulo: Desarrollo de un pipeline bioinformático para la clasificación de integrones de clase 1 por especie y ambiente.\nAutora: Marta Aransay Sáenz",
+    "crumbs": [
+      "Detalles del Proyecto"
+    ]
+  },
+  {
+    "objectID": "semana_01.html",
+    "href": "semana_01.html",
+    "title": "07-11 Septiembre",
+    "section": "",
+    "text": "Lunes 07/09\nLectura inicial:",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#fixme",
+    "href": "semana_01.html#fixme",
+    "title": "07-11 Septiembre",
+    "section": "FIXME",
+    "text": "FIXME\naquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#clasificación-de-promotores",
+    "href": "semana_01.html#clasificación-de-promotores",
+    "title": "07-11 Septiembre",
+    "section": "Clasificación de promotores",
+    "text": "Clasificación de promotores\nInformación obtenida de: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000793\n\nPcS:\n\nAcc Number or reference: U12441 -&gt; 24.3% occurence TTGACA 17 TAAACT\n\nPcW:\n\nAcc Number or reference: U49101 -&gt; 41.7% occurence TGGACA 17 TAAGCT\n\nPcH1:\n\nAcc Number or reference: M95287 -&gt; 28% occurence TGGACA 17 TAAACT\n\nPcH2:\n\nAcc Number or reference: M95U13880 -&gt; 4.4% occurence TTGACA 17 TAAGCT\n\nP2:\n\nAcc Number or reference: U42226 -&gt; 8.7% occurence TTGTTA 17 TACAGT",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#integrall",
+    "href": "semana_01.html#integrall",
+    "title": "07-11 Septiembre",
+    "section": "Integrall",
+    "text": "Integrall\nHe calculado la abundancia relativa de la primera sheet de la base de datos de Integrall: (PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23.xlsx)\nPERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por deleted (por eso el v2 en: PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )\nRealizado en el script -&gt; PracticasExternas/scripts/clasificacion_inicial_Integrall.py",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_02.html",
+    "href": "semana_02.html",
+    "title": "2  14-18 Septiembre",
+    "section": "",
+    "text": "2.1 Lunes 14",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>14-18 Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_02.html#lunes-14",
+    "href": "semana_02.html#lunes-14",
+    "title": "2  14-18 Septiembre",
+    "section": "",
+    "text": "2.1.0.1 prueba1",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>14-18 Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_02.html#martes-15",
+    "href": "semana_02.html#martes-15",
+    "title": "2  14-18 Septiembre",
+    "section": "2.2 Martes 15",
+    "text": "2.2 Martes 15\nprueba",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>14-18 Septiembre</span>"
+    ]
+  }
+]

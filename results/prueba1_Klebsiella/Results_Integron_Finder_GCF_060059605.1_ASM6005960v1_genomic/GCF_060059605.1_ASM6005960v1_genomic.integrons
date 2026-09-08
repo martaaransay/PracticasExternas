@@ -1,0 +1,15 @@
+# integron_finder 2.0.6 
+# cmd: integron_finder --promoter-attI --outdir results/prueba1_Klebsiella data/Klebsiella/ncbi_dataset/data/GCF_060059605.1/GCF_060059605.1_ASM6005960v1_genomic.fna
+ID_integron	ID_replicon	element	pos_beg	pos_end	strand	evalue	type_elt	annotation	model	type	default	distance_2attC	considered_topology
+integron_01	NZ_JCBPDJ010000003.1	NZ_JCBPDJ010000003.1_48	37172	37519	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	attc_001	37622	37681	-1	8.1e-08	attC	attC	attc_4	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	NZ_JCBPDJ010000003.1_49	37636	38481	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	NZ_JCBPDJ010000003.1_50	38662	39135	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	attc_002	39148	39261	-1	0.00017	attC	attC	attc_4	complete	Yes	1467.0	lin
+integron_01	NZ_JCBPDJ010000003.1	NZ_JCBPDJ010000003.1_51	39268	39720	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	attc_003	39751	39822	-1	1.6e-06	attC	attC	attc_4	complete	Yes	490.0	lin
+integron_01	NZ_JCBPDJ010000003.1	NZ_JCBPDJ010000003.1_52	39817	40416	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	attI1	40524	40582	-1	NA	attI	attI_1	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	P_intI1	40607	40641	1	NA	Promoter	Pint_1	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	Pc_int1	40633	40659	-1	NA	Promoter	Pc_1	NA	complete	Yes	NA	lin
+integron_01	NZ_JCBPDJ010000003.1	NZ_JCBPDJ010000003.1_53	40663	41676	1	1.2999999999999998e-24	protein	intI	intersection_tyr_intI	complete	Yes	NA	lin

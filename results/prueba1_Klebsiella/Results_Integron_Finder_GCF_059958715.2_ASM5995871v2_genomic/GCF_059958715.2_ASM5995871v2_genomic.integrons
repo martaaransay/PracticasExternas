@@ -1,0 +1,14 @@
+# integron_finder 2.0.6 
+# cmd: integron_finder --promoter-attI --outdir results/prueba1_Klebsiella data/Klebsiella/ncbi_dataset/data/GCF_059958715.2/GCF_059958715.2_ASM5995871v2_genomic.fna
+ID_integron	ID_replicon	element	pos_beg	pos_end	strand	evalue	type_elt	annotation	model	type	default	distance_2attC	considered_topology
+integron_01	NZ_PV022879.1	NZ_PV022879.1_32	25443	25790	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	attc_001	25893	25952	-1	0.001	attC	attC	attc_4	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	NZ_PV022879.1_33	26493	27848	1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	NZ_PV022879.1_34	27924	28703	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	attc_002	28719	28778	-1	4.5e-06	attC	attC	attc_4	complete	Yes	2767.0	lin
+integron_01	NZ_PV022879.1	attc_003	29039	29128	-1	0.00013	attC	attC	attc_4	complete	Yes	261.0	lin
+integron_01	NZ_PV022879.1	NZ_PV022879.1_35	29123	29620	-1	NA	protein	protein	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	attI1	29626	29684	-1	NA	attI	attI_1	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	P_intI1	29709	29743	1	NA	Promoter	Pint_1	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	Pc_int1	29735	29761	-1	NA	Promoter	Pc_1	NA	complete	Yes	NA	lin
+integron_01	NZ_PV022879.1	NZ_PV022879.1_36	29765	30652	1	8.4e-25	protein	intI	intersection_tyr_intI	complete	Yes	NA	lin
