@@ -9,9 +9,20 @@ encabezado = 3 # Número de líneas en el encabezado a skippear
 df = pd.read_excel(path, skiprows = encabezado) # Lectura del excel
 df.columns = df.columns.str.strip() # Limpieza de columnas
 
-def abundancia_pc(df, columnas, path_out = "./results/pruebas_inicial_integrall/abundancia_pc_especie.xlsx"):
+def abundancia_pc(df, columnas, 
+                  path_out = "./results/pruebas_inicial_integrall/abundancia_pc_especie.xlsx"):
     """
-    Función para generar un .xlsx con el conteo de promotores sobreuna tabla...
+    Genera un xlsx de abundancia de promotores por especie y un conjunto de gráficos.
+
+    Args
+    ----------
+    df : pd.DataFrame
+        Tabla de entrada con dos columnas (especies y Pcs)
+    columnas : list[str]
+        Lista con el nombre de la columna que contiene las especies y la columna que
+        contiene los Pcs.
+    path_out : str, optional
+        Ruta del archivo .xlsx de salida donde se guardarán las tablas de conteo.
     """
     tabla_conteo = pd.crosstab(df[columnas[0]], df[columnas[1]]) # Conteo del número de Pc - especie
     # Columna con el conteo total de Pc por especie
