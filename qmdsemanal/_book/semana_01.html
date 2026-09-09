@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>07-11 Septiembre – Diario Prácticas</title>
+<title>Semana del 07 al 11 de Septiembre – Diario Prácticas</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./semana_01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">07-11 Septiembre</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./semana_01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Semana del 07 al 11 de Septiembre</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./semana_01.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">07-11 Septiembre</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Semana del 07 al 11 de Septiembre</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,9 +178,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#organización-inicial" id="toc-organización-inicial" class="nav-link" data-scroll-target="#organización-inicial">Organización inicial</a></li>
   <li><a href="#primeras-pruebas-con-integron_finder" id="toc-primeras-pruebas-con-integron_finder" class="nav-link" data-scroll-target="#primeras-pruebas-con-integron_finder">Primeras pruebas con Integron_Finder</a></li>
-  <li><a href="#fixme" id="toc-fixme" class="nav-link" data-scroll-target="#fixme">FIXME</a></li>
   <li><a href="#clasificación-de-promotores" id="toc-clasificación-de-promotores" class="nav-link" data-scroll-target="#clasificación-de-promotores">Clasificación de promotores</a></li>
   <li><a href="#integrall" id="toc-integrall" class="nav-link" data-scroll-target="#integrall">Integrall</a></li>
+  </ul></li>
+  <li><a href="#miércoles-0909" id="toc-miércoles-0909" class="nav-link" data-scroll-target="#miércoles-0909">Miércoles 09/09</a>
+  <ul class="collapse">
+  <li><a href="#tarea-1---exploración-de-la-base-de-datos-de-integrall" id="toc-tarea-1---exploración-de-la-base-de-datos-de-integrall" class="nav-link" data-scroll-target="#tarea-1---exploración-de-la-base-de-datos-de-integrall">Tarea 1 -&gt; Exploración de la base de datos de Integrall</a></li>
+  <li><a href="#tarea-2---descarga-automatizada-de-genomas-desde-ncbi" id="toc-tarea-2---descarga-automatizada-de-genomas-desde-ncbi" class="nav-link" data-scroll-target="#tarea-2---descarga-automatizada-de-genomas-desde-ncbi">Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -190,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">07-11 Septiembre</span></h1>
+<h1 class="title"><span class="chapter-title">Semana del 07 al 11 de Septiembre</span></h1>
 </div>
 
 
@@ -222,74 +226,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="organización-inicial">Organización inicial</h3>
 <p>Creación del <a href="https://github.com/martaaransay/PracticasExternas">repositorio de github</a></p>
 <p>Generación de un entorno de prueba: he hecho un environment_pruebas.yml para poder generar un entorno conda de pruebas. Comandos para actualizar el entorno (general)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El archivo con el environment se llama así:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment_pruebas.yml</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Activación del entorno creado (se pone en el nombre lo del name de la cabecera del archivo yml)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pruebas</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Para actualizar el entorno si se han cambiado los paquetes:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env update <span class="at">-f</span> environment_pruebas.yml <span class="at">--prune</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --prune elimina del entorno los paquetes que hayas quitado del yml, sino no borra </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># El archivo con el environment se llama así:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment_pruebas.yml</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Activación del entorno creado (se pone en el nombre lo del name de la cabecera del archivo yml)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ex">conda</span> activate pruebas</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Para actualizar el entorno si se han cambiado los paquetes:</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ex">conda</span> env update <span class="at">-f</span> environment_pruebas.yml <span class="at">--prune</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># --prune elimina del entorno los paquetes que hayas quitado del yml, sino no borra </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><strong>FIXME</strong> He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)</li>
+<li><span style="color: red;"><strong>FIXME</strong></span> He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)</li>
 </ul>
 </section>
 <section id="primeras-pruebas-con-integron_finder" class="level3">
 <h3 class="anchored" data-anchor-id="primeras-pruebas-con-integron_finder">Primeras pruebas con Integron_Finder</h3>
 <p>Primero descargamos algunos genomas (los que sea) ej. Klebsiella, para ello metemos en el yml para descargar vía NCBI ( - conda-forge::ncbi-datasets-cli)</p>
 <p>Para descargar genomas:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">###para limitar aun más el numeor de genomas que descarga, pongo solo los q se hayan subido a partir del lunes</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">datasets</span> download genome taxon <span class="st">"Klebsiella pneumoniae"</span> <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>--dehydrated  <span class="dt">\</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>--assembly-level complete <span class="dt">\</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>--assembly-source RefSeq <span class="dt">\</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>--released-after <span class="st">"08/09/2026"</span> <span class="dt">\</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>--filename Klebsiella_complete.zip</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># --dehydrated -&gt; Cuando las descargas directas en formato .zip dan errores, NCBI recomienda descargar primero solo metadatos y luego rellenarlo (con rehydrate)</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Descomprimimos el archivo</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> Klebsiella_complete.zip <span class="at">-d</span> Klebsiella</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Y ahora usamos el rehydrate:</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">datasets</span> rehydrate <span class="at">--directory</span> Klebsiella</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Se guardan los .fna en /Klebsiella/ncbi_dataset/data/&lt;accession&gt;/*.fna</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">## HE HECHO LO DE MÁS ABAJO!!!!!!</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Para ejecutar IntegronFinder:</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">integron_finder</span> <span class="at">--outdir</span> results/prueba1_Klebsiella <span class="dt">\</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Klebsiella/ncbi_dataset/data/<span class="pp">*</span>/<span class="pp">*</span>.fna</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># TENER EN CUENTA FLAGS QUE NO HE USADO AL SER UNA PRUEBA:</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># --local-max -&gt; busqueda más sensitive (local detection, slower)</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># --func-annot -&gt; anota funcionalmente las cassettes</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">## PARA que tarde menos y al ser una prueba, hago un bucle con los primeros 5 genomas:</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="va">counter</span><span class="op">=</span>0</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> data/Klebsiella/ncbi_dataset/data/<span class="pp">*</span>/<span class="pp">*</span>.fna<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$counter</span><span class="st">"</span> <span class="ot">-eq</span> 5 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="ex">integron_finder</span> <span class="at">--promoter-attI</span> <span class="at">--outdir</span> results/prueba1_Klebsiella <span class="st">"</span><span class="va">$f</span><span class="st">"</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">((</span><span class="va">counter</span><span class="op">=</span><span class="va">counter</span><span class="op">+</span><span class="dv">1</span><span class="kw">))</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">###para limitar aun más el numeor de genomas que descarga, pongo solo los q se hayan subido a partir del lunes</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">datasets</span> download genome taxon <span class="st">"Klebsiella pneumoniae"</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>--dehydrated  <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>--assembly-level complete <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>--assembly-source RefSeq <span class="dt">\</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>--released-after <span class="st">"08/09/2026"</span> <span class="dt">\</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>--filename Klebsiella_complete.zip</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># --dehydrated -&gt; Cuando las descargas directas en formato .zip dan errores, NCBI recomienda descargar primero solo metadatos y luego rellenarlo (con rehydrate)</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co"># Descomprimimos el archivo</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="fu">unzip</span> Klebsiella_complete.zip <span class="at">-d</span> Klebsiella</span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># Y ahora usamos el rehydrate:</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="ex">datasets</span> rehydrate <span class="at">--directory</span> Klebsiella</span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># Se guardan los .fna en /Klebsiella/ncbi_dataset/data/&lt;accession&gt;/*.fna</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">## HE HECHO LO DE MÁS ABAJO!!!!!!</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#Para ejecutar IntegronFinder:</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="ex">integron_finder</span> <span class="at">--outdir</span> results/prueba1_Klebsiella <span class="dt">\</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>Klebsiella/ncbi_dataset/data/<span class="pp">*</span>/<span class="pp">*</span>.fna</span>
+<span id="cb2-24"><a href="#cb2-24"></a></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co"># TENER EN CUENTA FLAGS QUE NO HE USADO AL SER UNA PRUEBA:</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co"># --local-max -&gt; busqueda más sensitive (local detection, slower)</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co"># --func-annot -&gt; anota funcionalmente las cassettes</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">## PARA que tarde menos y al ser una prueba, hago un bucle con los primeros 5 genomas:</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="va">counter</span><span class="op">=</span>0</span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="cf">for</span> f <span class="kw">in</span> data/Klebsiella/ncbi_dataset/data/<span class="pp">*</span>/<span class="pp">*</span>.fna<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$counter</span><span class="st">"</span> <span class="ot">-eq</span> 5 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>    <span class="cf">break</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>  <span class="cf">fi</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>  <span class="ex">integron_finder</span> <span class="at">--promoter-attI</span> <span class="at">--outdir</span> results/prueba1_Klebsiella <span class="st">"</span><span class="va">$f</span><span class="st">"</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>  <span class="kw">((</span><span class="va">counter</span><span class="op">=</span><span class="va">counter</span><span class="op">+</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>OUTPUT DE IntegronFinder: - <strong>mysequences.integrons</strong> : A file with all integrons and their elements detected in all sequences in the input file. Ese es el archivo que interesa, de ahí hay que buscar la fila que tenga en element -&gt; Pc_int1 que es el promotor</p>
 <section id="pasar-del-integronfinder---sequencia-que-se-corresponde-con-el-promotor" class="level4">
 <h4 class="anchored" data-anchor-id="pasar-del-integronfinder---sequencia-que-se-corresponde-con-el-promotor">Pasar del integronfinder -&gt; sequencia que se corresponde con el promotor</h4>
 <p>Usando la herramienta seqkit (añadida al .yml: - bioconda::seqkit), descargamos esa zona del genoma:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EJEMPLO DE ESA LINEA en el output de IntegronFinder</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># integron_01   NZ_PV022879.1   Pc_int1 29735   29761   -1  NA  Promoter    Pc_1    NA  complete    Yes NA  lin</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">## para dar alog más de margen se extraen -10 y +10 nt extra ####FIXME -&gt;????</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">fasta</span><span class="op">=</span>data/Klebsiella/ncbi_dataset/data/GCF_059958715.2/GCF_059958715.2_ASM5995871v2_genomic.fna</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> subseq <span class="at">--chr</span> NZ_PV022879.1 <span class="at">-r</span> 29725:29771 <span class="dt">\</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">$fasta</span> <span class="dt">\</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="ex">seqkit</span> seq <span class="at">-r</span> <span class="at">-p</span>  <span class="op">&gt;</span> pc_region.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="fixme" class="level2">
-<h2 class="anchored" data-anchor-id="fixme">FIXME</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># EJEMPLO DE ESA LINEA en el output de IntegronFinder</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># integron_01   NZ_PV022879.1   Pc_int1 29735   29761   -1  NA  Promoter    Pc_1    NA  complete    Yes NA  lin</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">## para dar alog más de margen se extraen -10 y +10 nt extra ####FIXME -&gt;????</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="va">fasta</span><span class="op">=</span>data/Klebsiella/ncbi_dataset/data/GCF_059958715.2/GCF_059958715.2_ASM5995871v2_genomic.fna</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">seqkit</span> subseq <span class="at">--chr</span> NZ_PV022879.1 <span class="at">-r</span> 29725:29771 <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="va">$fasta</span> <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">|</span> <span class="ex">seqkit</span> seq <span class="at">-r</span> <span class="at">-p</span>  <span class="op">&gt;</span> pc_region.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><span style="color: red;"><strong>FIXME:</strong></span></p>
 <p>aquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es</p>
+</section>
 </section>
 <section id="clasificación-de-promotores" class="level2">
 <h2 class="anchored" data-anchor-id="clasificación-de-promotores">Clasificación de promotores</h2>
@@ -297,29 +299,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>PcS:</strong></li>
 </ul>
-<p>Acc Number or reference: U12441 -&gt; 24.3% occurence TTGACA 17 TAAACT</p>
+<p>Acc Number or reference: U12441 -&gt; 24.3% occurence</p>
+<p>TTGACA 17 TAAACT</p>
 <ul>
 <li><strong>PcW:</strong></li>
 </ul>
-<p>Acc Number or reference: U49101 -&gt; 41.7% occurence TGGACA 17 TAAGCT</p>
+<p>Acc Number or reference: U49101 -&gt; 41.7% occurence</p>
+<p>TGGACA 17 TAAGCT</p>
 <ul>
 <li><strong>PcH1:</strong></li>
 </ul>
-<p>Acc Number or reference: M95287 -&gt; 28% occurence TGGACA 17 TAAACT</p>
+<p>Acc Number or reference: M95287 -&gt; 28% occurence</p>
+<p>TGGACA 17 TAAACT</p>
 <ul>
 <li><strong>PcH2:</strong></li>
 </ul>
-<p>Acc Number or reference: M95U13880 -&gt; 4.4% occurence TTGACA 17 TAAGCT</p>
+<p>Acc Number or reference: M95U13880 -&gt; 4.4% occurence</p>
+<p>TTGACA 17 TAAGCT</p>
 <ul>
 <li><strong>P2:</strong></li>
 </ul>
-<p>Acc Number or reference: U42226 -&gt; 8.7% occurence TTGTTA 17 TACAGT</p>
+<p>Acc Number or reference: U42226 -&gt; 8.7% occurence</p>
+<p>TTGTTA 17 TACAGT</p>
 </section>
 <section id="integrall" class="level2">
 <h2 class="anchored" data-anchor-id="integrall">Integrall</h2>
 <p>He calculado la abundancia relativa de la primera sheet de la base de datos de Integrall: (PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23.xlsx)</p>
 <p>PERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por deleted (por eso el v2 en: PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )</p>
-<p>Realizado en el script -&gt; PracticasExternas/scripts/clasificacion_inicial_Integrall.py</p>
+<p>Realizado en el script -&gt; ./scripts/T1_abundancia_Integrall.py</p>
+</section>
+</section>
+<section id="miércoles-0909" class="level1">
+<h1>Miércoles 09/09</h1>
+<section id="tarea-1---exploración-de-la-base-de-datos-de-integrall" class="level2">
+<h2 class="anchored" data-anchor-id="tarea-1---exploración-de-la-base-de-datos-de-integrall">Tarea 1 -&gt; Exploración de la base de datos de Integrall</h2>
+<p>OBJETIVOS:</p>
+<ul>
+<li><p>T1.1 Extraer y filtrar las entradas correspondientes a integrones de clase 1. Clasificar por especies con especial interés en las cinco especies ESKAPEE</p></li>
+<li><p>T1.2 Calcular la abundancia relativa de Pc 4</p></li>
+</ul>
+<p>He añadido gráfico de la tabla de conteo general, no solo de ESKAPEE. Además, he hecho la función generalizable por si se necesita usar más adelante Añadido al script (./scripts/T1_abundancia_Integrall.py)</p>
+</section>
+<section id="tarea-2---descarga-automatizada-de-genomas-desde-ncbi" class="level2">
+<h2 class="anchored" data-anchor-id="tarea-2---descarga-automatizada-de-genomas-desde-ncbi">Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI</h2>
+<p>OBJETIVOS:</p>
+<ul>
+<li><p>T2.1 Definir los criterios de filtrado de genomas</p></li>
+<li><p>T2.2 Desarrollar un script de descarga reproducible y automatizada con NCBI Datasets, adaptado a los criterios definidos</p></li>
+</ul>
+<p><a href="https://github.com/ncbi/datasets">Guía para usar datasets</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>FLAGS QUE PUEDE TENER EL COMANDO DE datasets:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>–annotated Limit to annotated genomes</p>
+<p>–assembly-level string Limit to genomes at one or more assembly levels (comma-separated): * chromosome * complete * contig * scaffold (default “[]”)</p>
+<p>–assembly-source string Limit to ‘RefSeq’ (GCF_) or ‘GenBank’ (GCA_) genomes (default “all”)</p>
+<p>–assembly-version string Optionally return “all” assembly accession versions * all: current assembly versions + all previous versions * current: current assembly versions, plus previous versions only if paired with a current version (default)</p>
+<p>–chromosomes strings Limit to a specified, comma-delimited list of chromosomes, or ‘all’ for all chromosomes</p>
+<p>–dehydrated Download a dehydrated zip archive including the data report and locations of data files (use the rehydrate command to retrieve data files).</p>
+<p>–exclude-atypical Exclude atypical assemblies</p>
+<p>–exclude-multi-isolate Exclude assemblies from multi-isolate projects –fast-zip-validation Skip zip checksum validation after download</p>
+<p>–from-type Only return records with type material</p>
+<p>–include string(,string) Specify the data files to include (comma-separated). * genome: genomic sequence * rna: transcript * protein: amino acid sequences * cds: nucleotide coding sequences * gff3: general feature file * gtf: gene transfer format * gbff: GenBank flat file * seq-report: sequence report file * all: include all available file types (equivalent to genome,protein,cds,gff3,gtf,gbff,rna,seq-report) * none: do not retrieve any sequence files (default [genome])</p>
+<p>–mag string Limit to metagenome assembled genomes (only) or remove them from the results (exclude) (default “all”)</p>
+<p>–preview Show information about the requested data package</p>
+<p>–reference Limit to reference genomes</p>
+<p>–released-after string Limit to genomes released on or after a specified date (free format, ISO 8601 YYYY-MM-DD recommended)</p>
+<p>–released-before string Limit to genomes released on or before a specified date (free format, ISO 8601 YYYY-MM-DD recommended)</p>
+<p>–search strings Limit results to genomes with specified text in the searchable fields: species and infraspecies, assembly name and submitter. To search multiple strings, use the flag multiple times.</p>
+</div>
+</div>
+</div>
+<p>Tengo que generar un script que permita hacer una descarga reproducible y automatizaba con NCBI datasets y dehyrated (importante!) - algoq ue permita paralelizar. quiero que la orden de bajar se pueda hacer desde un bioproyecto (por ejemplo) o de otra forma</p>
+<p>De ifnformación sobre metodologái tengo esto: Para la obtención de los genomas, la descarga se realizará con la herramienta Datasets de NCBI (7), usando el modo dehydrated para paralelizar la obtención por bloques. Se incluirán genomas cerrados, scaffolds y contigs, aplicando como filtro principal criterios de calidad del ensamblaje (nivel de ensamblaje, contigüidad y contaminación). pero me gustaria que los criterios rollo (scaffolds, contigs… se puedan decidir)</p>
 
 
 </section>

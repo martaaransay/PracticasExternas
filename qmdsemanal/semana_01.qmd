@@ -1,5 +1,5 @@
 ---
-title: "07-11 Septiembre"
+title: "Semana del 07 al 11 de Septiembre"
 number-sections: false
 ---
 
@@ -29,7 +29,8 @@ conda env update -f environment_pruebas.yml --prune
 # --prune elimina del entorno los paquetes que hayas quitado del yml, sino no borra 
 
 ``` 
-- **FIXME** He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)
+
+- [**FIXME**]{style="color: red;"} He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)
 
 ### Primeras pruebas con Integron_Finder
 
@@ -96,7 +97,7 @@ seqkit subseq --chr NZ_PV022879.1 -r 29725:29771 \
   | seqkit seq -r -p  > pc_region.fasta
 
 ```
-## FIXME
+[**FIXME:**]{style="color: red;"}
 
 aquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es
 
@@ -142,13 +143,95 @@ He calculado la abundancia relativa de la primera sheet de la base de datos de I
 PERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por deleted (por eso el v2 en: 
 PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )
 
-Realizado en el script -> PracticasExternas/scripts/clasificacion_inicial_Integrall.py
+Realizado en el script -> ./scripts/T1_abundancia_Integrall.py
 
 # Miércoles 09/09
 
 ## Tarea 1 -> Exploración de la base de datos de Integrall
 
+OBJETIVOS:
+
+- T1.1 Extraer y filtrar las entradas correspondientes a integrones de clase 1. Clasificar por especies con especial interés en las cinco especies ESKAPEE
+
+- T1.2 Calcular la abundancia relativa de Pc 4 
+
 He añadido gráfico de la tabla de conteo general, no solo de ESKAPEE.
 Además, he hecho la función generalizable por si se necesita usar más adelante
-Añadido al script (scripts/clasificacion_inicial_Integrall.py)
+Añadido al script (./scripts/T1_abundancia_Integrall.py)
 
+## Tarea 2 -> Descarga automatizada de genomas desde NCBI 
+
+OBJETIVOS:
+
+- T2.1 Definir los criterios de filtrado de genomas
+
+- T2.2 Desarrollar un script de descarga reproducible y automatizada con NCBI Datasets, adaptado a los criterios definidos
+
+[Guía para usar datasets](https://github.com/ncbi/datasets)
+
+::: {.callout-note collapse="true"}
+### FLAGS QUE PUEDE TENER EL COMANDO DE datasets:
+
+--annotated                 Limit to annotated genomes
+
+--assembly-level string     Limit to genomes at one or more assembly levels (comma-separated):
+                              * chromosome
+                              * complete
+                              * contig
+                              * scaffold
+                                (default "[]")
+
+--assembly-source string    Limit to 'RefSeq' (GCF_) or 'GenBank' (GCA_) genomes (default "all")
+
+--assembly-version string   Optionally return "all" assembly accession versions
+                              * all: current assembly versions + all previous versions
+                              * current: current assembly versions, plus previous versions only if paired with a current version (default)
+                            
+--chromosomes strings       Limit to a specified, comma-delimited list of chromosomes, or 'all' for all chromosomes
+
+--dehydrated                Download a dehydrated zip archive including the data report and locations of data files (use the rehydrate command to retrieve data files).
+
+--exclude-atypical          Exclude atypical assemblies
+
+--exclude-multi-isolate     Exclude assemblies from multi-isolate projects
+--fast-zip-validation       Skip zip checksum validation after download
+
+--from-type                 Only return records with type material
+
+--include string(,string)   Specify the data files to include (comma-separated).
+                              * genome:     genomic sequence
+                              * rna:        transcript
+                              * protein:    amino acid sequences
+                              * cds:        nucleotide coding sequences
+                              * gff3:       general feature file
+                              * gtf:        gene transfer format
+                              * gbff:       GenBank flat file
+                              * seq-report: sequence report file
+                              * all:        include all available file types (equivalent to genome,protein,cds,gff3,gtf,gbff,rna,seq-report)
+                              * none:       do not retrieve any sequence files
+                                (default [genome])
+
+--mag string                Limit to metagenome assembled genomes (only) or remove them from the results (exclude) (default "all")
+
+--preview                   Show information about the requested data package
+
+--reference                 Limit to reference genomes
+
+--released-after string     Limit to genomes released on or after a specified date (free format, ISO 8601 YYYY-MM-DD recommended)
+
+--released-before string    Limit to genomes released on or before a specified date (free format, ISO 8601 YYYY-MM-DD recommended)
+
+--search strings            Limit results to genomes with specified text in the searchable fields:
+                            species and infraspecies, assembly name and submitter.
+                            To search multiple strings, use the flag multiple times.
+:::
+
+Tengo que generar un script que permita hacer una descarga reproducible y automatizaba con NCBI datasets y dehyrated (importante!) - algoq ue permita paralelizar. quiero que la orden de bajar se pueda hacer desde un bioproyecto (por ejemplo) o de otra forma
+
+De ifnformación sobre metodologái tengo esto:
+Para la obtención de los genomas, la descarga se realizará con la
+herramienta Datasets de NCBI (7), usando el modo dehydrated para
+paralelizar la obtención por bloques. Se incluirán genomas cerrados,
+scaffolds y contigs, aplicando como filtro principal criterios de calidad
+del ensamblaje (nivel de ensamblaje, contigüidad y contaminación).
+pero  me gustaria que los criterios rollo (scaffolds, contigs... se puedan decidir)

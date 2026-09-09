@@ -11,3 +11,4 @@ book:
 format:
   html:
     theme: cosmo
+    code-line-numbers: true
