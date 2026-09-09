@@ -143,3 +143,12 @@ PERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por de
 PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )
 
 Realizado en el script -> PracticasExternas/scripts/clasificacion_inicial_Integrall.py
+
+# Miércoles 09/09
+
+## Tarea 1 -> Exploración de la base de datos de Integrall
+
+He añadido gráfico de la tabla de conteo general, no solo de ESKAPEE.
+Además, he hecho la función generalizable por si se necesita usar más adelante
+Añadido al script (scripts/clasificacion_inicial_Integrall.py)
+
