@@ -226,12 +226,10 @@ OBJETIVOS:
                             To search multiple strings, use the flag multiple times.
 :::
 
-Tengo que generar un script que permita hacer una descarga reproducible y automatizaba con NCBI datasets y dehyrated (importante!) - algoq ue permita paralelizar. quiero que la orden de bajar se pueda hacer desde un bioproyecto (por ejemplo) o de otra forma
+He generado el código (scripts/T2_descarga_genomas.py) pero [**FIXME**]{style="color: red;"} se peuden añadir más métricas que sean por umbrales numéricos:
+-  para ello habría que ejecutar *datasets summary genome ...* con la flag *--as-json-lines*. En ese JSON se puede filtrar numéricamente y los válidos pasarlos al script creado
 
-De ifnformación sobre metodologái tengo esto:
-Para la obtención de los genomas, la descarga se realizará con la
-herramienta Datasets de NCBI (7), usando el modo dehydrated para
-paralelizar la obtención por bloques. Se incluirán genomas cerrados,
-scaffolds y contigs, aplicando como filtro principal criterios de calidad
-del ensamblaje (nivel de ensamblaje, contigüidad y contaminación).
-pero  me gustaria que los criterios rollo (scaffolds, contigs... se puedan decidir)
+
+He añadido la parte de las métricas, pero fatla definir los umbrales correctamente
+- falta además limpiar un poco el código y comentarlo
+- hacer alguna prueba de errores también
