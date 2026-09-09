@@ -51,4 +51,19 @@ def origen_datos(origen, # taxon | accession
     ## * permite desempaquetar, para no generar una lista anidada
     return [origen, *nombres]
 
-def descargar_genomas()
+def descargar_genomas(origen, nombres, filename="ncbi_dataset.zip", flags=None):
+    if flags is None:
+        flags = []
+    
+    comando = ["datasets", "download", "genome", *origen_datos(origen,nombres), 
+               "--dehydrated", "--filename", filename, *flags]
+    
+    print(f"Ejecutando: \n {' '.join(comando)}")
+    subprocess.run(cmd, check=True)
+    return
+
+
+flags = definir_flags(assembly_source="RefSeq", assembly_level=["complete", "chromosome"],
+                       exclude_atypical=True, mag=False)
+
+descargar_genomas("taxon", ["Klebsiella pneumoniae"], filename="kpn.zip", flags=flags)
