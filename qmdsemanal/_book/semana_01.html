@@ -186,6 +186,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tarea-1---exploración-de-la-base-de-datos-de-integrall" id="toc-tarea-1---exploración-de-la-base-de-datos-de-integrall" class="nav-link" data-scroll-target="#tarea-1---exploración-de-la-base-de-datos-de-integrall">Tarea 1 -&gt; Exploración de la base de datos de Integrall</a></li>
   <li><a href="#tarea-2---descarga-automatizada-de-genomas-desde-ncbi" id="toc-tarea-2---descarga-automatizada-de-genomas-desde-ncbi" class="nav-link" data-scroll-target="#tarea-2---descarga-automatizada-de-genomas-desde-ncbi">Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI</a></li>
   </ul></li>
+  <li><a href="#jueves-1009" id="toc-jueves-1009" class="nav-link" data-scroll-target="#jueves-1009">Jueves 10/09</a>
+  <ul class="collapse">
+  <li><a href="#tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1" id="toc-tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1" class="nav-link" data-scroll-target="#tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1">Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -379,8 +383,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Tengo que generar un script que permita hacer una descarga reproducible y automatizaba con NCBI datasets y dehyrated (importante!) - algoq ue permita paralelizar. quiero que la orden de bajar se pueda hacer desde un bioproyecto (por ejemplo) o de otra forma</p>
-<p>De ifnformación sobre metodologái tengo esto: Para la obtención de los genomas, la descarga se realizará con la herramienta Datasets de NCBI (7), usando el modo dehydrated para paralelizar la obtención por bloques. Se incluirán genomas cerrados, scaffolds y contigs, aplicando como filtro principal criterios de calidad del ensamblaje (nivel de ensamblaje, contigüidad y contaminación). pero me gustaria que los criterios rollo (scaffolds, contigs… se puedan decidir)</p>
+<p>He generado el código (scripts/T2_descarga_genomas.py) pero <span style="color: red;"><strong>FIXME</strong></span> se peuden añadir más métricas que sean por umbrales numéricos: - para ello habría que ejecutar <em>datasets summary genome …</em> con la flag <em>–as-json-lines</em>. En ese JSON se puede filtrar numéricamente y los válidos pasarlos al script creado</p>
+<p>He añadido la parte de las métricas, pero fatla definir los umbrales correctamente - falta además limpiar un poco el código y comentarlo - hacer alguna prueba de errores también</p>
+</section>
+</section>
+<section id="jueves-1009" class="level1">
+<h1>Jueves 10/09</h1>
+<section id="tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1" class="level2">
+<h2 class="anchored" data-anchor-id="tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1">Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI</h2>
+<p>Limpiar el código hecho de descarga automatizada de genomas (intentar hacerlo más funcional(?))</p>
 
 
 </section>
