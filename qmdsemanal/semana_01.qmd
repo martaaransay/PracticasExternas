@@ -233,3 +233,11 @@ He generado el código (scripts/T2_descarga_genomas.py) pero [**FIXME**]{style="
 He añadido la parte de las métricas, pero fatla definir los umbrales correctamente
 - falta además limpiar un poco el código y comentarlo
 - hacer alguna prueba de errores también
+
+# Jueves 10/09
+
+OBJETIVOS INCIAL HOY:
+
+Acabar bien T2 (descarga automatizda de genomas) -> limpiar código, comprobar errores de cada función individual y a nivel general
+Mirar si es necesario el [integron-filtering](https://github.com/timghaly/integron-filtering) de forma previa a ejecutar IntegronFinder2
+Empezar códigdo de integron-filtering + IntegronFinder2
