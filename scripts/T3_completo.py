@@ -50,8 +50,9 @@ def recorrer_genomas(genomas,
         ## EXTRAER INFORMACIÓN SOBRE PCs
 
         pc = extraer_secuencia_Pc(genoma, acc_genoma, informacion_integronfinder)
-        print(pc["sequence"])
-        if c==3: break ################
+        with open("nuevo.csv", "a") as f:
+            pc.to_csv(f, index=False)
+        if c==10: break ################
 
 ### HAY QUE PONER QUE A INTEGRION SOLO VAA EL ACC PARA HACER EL PAT, PORQUE HACE DOS VECES UN FOR"""!!
 
