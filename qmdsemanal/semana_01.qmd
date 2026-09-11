@@ -226,11 +226,11 @@ OBJETIVOS:
                             To search multiple strings, use the flag multiple times.
 :::
 
-He generado el código (scripts/T2_descarga_genomas.py) pero [**FIXME**]{style="color: red;"} se peuden añadir más métricas que sean por umbrales numéricos:
+He generado el código (scripts/T2_descarga_genomas.py) pero se peuden añadir más métricas que sean por umbrales numéricos:
 -  para ello habría que ejecutar *datasets summary genome ...* con la flag *--as-json-lines*. En ese JSON se puede filtrar numéricamente y los válidos pasarlos al script creado
 
 
-He añadido la parte de las métricas, pero fatla definir los umbrales correctamente
+He añadido la parte de las métricas, pero fatla definir los umbrales correctamente ([**FIXME**]{style="color: red;"})
 - falta además limpiar un poco el código y comentarlo
 - hacer alguna prueba de errores también
 
@@ -241,3 +241,12 @@ OBJETIVOS INCIAL HOY:
 Acabar bien T2 (descarga automatizda de genomas) -> limpiar código, comprobar errores de cada función individual y a nivel general
 Mirar si es necesario el [integron-filtering](https://github.com/timghaly/integron-filtering) de forma previa a ejecutar IntegronFinder2
 Empezar códigdo de integron-filtering + IntegronFinder2
+
+## Tarea 2 -> Descarga automatizada de genomas desde NCBI 
+
+Script en teoría terminado (scripts/T2_descarga_genomas.py), y probado errores (scripts/T2_tests.py).
+Uso del script al final del mismo (scripts/T2_descarga_genomas.py)
+
+## Tarea 3 --> Detección de integrones de clase 1 y clasificación en función de su región promotora Pc
+
+Primero voy a probar lo que tarda en ejecutarse IntrogronFinder2 sobre el conjunto de genomas que he guardado (aprox 2k-3k) y luego miro lo de integron-filtering
