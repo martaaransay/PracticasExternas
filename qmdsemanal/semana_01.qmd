@@ -247,6 +247,11 @@ Empezar códigdo de integron-filtering + IntegronFinder2
 Script en teoría terminado (scripts/T2_descarga_genomas.py), y probado errores (scripts/T2_tests.py).
 Uso del script al final del mismo (scripts/T2_descarga_genomas.py)
 
-## Tarea 3 --> Detección de integrones de clase 1 y clasificación en función de su región promotora Pc
+
+
+# Viernes 11/09
+
+OBJETIVOS INICIAL HOY
+Tarea 3 --> Detección de integrones de clase 1 y clasificación en función de su región promotora Pc
 
 Primero voy a probar lo que tarda en ejecutarse IntrogronFinder2 sobre el conjunto de genomas que he guardado (aprox 2k-3k) y luego miro lo de integron-filtering
