@@ -1,5 +1,5 @@
 path = "/home/marta/CNB/PracticasExternas/results/pruebas_T2/kpn/results_IntegronFiltering/GCF_000364385.3_ASM36438v3_genomic/GCF_000364385.3_ASM36438v3_genomic.attC_filtered.fasta"
-diccionario_fasta = {} # Es mejor no usar 'dict' como nombre de variable para no sobreescribir la función nativa
+diccionario_fasta = {} 
 
 with open(path, "r") as archivo:
     id_actual = ""

@@ -15,7 +15,7 @@ def extraer_secuencia_Pc(ruta_genoma, acc_genoma, archivo_integrons):
     
     secuencias = []
     for index, row in promotores.iterrows():
-        id_replicon = row['ID_replicon']
+        id_replicon = row["ID_replicon"]
         
         # Verificar que el cromosoma/plásmido esté en el archivo FASTA
         if id_replicon not in genoma_dict:
