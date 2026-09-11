@@ -255,3 +255,55 @@ OBJETIVOS INICIAL HOY
 Tarea 3 --> Detección de integrones de clase 1 y clasificación en función de su región promotora Pc
 
 Primero voy a probar lo que tarda en ejecutarse IntrogronFinder2 sobre el conjunto de genomas que he guardado (aprox 2k-3k) y luego miro lo de integron-filtering
+
+## Tarea 3 -> Detección de integrones de clase 1 y clasificación en función de su región promotora Pc
+
+IntegronFinder2 si tenemos mcuhos genomas va a tardar mucho, así que pongo opción con flag modificable para hacer un filtrado previo
+
+En integron-filtering hay dos posibles scripts de filtrado:
+
+- **attC-screening.sh** (HattCI + Infernal): No hace predicción génica ni hmmsearch, busca la secuencia/estructura secundaria del attC directamente sobre la secuencia de ADN.
+
+- IntI-screening.sh (Prodigal + hmmsearch del dominio IntI): se solapa con lo que ya hace IntegronFinder2 internamente. 
+
+
+[**FIXME**]{style="color: red;"} : por ahora solo voy a usar integron-filtering el script de attC-screening.sh
+
+argumentos:
+attC-screening.sh usage:
+usage: ./attC-screening.sh
+
+Mandatory arguments:
+
+-m : universal attC CM ('attCs.cm')
+
+-i : input fasta of DNA sequences
+
+Optional arguments:
+
+-b : bit score cut-off for cmsearch | default: 20
+
+-l : minimum length of output sequences | default: 500 bp
+
+-t : number of CPUs | default: 1
+
+-o : output directory | default: current directory
+
+
+Para poder ejecutar attC-screening.sh fue necesario instalar manualmente una de sus dependencias, HattCI, ya que no está disponible como paquete de conda/bioconda y por tanto no puede incluirse directamente en el archivo de entorno (.yml). HattCI se distribuye únicamente como código fuente en C, por lo que hubo que clonar el repositorio (git clone https://github.com/maribuon/HattCI.git) dentro de scripts/T3_integronfiltering/ y compilarlo con make, generando así el ejecutable hattci.out. Al tratarse de un binario compilado localmente y no de un comando del sistema, no se encuentra automáticamente en el PATH, lo que inicialmente provocó el error hattci.out: command not found al lanzar el script. La solución fue añadir la carpeta de HattCI al PATH del proceso: en el caso de la automatización en Python, esto se resolvió insertando dicha ruta en os.environ["PATH"] al inicio del script, garantizando que el subproceso lanzado por subprocess.run() pueda localizar el ejecutable independientemente de cómo o desde dónde se invoque el script de Python. El resto de dependencias del pipeline (Infernal, SAMtools, SeqKit) sí están disponibles en bioconda y se gestionan de forma estándar en el entorno conda del proyecto.
+
+
+Usa <nombre>.attC_filtered.fasta, no <nombre>.attCs.fasta.
+
+Diferencia clave entre los dos:
+
+attC_filtered.fasta → contiene las secuencias/contigs originales completos que tenían al menos un attC (con la longitud mínima que pusiste, 500 pb). Conserva el contexto genómico alrededor del attC — genes vecinos, posible integrasa, array de casetes.
+attCs.fasta → contiene solo el fragmento recortado del propio sitio attC, sin el contexto genómico alrededor.
+
+IntegronFinder2 necesita ese contexto para funcionar (predice genes con Prodigal, busca la integrasa IntI cerca del attC, reconstruye el array de casetes). Si le pasas attCs.fasta (solo el attC aislado), no tiene con qué detectar integrasas ni casetes — perdería toda la información útil.
+
+## FIXME lo de compilar y eso me d miedo q no sea reproducible
+
+Matiz sobre el pre-filtrado con attC-screening.sh: si tu interés es solo el promotor Pc, ten en cuenta que ese pre-filtro descarta genomas sin sitios attC detectables — pero un integrón podría tener integrasa + Pc sin attC bien conservados (o con el array de casetes fuera del contig ensamblado), y te lo perderías antes de llegar a IntegronFinder2. Si tu pipeline es específicamente sobre clasificación de Pc, igual te interesa no descartar tan agresivamente en el paso de attC-screening, o al menos ser consciente de ese trade-off.
+
+directorio_integronfiltering

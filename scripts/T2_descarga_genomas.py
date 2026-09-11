@@ -277,13 +277,14 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
 
     ############# ------------------- unzip
     dir_out = os.path.dirname(filename) or "." # Si no hay path en el filename, devuelve "."
-    nueva_carpeta = os.path.basename(filename)
-    dir_out = os.path.join(dir_out, os.path.splitext[0])
+    nuevo_archivo = os.path.basename(filename)
+    nueva_carpeta = os.path.splitext(nuevo_archivo)[0]
+    direct = os.path.join(dir_out, nueva_carpeta)
     comando_unzip = ["unzip",
                      "-q",  # Quiet
                      "-o",  # Sobreescribe archivos para evitar errores
                      filename,
-                     "-d", dir_out] # Directorio donde se descomprime
+                     "-d", direct] # Directorio donde se descomprime
     print(f"Ejecutando: \n {shlex.join(comando_unzip)}")
     try:
         subprocess.run(comando_unzip, 
@@ -294,7 +295,7 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
         return
 
     ############ ------------------- datasets rehydrate
-    comando_rehydrate= ["datasets", "rehydrate", "--directory", dir_out]
+    comando_rehydrate= ["datasets", "rehydrate", "--directory", direct]
     print(f"Ejecutando: \n {shlex.join(comando_rehydrate)}")
     try:
         subprocess.run(comando_rehydrate, 
