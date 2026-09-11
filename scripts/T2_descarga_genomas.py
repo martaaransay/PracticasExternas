@@ -204,7 +204,7 @@ def filtrado_genomas(origen, nombre, # Argumentos para la función origen_datos(
     ## FIXME -> UNA OPCIÓN VIABLE para no crear un archivo:
         # ES DECIR: CAMBIAR EL ARCHIVO POR UNA LISTA TAL CUAL peero HAY UN LÍMITE MÁXIMO DE CARACTERES PARA UN COMANDO EN LA TERMINAL (ARG_MAX)
     archivo_lista = f"lista_accessions_{os.path.basename(filename).split('.')[0]}.txt"
-    ruta_archivo = os.path.dirname(filename) + "/" + archivo_lista
+    ruta_archivo = os.path.join(filename, archivo_lista)
     with open(ruta_archivo, "w") as f: # Creación de un archivo con los acc válidos (uno por línea)
         for acc in acc_validos:
             f.write(f"{acc}\n")
@@ -278,7 +278,7 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
     ############# ------------------- unzip
     dir_out = os.path.dirname(filename) or "." # Si no hay path en el filename, devuelve "."
     nueva_carpeta = os.path.basename(filename)
-    dir_out = dir_out + "/" + nueva_carpeta.split(".")[0]
+    dir_out = os.path.join(dir_out, os.path.splitext[0])
     comando_unzip = ["unzip",
                      "-q",  # Quiet
                      "-o",  # Sobreescribe archivos para evitar errores
