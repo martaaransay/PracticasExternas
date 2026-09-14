@@ -1,7 +1,7 @@
 import os
 from T3_0_integronfiltering import integron_filtering
 from T3_1_integronfinder import Integron_Finder
-from T3_2_extraerPc import extraer_secuencia_Pc
+from T3_2_extraerPc import extraer_Pc_gbk
 
 def ajustar_directorio_T2(dir_T2):
     """
@@ -77,19 +77,19 @@ def recorrer_genomas(rutas_genomas,
         # Crea el directorio (no error si ya existe)
         os.makedirs(directorio_integronfinder, exist_ok=True) 
         # Ejecución de IntegronFinder2
-        informacion_integronfinder = Integron_Finder(ruta_genoma_individual, 
+        archivos_gbk_integronfinder = Integron_Finder(ruta_genoma_individual, 
                                                      acc_genoma, 
                                                      directorio_integronfinder)
-        if not informacion_integronfinder:
+        if not archivos_gbk_integronfinder:
             print(f"No se ha podido procesar el genoma {ruta_genoma_individual} por IntegronFinder2.")
             # FIXME: Habría que borrar aquí algún archivo / directorio para que no de problemas al extraer PCs y clasificar??
             continue
             
         ## EXTRAER INFORMACIÓN SOBRE PCs
-
-        pc = extraer_secuencia_Pc(ruta_genoma_individual, acc_genoma, informacion_integronfinder)
-        with open("nuevo.csv", "a") as f:
-            pc.to_csv(f, index=False)
+        dict_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
+        
+        
+        ### falta generar el módulo de clasificación de Pcs!
 
 
 
