@@ -12,71 +12,101 @@
   {
     "objectID": "semana_01.html",
     "href": "semana_01.html",
-    "title": "07-11 Septiembre",
+    "title": "Semana del 07 al 11 de Septiembre",
     "section": "",
     "text": "Lunes 07/09\nLectura inicial:",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
-    ]
-  },
-  {
-    "objectID": "semana_01.html#fixme",
-    "href": "semana_01.html#fixme",
-    "title": "07-11 Septiembre",
-    "section": "FIXME",
-    "text": "FIXME\naquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
     ]
   },
   {
     "objectID": "semana_01.html#clasificación-de-promotores",
     "href": "semana_01.html#clasificación-de-promotores",
-    "title": "07-11 Septiembre",
+    "title": "Semana del 07 al 11 de Septiembre",
     "section": "Clasificación de promotores",
-    "text": "Clasificación de promotores\nInformación obtenida de: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000793\n\nPcS:\n\nAcc Number or reference: U12441 -&gt; 24.3% occurence TTGACA 17 TAAACT\n\nPcW:\n\nAcc Number or reference: U49101 -&gt; 41.7% occurence TGGACA 17 TAAGCT\n\nPcH1:\n\nAcc Number or reference: M95287 -&gt; 28% occurence TGGACA 17 TAAACT\n\nPcH2:\n\nAcc Number or reference: M95U13880 -&gt; 4.4% occurence TTGACA 17 TAAGCT\n\nP2:\n\nAcc Number or reference: U42226 -&gt; 8.7% occurence TTGTTA 17 TACAGT",
+    "text": "Clasificación de promotores\nInformación obtenida de: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000793\n\nPcS:\n\nAcc Number or reference: U12441 -&gt; 24.3% occurence\nTTGACA 17 TAAACT\n\nPcW:\n\nAcc Number or reference: U49101 -&gt; 41.7% occurence\nTGGACA 17 TAAGCT\n\nPcH1:\n\nAcc Number or reference: M95287 -&gt; 28% occurence\nTGGACA 17 TAAACT\n\nPcH2:\n\nAcc Number or reference: M95U13880 -&gt; 4.4% occurence\nTTGACA 17 TAAGCT\n\nP2:\n\nAcc Number or reference: U42226 -&gt; 8.7% occurence\nTTGTTA 17 TACAGT",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
     ]
   },
   {
     "objectID": "semana_01.html#integrall",
     "href": "semana_01.html#integrall",
-    "title": "07-11 Septiembre",
+    "title": "Semana del 07 al 11 de Septiembre",
     "section": "Integrall",
-    "text": "Integrall\nHe calculado la abundancia relativa de la primera sheet de la base de datos de Integrall: (PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23.xlsx)\nPERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por deleted (por eso el v2 en: PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )\nRealizado en el script -&gt; PracticasExternas/scripts/clasificacion_inicial_Integrall.py",
+    "text": "Integrall\nHe calculado la abundancia relativa de la primera sheet de la base de datos de Integrall: (PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23.xlsx)\nPERO, he cambiado en la base de datos de Integrall (el .xlsx) un deletede por deleted (por eso el v2 en: PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx )\nRealizado en el script -&gt; ./scripts/T1_abundancia_Integrall.py",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>07-11 Septiembre</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#tarea-1---exploración-de-la-base-de-datos-de-integrall",
+    "href": "semana_01.html#tarea-1---exploración-de-la-base-de-datos-de-integrall",
+    "title": "Semana del 07 al 11 de Septiembre",
+    "section": "Tarea 1 -> Exploración de la base de datos de Integrall",
+    "text": "Tarea 1 -&gt; Exploración de la base de datos de Integrall\nOBJETIVOS:\n\nT1.1 Extraer y filtrar las entradas correspondientes a integrones de clase 1. Clasificar por especies con especial interés en las cinco especies ESKAPEE\nT1.2 Calcular la abundancia relativa de Pc 4\n\nHe añadido gráfico de la tabla de conteo general, no solo de ESKAPEE. Además, he hecho la función generalizable por si se necesita usar más adelante Añadido al script (./scripts/T1_abundancia_Integrall.py)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#tarea-2---descarga-automatizada-de-genomas-desde-ncbi",
+    "href": "semana_01.html#tarea-2---descarga-automatizada-de-genomas-desde-ncbi",
+    "title": "Semana del 07 al 11 de Septiembre",
+    "section": "Tarea 2 -> Descarga automatizada de genomas desde NCBI",
+    "text": "Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI\nOBJETIVOS:\n\nT2.1 Definir los criterios de filtrado de genomas\nT2.2 Desarrollar un script de descarga reproducible y automatizada con NCBI Datasets, adaptado a los criterios definidos\n\nGuía para usar datasets\n\n\n\n\n\n\nNoteFLAGS QUE PUEDE TENER EL COMANDO DE datasets:\n\n\n\n\n\n–annotated Limit to annotated genomes\n–assembly-level string Limit to genomes at one or more assembly levels (comma-separated): * chromosome * complete * contig * scaffold (default “[]”)\n–assembly-source string Limit to ‘RefSeq’ (GCF_) or ‘GenBank’ (GCA_) genomes (default “all”)\n–assembly-version string Optionally return “all” assembly accession versions * all: current assembly versions + all previous versions * current: current assembly versions, plus previous versions only if paired with a current version (default)\n–chromosomes strings Limit to a specified, comma-delimited list of chromosomes, or ‘all’ for all chromosomes\n–dehydrated Download a dehydrated zip archive including the data report and locations of data files (use the rehydrate command to retrieve data files).\n–exclude-atypical Exclude atypical assemblies\n–exclude-multi-isolate Exclude assemblies from multi-isolate projects –fast-zip-validation Skip zip checksum validation after download\n–from-type Only return records with type material\n–include string(,string) Specify the data files to include (comma-separated). * genome: genomic sequence * rna: transcript * protein: amino acid sequences * cds: nucleotide coding sequences * gff3: general feature file * gtf: gene transfer format * gbff: GenBank flat file * seq-report: sequence report file * all: include all available file types (equivalent to genome,protein,cds,gff3,gtf,gbff,rna,seq-report) * none: do not retrieve any sequence files (default [genome])\n–mag string Limit to metagenome assembled genomes (only) or remove them from the results (exclude) (default “all”)\n–preview Show information about the requested data package\n–reference Limit to reference genomes\n–released-after string Limit to genomes released on or after a specified date (free format, ISO 8601 YYYY-MM-DD recommended)\n–released-before string Limit to genomes released on or before a specified date (free format, ISO 8601 YYYY-MM-DD recommended)\n–search strings Limit results to genomes with specified text in the searchable fields: species and infraspecies, assembly name and submitter. To search multiple strings, use the flag multiple times.\n\n\n\nHe generado el código (scripts/T2_descarga_genomas.py) pero se peuden añadir más métricas que sean por umbrales numéricos: - para ello habría que ejecutar datasets summary genome … con la flag –as-json-lines. En ese JSON se puede filtrar numéricamente y los válidos pasarlos al script creado\nHe añadido la parte de las métricas, pero fatla definir los umbrales correctamente (FIXME) - falta además limpiar un poco el código y comentarlo - hacer alguna prueba de errores también",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1",
+    "href": "semana_01.html#tarea-2---descarga-automatizada-de-genomas-desde-ncbi-1",
+    "title": "Semana del 07 al 11 de Septiembre",
+    "section": "Tarea 2 -> Descarga automatizada de genomas desde NCBI",
+    "text": "Tarea 2 -&gt; Descarga automatizada de genomas desde NCBI\nScript en teoría terminado (scripts/T2_descarga_genomas.py), y probado errores (scripts/T2_tests.py). Uso del script al final del mismo (scripts/T2_descarga_genomas.py)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#tarea-3---detección-de-integrones-de-clase-1-y-clasificación-en-función-de-su-región-promotora-pc",
+    "href": "semana_01.html#tarea-3---detección-de-integrones-de-clase-1-y-clasificación-en-función-de-su-región-promotora-pc",
+    "title": "Semana del 07 al 11 de Septiembre",
+    "section": "Tarea 3 -> Detección de integrones de clase 1 y clasificación en función de su región promotora Pc",
+    "text": "Tarea 3 -&gt; Detección de integrones de clase 1 y clasificación en función de su región promotora Pc\nIntegronFinder2 si tenemos mcuhos genomas va a tardar mucho, así que pongo opción con flag modificable para hacer un filtrado previo con integron-filtering\nEn integron-filtering hay dos posibles scripts de filtrado:\n\nattC-screening.sh (HattCI + Infernal): No hace predicción génica ni hmmsearch, busca la secuencia/estructura secundaria del attC directamente sobre la secuencia de ADN.\nIntI-screening.sh (Prodigal + hmmsearch del dominio IntI): se solapa con lo que ya hace IntegronFinder2 internamente.\n\nFIXME : por ahora solo voy a usar integron-filtering el script de attC-screening.sh\n\n\n\n\n\n\nNoteARGUMENTOS QUE ACEPTA EL SCRIPT attC-screening.sh\n\n\n\n\n\nattC-screening.sh usage: usage: ./attC-screening.sh\nMandatory arguments:\n\n-m : universal attC CM (‘attCs.cm’)\n\nEl attC no se reconoce por una secuencia, sino por su estructura secundaria conservada. Se usará el dado en el propio repositorio de github, que está entrenado para reconocer attC de forma genérica (universal)\n\n-i : input fasta of DNA sequences\n\nOptional arguments: he dejado las opciones por default con opción a ser modificables\n\n-b : bit score cut-off for cmsearch | default: 20\n\nA mayor cut-off, mayor debe ser el parecido\n\n-l : minimum length of output sequences | default: 500 bp\n\nLongitud mínima que debe tener la secuencia para ser válida (descarta fragmentos demasiado cortos)\n\n-t : number of CPUs | default: 1\n\nNúmero de CPUs, el default es 1 pero lo he cambiado a los máximos de la máquina -1\n\n-o : output directory | default: current directory\n\nCarpeta donde se guardan los resultados\n\n\n\nPara poder ejecutar attC-screening.sh fue necesario instalar HattCI (dependencia), ya que no está disponible como paquete de conda/bioconda:\nFIXME :puede dar problemas¿¿¿¿¿¿¿???????\nHattCI se distribuye únicamente como código fuente en C, por lo que: - 1 clonar el repositorio (git clone https://github.com/maribuon/HattCI.git) dentro de scripts/T3_integronfiltering/\n\n2 compilarlo con make (añadidas dependencias en el .yml)\n3 añadida variable PATH en el script de python pero ¿puede dar probelmas???\n\n\nuna vez el filtrado, genera varios archivos, pero hay qeu usar el attC_filtered.fasta, ya que contiene las secuencas originales que tenian al menos un attC (con la log minima indicada en -l)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
+    ]
+  },
+  {
+    "objectID": "semana_01.html#ojo",
+    "href": "semana_01.html#ojo",
+    "title": "Semana del 07 al 11 de Septiembre",
+    "section": "OJO:",
+    "text": "OJO:\nEste pre-filtro descarta genomas sin sitios attC detectables pero un integrón podría tener integrasa + Pc sin attC bien conservados (o con el array de casetes fuera del contig ensamblado), -&gt;&gt; por ello hay flag para desactivarlo si queremos",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Semana del 07 al 11 de Septiembre</span>"
     ]
   },
   {
     "objectID": "semana_02.html",
     "href": "semana_02.html",
-    "title": "2  14-18 Septiembre",
+    "title": "Semana del 14 al 18 de Septiembre",
     "section": "",
-    "text": "2.1 Lunes 14",
+    "text": "Lunes 14/09\nOBJETIVOS INICIAL HOY:",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>14-18 Septiembre</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Semana del 14 al 18 de Septiembre</span>"
     ]
   },
   {
-    "objectID": "semana_02.html#lunes-14",
-    "href": "semana_02.html#lunes-14",
-    "title": "2  14-18 Septiembre",
-    "section": "",
-    "text": "2.1.0.1 prueba1",
+    "objectID": "semana_02.html#problema-con-el-integron-filtering",
+    "href": "semana_02.html#problema-con-el-integron-filtering",
+    "title": "Semana del 14 al 18 de Septiembre",
+    "section": "Problema con el integron-filtering",
+    "text": "Problema con el integron-filtering\nFIXME\nPara que Integron-filtering funcione, requiere un binario externo (HattCI) en el PATH. Para solcuionarlo voy a adaptar la ruta al repositorio (ya que en teoría se debe instalar todo para que luego funcione el pipeline automatizado)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>14-18 Septiembre</span>"
-    ]
-  },
-  {
-    "objectID": "semana_02.html#martes-15",
-    "href": "semana_02.html#martes-15",
-    "title": "2  14-18 Septiembre",
-    "section": "2.2 Martes 15",
-    "text": "2.2 Martes 15\nprueba",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>14-18 Septiembre</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Semana del 14 al 18 de Septiembre</span>"
     ]
   }
 ]

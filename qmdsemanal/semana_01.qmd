@@ -260,6 +260,8 @@ Primero voy a probar lo que tarda en ejecutarse IntrogronFinder2 sobre el conjun
 
 IntegronFinder2 si tenemos mcuhos genomas va a tardar mucho, así que pongo opción con flag modificable para hacer un filtrado previo con integron-filtering
 
+### INTEGRON-FILTERING
+
 En integron-filtering hay dos posibles scripts de filtrado:
 
 - **attC-screening.sh** (HattCI + Infernal): No hace predicción génica ni hmmsearch, busca la secuencia/estructura secundaria del attC directamente sobre la secuencia de ADN.
@@ -270,7 +272,7 @@ En integron-filtering hay dos posibles scripts de filtrado:
 [**FIXME**]{style="color: red;"} : por ahora solo voy a usar integron-filtering el script de attC-screening.sh
 
 ::: {.callout-note collapse="true"}
-### ARGUMENTOS QUE ACEPTA EL SCRIPT attC-screening.sh
+#### ARGUMENTOS QUE ACEPTA EL SCRIPT attC-screening.sh
 
 attC-screening.sh usage:
 usage: ./attC-screening.sh
@@ -304,21 +306,33 @@ Carpeta donde se guardan los resultados
 
 ::: 
 
-Para poder ejecutar attC-screening.sh fue necesario instalar HattCI (dependencia), ya que no está disponible como paquete de conda/bioconda:
+#### Output de integron-filtering
 
-[**FIXME**]{style="color: red;"} :puede dar problemas¿¿¿¿¿¿¿???????
- 
-HattCI se distribuye únicamente como código fuente en C, por lo que:
-- 1 clonar el repositorio (git clone https://github.com/maribuon/HattCI.git) dentro de scripts/T3_integronfiltering/ 
+Lo que hace es analizar el genoma pasado (ej. genoma con chr1 + plásmido1 + plásmido2... -> archivo multifasta) y genera varios archivos.
+El que interesa es el que acaba en **attC_filtered.fasta**, que mantiene el contexto entero (ej. chr1 entero) de aquellos accession en los que ha encontrado coincidencia con sitio attC.
+Nos interesa mantener el contexto para luego estudiar bien el promotor con IntegronFinder2
 
-- 2 compilarlo con make (añadidas dependencias en el .yml)
+[**FIXME**]{style="color: red;"}:
+Se podría cambiar el funcionamiento si no da buenos resultados, ya que este programa genera otros archivos donde concreta mucho más el sitio attC
+¿Igual por requerimientos de tiempo?
 
-- 3 añadida variable PATH en el script de python pero ¿puede dar probelmas???
+#### Dependencias de integron-filtering --> HattCI
 
--
+HattCI es una herramienta que permite identificar los sitios attC ([link al paper](https://journals.sagepub.com/doi/abs/10.1089/cmb.2016.0024))
 
-una vez el filtrado, genera varios archivos, pero hay qeu usar el **attC_filtered.fasta**, ya que contiene las secuencas originales que tenian al menos un attC (con la log minima indicada en -l)
+No está disponible en bioconda/conda, así que lo que he tenido que hacer ha sido:
 
-## OJO:
+- 1: Clonar el [repositorio](https://github.com/maribuon/HattCI.git) - lo he hecho dentro de scripts/T3_integronfiltering
 
-Este pre-filtro descarta genomas sin sitios attC detectables pero un integrón podría tener integrasa + Pc sin attC bien conservados (o con el array de casetes fuera del contig ensamblado),  ->> por ello hay flag para desactivarlo si queremos
+- 2: Compilarlo con make (requiere compilador de C *gcc* añadido en el .yml) -> genera el binario *hattci.out*
+
+- 3: Añadido en el script del integron-filtering (./scripts/T3_0_integronfiltering.py) el cambio a la variable PATH para que funcione correctamente
+
+```
+git clone https://github.com/maribuon/HattCI.git
+make
+```
+
+[**FIXME**]{style="color: red;"}:
+OJO: Este filtrado descarta genomas sin sitios attC detectables PER ¿Nos interesa los integron sin attC pero con Int+Pc (por ejemplo)?
+He añadido flag de desactivación por si acaso
