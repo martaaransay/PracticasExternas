@@ -270,7 +270,14 @@ def descargar_genomas(origen, nombre, # Argumentos para las funciones: origen_da
 
 ##------------------------ Función para descomprimir y rehydrate los genomas
 def unzip_rehydrate(filename = "ncbi_dataset.zip"): 
-    
+    """
+    Descomprime un archivo ZIP de NCBI y ejecuta el comando de rehidratación de datasets.
+
+    Args
+    -------
+    filename (str, opcional): Ruta al archivo ZIP a descomprimir. 
+                              Por defecto es "ncbi_dataset.zip".
+    """
     if not os.path.isfile(filename): # Control de que el archivo exista
         print(f"No se ha encontrado el archivo {filename}")
         return
