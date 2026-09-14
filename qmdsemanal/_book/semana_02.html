@@ -140,8 +140,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#lunes-1409" id="toc-lunes-1409" class="nav-link active" data-scroll-target="#lunes-1409">Lunes 14/09</a>
   <ul class="collapse">
   <li><a href="#problema-con-el-integron-filtering" id="toc-problema-con-el-integron-filtering" class="nav-link" data-scroll-target="#problema-con-el-integron-filtering">Problema con el integron-filtering</a></li>
+  <li><a href="#integronfinder2" id="toc-integronfinder2" class="nav-link" data-scroll-target="#integronfinder2">IntegronFinder2</a></li>
   </ul></li>
-  <li><a href="#posible-a-futuro" id="toc-posible-a-futuro" class="nav-link" data-scroll-target="#posible-a-futuro">POSIBLE A FUTURO</a></li>
+  <li><a href="#pendiente-a-futuro" id="toc-pendiente-a-futuro" class="nav-link" data-scroll-target="#pendiente-a-futuro">PENDIENTE A FUTURO</a></li>
   </ul>
 </nav>
     </div>
@@ -179,11 +180,102 @@ ul.task-list li input[type="checkbox"] {
 <section id="problema-con-el-integron-filtering" class="level2">
 <h2 class="anchored" data-anchor-id="problema-con-el-integron-filtering">Problema con el integron-filtering</h2>
 <p><span style="color: red;"><strong>FIXME</strong></span></p>
-<p>Para que Integron-filtering funcione, requiere un binario externo (HattCI) en el PATH. Para solcuionarlo voy a adaptar la ruta al repositorio (ya que en teoría se debe instalar todo para que luego funcione el pipeline automatizado)</p>
+<p>Para que Integron-filtering funcione, requiere un binario externo (HattCI) en el PATH. Para solcuionarlo voy a adaptar la ruta al repositorio (ya que en teoría se debe instalar todo para que luego funcione el pipeline automatizado) Añadido al script -&gt; ./scripts/T3_0_integronfiltering.py</p>
+</section>
+<section id="integronfinder2" class="level2">
+<h2 class="anchored" data-anchor-id="integronfinder2">IntegronFinder2</h2>
+<p>IntegronFinder2 identifica integrones en secuencias de DNA y acota las regiones de los Pc (que es lo que nos interesa) en los integrones encontrados</p>
+<p>Uso del comando en bash:</p>
+<pre><code>integron_finder [-h] [--local-max] [--func-annot] [--cpu CPU] [-dt DISTANCE_THRESHOLD] 
+                [--outdir OUTDIR] [--union-integrases] [--cmsearch CMSEARCH] 
+                [--hmmsearch HMMSEARCH] [--prodigal PRODIGAL] [--path-func-annot PATH_FUNC_ANNOT] 
+                [--gembase] [--gembase-path GEMBASE_PATH] [--annot-parser ANNOT_PARSER] 
+                [--prot-file PROT_FILE] [--attc-model ATTC_MODEL] [--evalue-attc EVALUE_ATTC] 
+                [--calin-threshold CALIN_THRESHOLD] [--keep-palindromes] [--no-proteins]
+                [--promoter-attI] [--max-attc-size MAX_ATTC_SIZE] [--min-attc-size MIN_ATTC_SIZE] 
+                [--eagle-eyes] [--pdf] [--gbk] [--keep-tmp] [--split-results] [--circ | --linear] 
+                [--topology-file TOPOLOGY_FILE] [--version] [--mute] [-v] [-q] replicon</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Argumentos que acepta IntegronFinder2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>He marcado en azul aquellos argumentos que pueden tener sentido para la búsqueda y clasificación de Pcs:</em></p>
+<p>positional arguments:</p>
+<ul>
+<li><span style="color: blue;"><strong>replicon</strong></span>: Path to the replicon file (in fasta format), eg : path/to/file.fst or file.fst</li>
+</ul>
+<p>optional arguments:</p>
+<ul>
+<li><p><strong>-h, –help</strong>: show this help message and exit</p></li>
+<li><p><span style="color: blue;"><strong>–local-max</strong></span>: Allows thorough local detection (slower but more sensitive and do not increase false positive rate).</p></li>
+<li><p><strong>–func-annot</strong>: Functional annotation of CDS associated with integrons HMM files are needed in Func_annot folder.</p></li>
+<li><p><span style="color: blue;"><strong>–cpu CPU</strong></span>: Number of CPUs used by INFERNAL and HMMER. Increasing too much (usually above 4) may decrease performance.</p></li>
+<li><p><span style="color: blue;"><strong>-dt DISTANCE_THRESHOLD, –distance-thresh DISTANCE_THRESHOLD</strong></span>: Two elements are aggregated if they are distant of DISTANCE_THRESH [4000]bp or less</p></li>
+<li><p><span style="color: blue;"><strong>–outdir OUTDIR</strong></span>: Set the output directory (default: current)</p></li>
+<li><p><strong>–union-integrases</strong>: Instead of taking intersection of hits from Phage_int profile (Tyr recombinases) and integron_integrase profile, use the union of the hits. Es decir, IntegronFinder no detecta la Int con un solo modelo, sino combinando dos perfiles HMM distintos, luego se mantiene la intersección de ambos modelos para ser detectado</p></li>
+</ul>
+<p>De estos siguientes no hay que modificar nada porque hemos instalado el entorno completo:</p>
+<ul>
+<li><p><strong>–cmsearch CMSEARCH</strong>: Complete path to cmsearch if not in PATH. eg: /usr/local/bin/cmsearch</p></li>
+<li><p><strong>–hmmsearch HMMSEARCH</strong>: Complete path to hmmsearch if not in PATH. eg: /usr/local/bin/hmmsearch</p></li>
+<li><p><strong>–prodigal PRODIGAL</strong>: Complete path to prodigal if not in PATH. eg: /usr/local/bin/prodigal</p></li>
+<li><p><strong>–path-func-annot PATH_FUNC_ANNOT</strong>: Path to file containing all hmm bank paths (one per line)</p></li>
+</ul>
+<p>Los siguientes son alternativas para no usar PRODIGAL y usar otro fichero de proteínas ya anotado:</p>
+<ul>
+<li><p><strong>–gembase</strong>: Use gembase formatted protein file instead of Prodigal. Folder structure must be preserved</p></li>
+<li><p><strong>–gembase-path GEMBASE_PATH</strong>: path to the gembase root directory (needed only if the replicon file is not locatedin gembase-path)</p></li>
+<li><p><strong>–annot-parser ANNOT_PARSER</strong>: the path to the parser to use to get information from protein file.</p></li>
+<li><p><strong>–prot-file PROT_FILE</strong>: The path to the proteins file used for annotations</p></li>
+<li><p><span style="color: blue;"><strong>–attc-model ATTC_MODEL</strong></span>: Path or file to the attc model (Covariance Matrix).</p></li>
+<li><p><span style="color: blue;"><strong>–evalue-attc EVALUE_ATTC</strong></span>: Set evalue threshold to filter out hits above it (default: 1) Un valor más bajo es más estricto (ahora es E-value)</p></li>
+<li><p><strong>–calin-threshold CALIN_THRESHOLD</strong>: keep ‘CALIN’ only if attC sites number &gt;= calin-threshold (default: 2) Un CALIN es un cluster de sitios attC que aparecen juntos sin una Int cercana asociada. El default exige que haya al menos 2 attC juntos para que sea CALIN</p></li>
+<li><p><span style="color: blue;"><strong>–keep-palindromes</strong></span>: For a given hit, if the palindromic version is found, don’t remove the one with highest evalue. Los attC son repeticiones invertidas imperfectas, así que a veces se encuentran hits prácticamente en la misma posición en ambas hebras. Por defecto, se queda solo con el mejor de los dos (menor e-value)</p></li>
+<li><p><strong>–no-proteins</strong>: Don’t annotate CDS and don’t find integrase, just look for attC sites. No debemos usarlo porque anota el pc en relación a la posición de la Integrasas</p></li>
+<li><p><span style="color: blue;"><strong>–promoter-attI</strong></span>: Search also for promoter and attI sites. (default False)</p></li>
+<li><p><span style="color: blue;"><strong>–max-attc-size MAX_ATTC_SIZE</strong></span>: Set maximum value fot the attC size (default: 200bp)</p></li>
+<li><p><span style="color: blue;"><strong>–min-attc-size MIN_ATTC_SIZE</strong></span>: Set minimum value fot the attC size (default: 40bp)</p></li>
+<li><p><span style="color: blue;">**–eagle-eyes</span>: Synonym of –local-max. Like a soaring eagle in the sky, catching rabbits (or attC sites) by surprise.</p></li>
+</ul>
+<p><span style="color: red;">### FIXME</span>: Igual hay que modificar estos argumentos (topology file), porque: como en la T2 controlamos el nivel de ensamblado (complete/chromosome/scaffold/contig) al descargar los genomas, podemos generar el –topology-file con criterio correcto luego habría que añadir esta parte!!!</p>
+<ul>
+<li><p><strong>–circ</strong>: Set the default topology for replicons to ‘circular’</p></li>
+<li><p><strong>–linear</strong>: Set the default topology for replicons to ‘linear’</p></li>
+<li><p><span style="color: blue;"><strong>–topology-file TOPOLOGY_FILE</strong></span>: The path to a file where the topology for each replicon is specified.</p></li>
+<li><p><strong>–version</strong>: show program’s version number and exit</p></li>
+<li><p><strong>–mute</strong>: mute the log on stdout.(continue to log on integron_finder.out)</p></li>
+</ul>
+<p>Output options:</p>
+<ul>
+<li><p><strong>–pdf</strong>: For each complete integron, a simple graphic of the region is depicted (in pdf format)</p></li>
+<li><p><span style="color: blue;"><strong>–gbk</strong></span>: generate a GenBank file with the sequence annotated with the same annotations than .integrons file.</p></li>
+<li><p><strong>–keep-tmp</strong>: keep intermediate results. This results are stored in directory named tmp_<replicon id=""></replicon></p></li>
+<li><p><strong>–split-results</strong>: Instead of merging integron results from all replicon in one file, keep them in separated files.</p></li>
+<li><p><strong>-v, –verbose</strong>: Increase verbosity of output (can be cumulative : -vv)</p></li>
+<li><p><strong>-q, –quiet</strong>: Decrease verbosity of output (can be cumulative : -qq)</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Es decir, el nuevo uso del comando quedaría como:</p>
+<pre><code>integron_finder [--local-max] [--cpu CPU] [-dt DISTANCE_THRESHOLD] [--outdir OUTDIR] 
+                [--attc-model ATTC_MODEL] [--evalue-attc EVALUE_ATTC] 
+                [--keep-palindromes] --promoter-attI [--max-attc-size MAX_ATTC_SIZE] 
+                [--min-attc-size MIN_ATTC_SIZE] [--eagle-eyes] --gbk 
+                [--topology-file TOPOLOGY_FILE] replicon</code></pre>
 </section>
 </section>
-<section id="posible-a-futuro" class="level1">
-<h1>POSIBLE A FUTURO</h1>
+<section id="pendiente-a-futuro" class="level1">
+<h1>PENDIENTE A FUTURO</h1>
+<p>añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2</p>
 <p><strong>file</strong> es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????</p>
 
 

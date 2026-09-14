@@ -42,65 +42,119 @@ integron_finder [-h] [--local-max] [--func-annot] [--cpu CPU] [-dt DISTANCE_THRE
 ::: {.callout-important collapse="true"}
 # Argumentos que acepta IntegronFinder2
 
+*He marcado en azul aquellos argumentos que pueden tener sentido para la búsqueda y clasificación de Pcs:*
+
 positional arguments:
-  replicon              Path to the replicon file (in fasta format), eg : path/to/file.fst or file.fst
+
+- [**replicon**]{style="color: blue;"}: Path to the replicon file (in fasta format), eg : path/to/file.fst or file.fst
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --local-max           Allows thorough local detection (slower but more sensitive and do not increase false positive rate).
-  --func-annot          Functional annotation of CDS associated with integrons HMM files are needed in Func_annot folder.
-  --cpu CPU             Number of CPUs used by INFERNAL and HMMER. Increasing too much (usually above 4) may decrease performance. 
-  -dt DISTANCE_THRESHOLD, --distance-thresh DISTANCE_THRESHOLD
-                        Two elements are aggregated if they are distant of DISTANCE_THRESH [4000]bp or less
-  --outdir OUTDIR       Set the output directory (default: current)
-  --union-integrases    Instead of taking intersection of hits from Phage_int profile (Tyr recombinases) and integron_integrase profile,
-                        use the union of the hits
-  --cmsearch CMSEARCH   Complete path to cmsearch if not in PATH. eg: /usr/local/bin/cmsearch
-  --hmmsearch HMMSEARCH
-                        Complete path to hmmsearch if not in PATH. eg: /usr/local/bin/hmmsearch
-  --prodigal PRODIGAL   Complete path to prodigal if not in PATH. eg: /usr/local/bin/prodigal
-  --path-func-annot PATH_FUNC_ANNOT
-                        Path to file containing all hmm bank paths (one per line)
-  --gembase             Use gembase formatted protein file instead of Prodigal. Folder structure must be preserved
-  --gembase-path GEMBASE_PATH
-                        path to the gembase root directory (needed only if the replicon file is not locatedin gembase-path)
-  --annot-parser ANNOT_PARSER
-                        the path to the parser to use to get information from protein file.
-  --prot-file PROT_FILE
-                        The path to the proteins file used for annotations
-  --attc-model ATTC_MODEL
-                        Path or file to the attc model (Covariance Matrix).
-  --evalue-attc EVALUE_ATTC
-                        Set evalue threshold to filter out hits above it (default: 1)
-  --calin-threshold CALIN_THRESHOLD
-                        keep 'CALIN' only if attC sites number >= calin-threshold (default: 2)
-  --keep-palindromes    For a given hit, if the palindromic version is found, don't remove the one with highest evalue.
-  --no-proteins         Don't annotate CDS and don't find integrase, just look for attC sites.
-  --promoter-attI       Search also for promoter and attI sites. (default False)
-  --max-attc-size MAX_ATTC_SIZE
-                        Set maximum value fot the attC size (default: 200bp)
-  --min-attc-size MIN_ATTC_SIZE
-                        set minimum value fot the attC size (default: 40bp)
-  --eagle-eyes          Synonym of --local-max. Like a soaring eagle in the sky, catching rabbits (or attC sites) by surprise.
-  --circ                Set the default topology for replicons to 'circular'
-  --linear              Set the default topology for replicons to 'linear'
-  --topology-file TOPOLOGY_FILE
-                        The path to a file where the topology for each replicon is specified.
-  --version             show program's version number and exit
-  --mute                mute the log on stdout.(continue to log on integron_finder.out)
+
+- **-h, --help**: show this help message and exit
+
+- [**--local-max**]{style="color: blue;"}: Allows thorough local detection (slower but more sensitive and do not increase false positive rate).
+
+- **--func-annot**: Functional annotation of CDS associated with integrons HMM files are needed in Func_annot folder.
+  
+- [**--cpu CPU**]{style="color: blue;"}: Number of CPUs used by INFERNAL and HMMER. Increasing too much (usually above 4) may decrease performance. 
+
+- [**-dt DISTANCE_THRESHOLD, --distance-thresh DISTANCE_THRESHOLD**]{style="color: blue;"}: Two elements are aggregated if they are distant of DISTANCE_THRESH [4000]bp or less
+ 
+- [**--outdir OUTDIR**]{style="color: blue;"}: Set the output directory (default: current)
+
+- **--union-integrases**: Instead of taking intersection of hits from Phage_int profile (Tyr recombinases) and integron_integrase profile,
+                        use the union of the hits.
+                        Es decir, IntegronFinder no detecta la Int con un solo modelo, sino combinando dos perfiles HMM distintos, luego se mantiene la intersección de ambos modelos para ser detectado
+
+De estos siguientes no hay que modificar nada porque hemos instalado el entorno completo:
+
+- **--cmsearch CMSEARCH**: Complete path to cmsearch if not in PATH. eg: /usr/local/bin/cmsearch
+
+- **--hmmsearch HMMSEARCH**: Complete path to hmmsearch if not in PATH. eg: /usr/local/bin/hmmsearch
+
+- **--prodigal PRODIGAL**: Complete path to prodigal if not in PATH. eg: /usr/local/bin/prodigal
+
+- **--path-func-annot PATH_FUNC_ANNOT**: Path to file containing all hmm bank paths (one per line)
+
+Los siguientes son alternativas para no usar PRODIGAL y usar otro fichero de proteínas ya anotado:
+
+- **--gembase**: Use gembase formatted protein file instead of Prodigal. Folder structure must be preserved
+
+- **--gembase-path GEMBASE_PATH**: path to the gembase root directory (needed only if the replicon file is not locatedin gembase-path)
+
+- **--annot-parser ANNOT_PARSER**: the path to the parser to use to get information from protein file.
+
+- **--prot-file PROT_FILE**: The path to the proteins file used for annotations
+
+- [**--attc-model ATTC_MODEL**]{style="color: blue;"}: Path or file to the attc model (Covariance Matrix).
+
+- [**--evalue-attc EVALUE_ATTC**]{style="color: blue;"}: Set evalue threshold to filter out hits above it (default: 1)
+                                                          Un valor más bajo es más estricto (ahora es E-value)
+
+- **--calin-threshold CALIN_THRESHOLD**: keep 'CALIN' only if attC sites number >= calin-threshold (default: 2)
+                                        Un CALIN es un cluster de sitios attC que aparecen juntos sin una Int cercana asociada. El default exige que haya al menos 2 attC juntos para que sea CALIN
+
+- [**--keep-palindromes**]{style="color: blue;"}: For a given hit, if the palindromic version is found, don't remove the one with highest evalue.
+                          Los attC son repeticiones invertidas imperfectas, así que a veces se encuentran hits prácticamente en la misma posición en ambas hebras.
+                          Por defecto, se queda solo con el mejor de los dos (menor e-value)
+                          
+- **--no-proteins**:  Don't annotate CDS and don't find integrase, just look for attC sites. 
+                      No debemos usarlo porque anota el pc en relación a la posición de la Integrasas
+
+- [**--promoter-attI**]{style="color: blue;"}: Search also for promoter and attI sites. (default False)
+
+- [**--max-attc-size MAX_ATTC_SIZE**]{style="color: blue;"}: Set maximum value fot the attC size (default: 200bp)
+
+- [**--min-attc-size MIN_ATTC_SIZE**]{style="color: blue;"}: Set minimum value fot the attC size (default: 40bp)
+
+- [**--eagle-eyes]{style="color: blue;"}: Synonym of --local-max. Like a soaring eagle in the sky, catching rabbits (or attC sites) by surprise.
+
+[### FIXME]{style="color: red;"}: Igual hay que modificar estos argumentos (topology file), porque:
+como en la T2 controlamos el nivel de ensamblado (complete/chromosome/scaffold/contig) al descargar los genomas, podemos generar
+el --topology-file con criterio correcto 
+luego habría que añadir esta parte!!!
+
+- **--circ**: Set the default topology for replicons to 'circular'
+
+- **--linear**: Set the default topology for replicons to 'linear'
+
+- [**--topology-file TOPOLOGY_FILE**]{style="color: blue;"}: The path to a file where the topology for each replicon is specified.
+
+- **--version**: show program's version number and exit
+
+- **--mute**: mute the log on stdout.(continue to log on integron_finder.out)
 
 Output options:
-  --pdf                 For each complete integron, a simple graphic of the region is depicted (in pdf format)
-  --gbk                 generate a GenBank file with the sequence annotated with the same annotations than .integrons file.
-  --keep-tmp            keep intermediate results. This results are stored in directory named tmp_<replicon id>
-  --split-results       Instead of merging integron results from all replicon in one file, keep them in separated files.
 
-  -v, --verbose         Increase verbosity of output (can be cumulative : -vv)
-  -q, --quiet           Decrease verbosity of output (can be cumulative : -qq)
+- **--pdf**: For each complete integron, a simple graphic of the region is depicted (in pdf format)
+
+- [**--gbk**]{style="color: blue;"}: generate a GenBank file with the sequence annotated with the same annotations than .integrons file.
+
+- **--keep-tmp**: keep intermediate results. This results are stored in directory named tmp_<replicon id>
+
+- **--split-results**: Instead of merging integron results from all replicon in one file, keep them in separated files.
+
+- **-v, --verbose**: Increase verbosity of output (can be cumulative : -vv)
+
+- **-q, --quiet**: Decrease verbosity of output (can be cumulative : -qq)
 
 :::
 
+Es decir, el nuevo uso del comando quedaría como:
 
-# POSIBLE A FUTURO
+```
+integron_finder [--local-max] [--cpu CPU] [-dt DISTANCE_THRESHOLD] [--outdir OUTDIR] 
+                [--attc-model ATTC_MODEL] [--evalue-attc EVALUE_ATTC] 
+                [--keep-palindromes] --promoter-attI [--max-attc-size MAX_ATTC_SIZE] 
+                [--min-attc-size MIN_ATTC_SIZE] [--eagle-eyes] --gbk 
+                [--topology-file TOPOLOGY_FILE] replicon
+```
+
+
+# PENDIENTE A FUTURO
+
+Tengo que adaptar el código de extraer los pcs al nuevo archivo generado de .gbk
+
+añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
 
 __file__ es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????

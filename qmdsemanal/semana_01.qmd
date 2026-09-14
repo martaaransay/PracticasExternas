@@ -272,7 +272,7 @@ En integron-filtering hay dos posibles scripts de filtrado:
 [**FIXME**]{style="color: red;"} : por ahora solo voy a usar integron-filtering el script de attC-screening.sh
 
 ::: {.callout-important collapse="true"}
-#### ARGUMENTOS QUE ACEPTA EL SCRIPT attC-screening.sh
+#### Argumentos que acepta el script attC-screening.sh
 
 attC-screening.sh usage:
 usage: ./attC-screening.sh
