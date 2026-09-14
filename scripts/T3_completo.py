@@ -38,7 +38,7 @@ def acceder_archivos_fasta(directorio):
     rutas_genomas = [] # Lista para almacenar la ruta de cada genoma
     carpetas = sorted(os.listdir(directorio)) # lista de carpetas dentro del directorio adaptado
     for carpeta in carpetas: 
-        ruta_individual = os.path.join(dir_in, carpeta) # Añade la carpeta dentro de la ruta
+        ruta_individual = os.path.join(directorio, carpeta) # Añade la carpeta dentro de la ruta
         # Si se ha descargado correctamente, se genera una nueva carpeta que contiene dentro el genoma
         if os.path.isdir(ruta_individual): 
             archivos_por_carpeta = os.listdir(ruta_individual) # Lista de los archivos de la nueva carpeta
@@ -80,7 +80,11 @@ def recorrer_genomas(rutas_genomas,
         informacion_integronfinder = Integron_Finder(ruta_genoma_individual, 
                                                      acc_genoma, 
                                                      directorio_integronfinder)
-
+        if not informacion_integronfinder:
+            print(f"No se ha podido procesar el genoma {ruta_genoma_individual} por IntegronFinder2.")
+            # FIXME: Habría que borrar aquí algún archivo / directorio para que no de problemas al extraer PCs y clasificar??
+            continue
+            
         ## EXTRAER INFORMACIÓN SOBRE PCs
 
         pc = extraer_secuencia_Pc(ruta_genoma_individual, acc_genoma, informacion_integronfinder)
