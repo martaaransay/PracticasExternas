@@ -1,9 +1,23 @@
-import os
-actual_dir = os.path.dirname(__file__)
-HATTCI_DIR = os.path.join(actual_dir, "T3_integronfiltering", "HattCI")
+from Bio import SeqIO
 
-os.environ["PATH"] = f"{HATTCI_DIR}{os.pathsep}{os.environ['PATH']}"
-REPO_ROOT = os.path.join(actual_dir, os.pardir, os.pardir)
+record = SeqIO.read("/home/marta/CNB/PracticasExternas/results/pruebas_T2/kpn/results_IntegronFinder2/Results_Integron_Finder_GCF_000364385.3_ASM36438v3_genomic.attC_filtered/NZ_CP006661.1.gbk", 
+                    "genbank")
 
-print(REPO_ROOT)
-print(HATTCI_DIR)
+
+promotores_pc = []
+locus_id = record.id
+for feature in record.features:
+    if feature.type == "Promoter":
+        nombre = feature.qualifiers.get("Promoter", [""])[0]
+        if "Pc" in nombre:  # filtra solo Pc, no P_intI1
+            secuencia_pc = feature.location.extract(record.seq)
+            promotores_pc.append({
+                "locus": locus_id,
+                "nombre": nombre,
+                "coordenadas": str(feature.location),
+                "hebra": feature.location.strand,
+                "secuencia": str(secuencia_pc),
+            })
+
+for p in promotores_pc:
+    print(p)

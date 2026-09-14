@@ -1,7 +1,7 @@
 import os
 from T3_0_integronfiltering import integron_filtering
 from T3_1_integronfinder import Integron_Finder
-from T3_2_extraerPc import extraer_Pc_gbk
+from T3_2_Pc import extraer_Pc_gbk
 
 def ajustar_directorio_T2(dir_T2):
     """
@@ -81,18 +81,21 @@ def recorrer_genomas(rutas_genomas,
                                                      acc_genoma, 
                                                      directorio_integronfinder)
         if not archivos_gbk_integronfinder:
-            print(f"No se ha podido procesar el genoma {ruta_genoma_individual} por IntegronFinder2.")
+            print(f"IntegronFinder2 no ha detectado integrones en el genoma {ruta_genoma_individual}.")
             # FIXME: Habría que borrar aquí algún archivo / directorio para que no de problemas al extraer PCs y clasificar??
             continue
             
         ## EXTRAER INFORMACIÓN SOBRE PCs
-        dict_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
-        
+        lista_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
+        for element in lista_pc:
+            print(element["secuencia"])
         
         ### falta generar el módulo de clasificación de Pcs!
 
 
-
+### FIXME -> Falta arreglar la parte de que no salga Promotor en los .gbk por ejemplo!!!!
+### FIXME -> Muchas veces aparece además el mensaje de: 
+# "No se ha podido procesar el genoma results/pruebas_T2/kpn/results_IntegronFiltering/GCF_001663295.1_ASM166329v1_genomic/GCF_001663295.1_ASM166329v1_genomic.attC_filtered.fasta por IntegronFinder2"
 
 
 # EJEMPLOS USADOS:

@@ -150,10 +150,21 @@ integron_finder [--local-max] [--cpu CPU] [-dt DISTANCE_THRESHOLD] [--outdir OUT
                 [--topology-file TOPOLOGY_FILE] replicon
 ```
 
+### Output de IntegronFinder2
+
+IntegronFinder2 genera diferentes outputs, pero como hemos puesto la opción **--gbk**, de este podemos extraer mucho más fácil la información
+Por ello, usando SeqIO es fácil parsear el .gbk de forma directa
+
+## PROBLEMA CON IntegronFinder2
+[**FIXME**]{style="color: red;"} Por ahora, al extraer la secuencia, me obtiene todo P2 (mirandolo a ojo, sin módulo de clasificción)
+
+MAÑANA: Voy a probar:
+-  con otra especie,
+-  probar hacineodlo sin la flag de filtering????
+
+ y luego sino habrá que generar algún modulo de detección de promotores??? ver si existe????
 
 # PENDIENTE A FUTURO
-
-Tengo que adaptar el código de extraer los pcs al nuevo archivo generado de .gbk
 
 añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
 
