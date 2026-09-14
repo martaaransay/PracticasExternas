@@ -277,19 +277,31 @@ usage: ./attC-screening.sh
 
 Mandatory arguments:
 
--m : universal attC CM ('attCs.cm') -> descargado del propio github
+- **-m : universal attC CM ('attCs.cm')**
 
--i : input fasta of DNA sequences
+El attC no se reconoce por una secuencia, sino por su estructura secundaria conservada.
+Se usará el dado en el propio repositorio de github, que está entrenado para reconocer attC de forma genérica (universal)
 
-Optional arguments: (he dejdo todos los que estaban por default, con opción a ser modificados)
+- **-i : input fasta of DNA sequences**
 
--b : bit score cut-off for cmsearch | default: 20
+Optional arguments:  [he dejado las opciones por default con opción a ser modificables MENOS los CPUs]{style="color: red;"}
 
--l : minimum length of output sequences | default: 500 bp
+- **-b : bit score cut-off for cmsearch** | default: 20
 
--t : number of CPUs | default: 1
+A mayor cut-off, mayor debe ser el parecido
 
--o : output directory | default: current directory
+- **-l : minimum length of output sequences** | default: 500 bp
+
+Longitud mínima que debe tener la secuencia para ser válida (descarta fragmentos demasiado cortos)
+
+- **-t : number of CPUs** | default: 1
+
+Número de CPUs, el default es 1 pero lo he cambiado a los máximos de la máquina -1
+
+- **-o : output directory** | default: current directory
+
+Carpeta donde se guardan los resultados
+
 ::: 
 
 Para poder ejecutar attC-screening.sh fue necesario instalar HattCI (dependencia), ya que no está disponible como paquete de conda/bioconda:
