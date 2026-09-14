@@ -169,8 +169,8 @@ OBJETIVOS:
 
 [Guía para usar datasets](https://github.com/ncbi/datasets)
 
-::: {.callout-note collapse="true"}
-### FLAGS QUE PUEDE TENER EL COMANDO DE datasets:
+::: {.callout-important collapse="true"}
+# Flags que puede tener el comando datasets
 
 --annotated                 Limit to annotated genomes
 
@@ -271,7 +271,7 @@ En integron-filtering hay dos posibles scripts de filtrado:
 
 [**FIXME**]{style="color: red;"} : por ahora solo voy a usar integron-filtering el script de attC-screening.sh
 
-::: {.callout-note collapse="true"}
+::: {.callout-important collapse="true"}
 #### ARGUMENTOS QUE ACEPTA EL SCRIPT attC-screening.sh
 
 attC-screening.sh usage:
