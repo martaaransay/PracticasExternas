@@ -2,10 +2,17 @@ import subprocess
 import shlex
 import os
 
-## FIXME -> tengo que adaptar esto???
-HATTCI_DIR = os.path.expanduser("~/CNB/PracticasExternas/scripts/T3_integronfiltering/HattCI")
-os.environ["PATH"] = HATTCI_DIR + os.pathsep + os.environ["PATH"]
-# FUNCIÓN PARA EJECUTAR INTEGRON FILTERING
+# FIXME: Cuando acabe, hay que adaptar esto a cómo se encuentre finalmente!
+actual_dir = os.path.dirname(__file__) # __file__ ruta del .py actual ()
+HattCI_dir = os.path.join(actual_dir, "T3_integronfiltering", "HattCI") # Ruta donde está el ejecutable de HattCI
+# os.environ es un dict con las variables de entorno -> os.environ["PATH"] devuelve la variable PATH
+# os.pathsep es el caracter separador de PATH en cada sistema operativo
+os.environ["PATH"] = f"{HattCI_dir}{os.pathsep}{os.environ['PATH']}" # Sobreescribe la variable PATH añadiendo el ejecutable de HattCI
+# Al poner antes el diretorio de HattCI, si había alguno más, se prioriza el indicado antes
+#### ojo -> el cambio de PATH solo dura mientras se ejecuta el script
+
+
+# ---------------- FUNCIÓN PARA EJECUTAR INTEGRON FILTERING
 
 def adaptar_dir_integronfiltering(outdir):
     resultados_integronfiltering = os.listdir(outdir)

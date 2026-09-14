@@ -11,4 +11,19 @@ OBJETIVOS INICIAL HOY:
 
 - Revisar bien argumentos de cada uno de los programas usados (integron-filtering + integronfinder2)
 
+- mirar bien lo del path para usar el .sh de integron-filtering
+
 - ¿Generar el módulo de clasificación de los Pc? --> leer documentación sobre la secuencia de estos
+
+## Problema con el integron-filtering
+
+[**FIXME**]{style="color: red;"} 
+
+Para que Integron-filtering funcione, requiere un binario externo (HattCI) en el PATH. Para solcuionarlo voy a adaptar la ruta al repositorio (ya que en teoría se debe instalar todo para que luego funcione el pipeline automatizado)
+
+
+
+
+# POSIBLE A FUTURO
+
+__file__ es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????
