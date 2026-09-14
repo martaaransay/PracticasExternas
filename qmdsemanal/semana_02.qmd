@@ -1,11 +1,14 @@
 ---
-title: "14-18 Septiembre"
+title: "Semana del 14 al 18 de Septiembre"
+number-sections: false
 ---
 
-## Lunes 14
+# Lunes 14/09
 
-#### prueba1
+OBJETIVOS INICIAL HOY:
 
-## Martes 15
+- Revisar bien los scripts hechos de la Tarea 3
 
-prueba
+- Revisar bien argumentos de cada uno de los programas usados (integron-filtering + integronfinder2)
+
+- ¿Generar el módulo de clasificación de los Pc? --> leer documentación sobre la secuencia de estos
