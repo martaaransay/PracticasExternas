@@ -178,9 +178,19 @@ OBJETIVOS INICIAL
 
 - preparar tutoría 
 
+RESULTADOS:
+Con otras especies:
+- con Acinetobacter baumannii solo detecta P2 también
+- con Escherichia coli solo detecta P2 también
+
+Con el flag de filtrado en false en esas dos especies ocurre lo mismo
+
+¿Posible solución? -> En lugar de usar la flag de --promoter--attI extraer algo upstream de la región de integrón idenfiticada y ahí utilzar las secuencias teóricas de promotores para comprar directamente 
 
 # PENDIENTE A FUTURO
 
 añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
+
+para añadir tiempo de rendimiento -> Si se usa el flag de intergon-filtering, y el .fasta está vacío, directamente -> No se han detectado integrones ( evitar que pase por IntegronFinder2)
 
 __file__ es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????

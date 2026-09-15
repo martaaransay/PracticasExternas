@@ -10,19 +10,18 @@ import os # comprobación de existencia de ciertos archivos
 #### ------- FUNCIONES:
 
 #------------------------ Función para definir las flags para la descarga de genomas (datasets download)
-def definir_flags(
-          assembly_source = None, # RefSeq | GenBank | None =todas
-          assembly_level = None, # comma-separated (string): chromosome | complete | contig | scaffold | None =todas
-          annotated = None, # Para excluir genomas anotados (≠ None)
-          exclude_atypical = None, # Excluye assemblies atípicos (≠ None) #FIXME -> comprobar qué considera como atípicos
-          exclude_multi_isolate = None, # Excluye assemblies de proyectos multi-isolate (≠ None) #FIXME
-          mag = None, # Si es True o 'only', solo usa MAGS; si es false o 'exclude', los excluye
-          ):
+def definir_flags(assembly_source = None, # RefSeq | GenBank | None =todas
+                  assembly_level = None, # comma-separated (string): chromosome | complete | contig | scaffold | None =todas
+                  annotated = None, # Para excluir genomas anotados (≠ None)
+                  exclude_atypical = None, # Excluye assemblies atípicos (≠ None) #FIXME -> comprobar qué considera como atípicos
+                  exclude_multi_isolate = None, # Excluye assemblies de proyectos multi-isolate (≠ None) #FIXME
+                  mag = None, # Si es True o 'only', solo usa MAGS; si es false o 'exclude', los excluye
+                  ):
     """
     Construye y valida una lista de flags para el comando de descarga de NCBI datasets.
 
     Args
-    --------------------
+    --------
     assembly_source (str): Origen del ensamblaje. Valores permitidos: 'RefSeq' o 'GenBank'.
     assembly_level (str | list): Nivel de ensamblaje. Valores permitidos: 'chromosome', 'complete', 'contig', 'scaffold'.
     annotated (bool): Si evalúa a ≠ False/None, incluye genomas anotados ('--annotated').
@@ -31,9 +30,9 @@ def definir_flags(
     mag (bool | str): Filtro para genomas metagenómicos. Valores: True/'only', False/'exclude' o 'all'.
 
     Returns
-    ----------------------
-    list: Lista de cadenas de texto con los argumentos listos para ser pasados a subprocess.
-"""
+    --------
+    flags (list): Lista de cadenas de texto con los argumentos listos para ser pasados a subprocess.
+    """
     
     flags = [] # Lista de las flags a rellenar
 
@@ -62,7 +61,7 @@ def definir_flags(
                                     \n (introducido: {assembly_level})")
         
         for item in ass_level: # Control de argumentos válidos
-            if item not in ["chromosome","complete","contig","scaffold"]:
+            if item not in ["chromosome", "complete", "contig", "scaffold"]:
                 raise ValueError(f"No se ha introducido una de las posibilidades: chromosome | complete | contig | scaffold \
                                 \n (introducido: {assembly_level})")
         else:
@@ -102,13 +101,14 @@ def origen_datos(origen, # Args válidos: taxon | accession | inputfile
     Construye la lista de argumentos respecto al los genomas a descargar para el comando de descarga de NCBI datasets.
 
     Args
-    -----------------
+    --------
     origen (str): Tipo de entrada para la búsqueda. Valores permitidos: 'taxon', 'accession' o 'inputfile'.
-    nombre (str | list): Valores a buscar (string separado por comas o lista de strings) o ruta del archivo si el origen es 'inputfile'.
+    nombre (str | list): Valores a buscar (string separado por comas o lista de strings) o ruta del archivo si el 
+                         origen es 'inputfile'.
 
     Returns
-    -----------------
-    list: Lista de cadenas de texto con los argumentos del origen desempaquetados, listos para el comando de subprocess.
+    --------
+    lista (list): Lista de cadenas de texto con los argumentos del origen desempaquetados para datasets.
     """
     origen = origen.lower() # Control de mayúsculas
     if origen not in ["taxon", "accession", "inputfile"]: # Control de argumentos válidos
@@ -137,13 +137,13 @@ def origen_datos(origen, # Args válidos: taxon | accession | inputfile
         lista = [origen, *nombre_nofile] ## * permite desempaquetar, para no generar una lista anidada
     return lista 
 
-
+#------------------------ Función para filtrar genomas
 def filtrado_genomas(origen, nombre, # Argumentos para la función origen_datos(origen, nombre)
                     filename, # Filename para mantener el mismo directorio
                     # FIXME -> Seleccionar umbrales válidos 
-                    umbral_n50=5000, # Umbral para el N50
-                    max_contaminacion=2, # Umbral de contaminación
-                    umbral_continuidad=97): # Umbral de continuidad 
+                    umbral_n50 = 5000, # Umbral para el N50
+                    max_contaminacion = 2, # Umbral de contaminación
+                    umbral_continuidad = 97): # Umbral de continuidad 
     """
     Consulta los metadatos de genomas en NCBI datasets, filtra por métricas de calidad y guarda los accessions válidos en un fichero de texto.
 
@@ -158,8 +158,8 @@ def filtrado_genomas(origen, nombre, # Argumentos para la función origen_datos(
 
     Return
     --------------
-    tuple[str, str] | None: Tupla ('inputfile', ruta_del_archivo) con el nombre del fichero generado si hay genomas que superan los filtros
-                            None si no hay resultados válidos o si la ejecución falla.
+    tupla_accessions (tuple): Tupla con el nombre del fichero generado si hay genomas que superan los filtros
+                                        None si no hay resultados válidos o si la ejecución falla.
     """
     # Para obtener el JSON con los datos sobre el genoma 
     comando_summary = ["datasets", "summary", "genome", 
@@ -184,7 +184,7 @@ def filtrado_genomas(origen, nombre, # Argumentos para la función origen_datos(
         # Métricas de calidad:
         #-------------------N50
         assembly_stats = datos.get("assembly_stats", {}) # Obtener stats de forma segura (si no están, dic vacío)
-        n50 = assembly_stats.get("scaffold_n50",0) # FIXME (scaffold_n50 o contig_n50)
+        n50 = assembly_stats.get("scaffold_n50", 0) # FIXME (scaffold_n50 o contig_n50)
         
         #-------------------CONTAMINACIÓN Y CONTINUIDAD
         checkm_info = datos.get("checkm_info", {})
@@ -209,7 +209,8 @@ def filtrado_genomas(origen, nombre, # Argumentos para la función origen_datos(
         for acc in acc_validos:
             f.write(f"{acc}\n")
         print(f"Se han guardado en el archivo '{ruta_archivo}' los accessions que se van a analizar.")
-    return "inputfile", ruta_archivo
+    tupla_accessions = ("inputfile", ruta_archivo)
+    return tupla_accessions
 
 
 ##------------------------ Función para descargar los genomas
@@ -314,19 +315,31 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
 
 ####### EJEMPLOS FINALES PROBADOS:
 
-flags = definir_flags(assembly_source="RefSeq", 
+# flags = definir_flags(assembly_source="RefSeq", 
+#                       assembly_level=["complete", "chromosome"],
+#                       exclude_atypical=True, 
+#                       mag=False)
+
+# file = "results/pruebas_T2/kpn.zip"
+# check = descargar_genomas(origen="taxon", 
+#                           nombre=["Klebsiella pneumoniae"], 
+#                           filename=file, 
+#                           flags=flags)
+
+# Para probar si IntegronFinder2 solo identifica P2
+file01 = "results/pruebas_IntegronFinderCheck/EC.zip"
+flags01 = definir_flags(assembly_source="RefSeq", 
                       assembly_level=["complete", "chromosome"],
                       exclude_atypical=True, 
                       mag=False)
 
-file = "results/pruebas_T2/kpn.zip"
-check = descargar_genomas(origen="taxon", 
-                          nombre=["Klebsiella pneumoniae"], 
-                          filename=file, 
-                          flags=flags)
+check01 = descargar_genomas(origen="taxon", 
+                          nombre="Escherichia coli", 
+                          filename=file01, 
+                          flags=flags01)
 
-if check:
-    unzip_rehydrate(filename=file)
+if check01:
+    unzip_rehydrate(filename=file01)
 # FIXME -> se puede cambiar facilmente para en vez de ejecutar decargar y unzip+ rehydrate hacerlo junto, pero bueno
 
 # FIXME -> no salen las barras de progreso al ejecutar este script, pero si quitamos el argumento (capture_output=True)

@@ -45,7 +45,7 @@ def acceder_archivos_fasta(directorio):
             for archivo in archivos_por_carpeta:
                 if os.path.splitext(archivo)[-1] == ".fna": 
                     # Si el archivo concreto se corresponde con un .fasta, se añade a la ruta
-                    ruta_archivo = ruta_individual + "/" + archivo
+                    ruta_archivo = os.path.join(ruta_individual, archivo)
                     rutas_genomas.append(ruta_archivo) # Guarda la ruta individual de cada genoma
     return rutas_genomas
 
@@ -102,10 +102,26 @@ def recorrer_genomas(rutas_genomas,
 
 
 path=ajustar_directorio_T2("results/pruebas_T2/kpn.zip")
+# genom = acceder_archivos_fasta(path)
+# recorrer_genomas(genom, path)
 
-genom = acceder_archivos_fasta(path)
+# Prueba con otra especie para ver si funciona bien IntegronFinder2
+# con flag de filtrado true
+##----Acinetobacter baumannii
+file01 = "results/pruebas_IntegronFinderCheck/kpn.zip"
+path01 = ajustar_directorio_T2(file01)
+genomas = acceder_archivos_fasta(path01)
+# recorrer_genomas(genomas, path01)
 
+##----Escherichia coli
+file02 = "results/pruebas_IntegronFinderCheck/EC.zip"
+# path02 = ajustar_directorio_T2(file02)
+# genomas02 = acceder_archivos_fasta(path02)
+# recorrer_genomas(genomas02, path02)
 
-recorrer_genomas(genom, path)
+# con flag de filtrado false
+##----Acinetobacter baumannii
+# recorrer_genomas(genomas, path01, flag_integronfiltering=False)
 
-# hacer pruebas con flag de filtrado False
+##----Escherichia coli
+recorrer_genomas(genomas02, path02, flag_integronfiltering=False)
