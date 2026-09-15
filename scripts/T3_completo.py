@@ -108,10 +108,10 @@ path=ajustar_directorio_T2("results/pruebas_T2/kpn.zip")
 # Prueba con otra especie para ver si funciona bien IntegronFinder2
 # con flag de filtrado true
 ##----Acinetobacter baumannii
-file01 = "results/pruebas_IntegronFinderCheck/kpn.zip"
+file01 = "results/pruebas_IntegronFinderCheck/EC.zip"
 path01 = ajustar_directorio_T2(file01)
 genomas = acceder_archivos_fasta(path01)
-# recorrer_genomas(genomas, path01)
+recorrer_genomas(genomas, path01)
 
 ##----Escherichia coli
 file02 = "results/pruebas_IntegronFinderCheck/EC.zip"
@@ -124,4 +124,4 @@ file02 = "results/pruebas_IntegronFinderCheck/EC.zip"
 # recorrer_genomas(genomas, path01, flag_integronfiltering=False)
 
 ##----Escherichia coli
-recorrer_genomas(genomas02, path02, flag_integronfiltering=False)
+# recorrer_genomas(genomas02, path02, flag_integronfiltering=False)
