@@ -140,8 +140,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#lunes-1409" id="toc-lunes-1409" class="nav-link active" data-scroll-target="#lunes-1409">Lunes 14/09</a>
   <ul class="collapse">
   <li><a href="#problema-con-el-integron-filtering" id="toc-problema-con-el-integron-filtering" class="nav-link" data-scroll-target="#problema-con-el-integron-filtering">Problema con el integron-filtering</a></li>
-  <li><a href="#integronfinder2" id="toc-integronfinder2" class="nav-link" data-scroll-target="#integronfinder2">IntegronFinder2</a></li>
+  <li><a href="#integronfinder2" id="toc-integronfinder2" class="nav-link" data-scroll-target="#integronfinder2">IntegronFinder2</a>
+  <ul class="collapse">
+  <li><a href="#output-de-integronfinder2" id="toc-output-de-integronfinder2" class="nav-link" data-scroll-target="#output-de-integronfinder2">Output de IntegronFinder2</a></li>
   </ul></li>
+  <li><a href="#problema-con-integronfinder2" id="toc-problema-con-integronfinder2" class="nav-link" data-scroll-target="#problema-con-integronfinder2">PROBLEMA CON IntegronFinder2</a></li>
+  </ul></li>
+  <li><a href="#martes-1509" id="toc-martes-1509" class="nav-link" data-scroll-target="#martes-1509">Martes 15/09</a></li>
   <li><a href="#pendiente-a-futuro" id="toc-pendiente-a-futuro" class="nav-link" data-scroll-target="#pendiente-a-futuro">PENDIENTE A FUTURO</a></li>
   </ul>
 </nav>
@@ -271,7 +276,30 @@ ul.task-list li input[type="checkbox"] {
                 [--keep-palindromes] --promoter-attI [--max-attc-size MAX_ATTC_SIZE] 
                 [--min-attc-size MIN_ATTC_SIZE] [--eagle-eyes] --gbk 
                 [--topology-file TOPOLOGY_FILE] replicon</code></pre>
+<section id="output-de-integronfinder2" class="level3">
+<h3 class="anchored" data-anchor-id="output-de-integronfinder2">Output de IntegronFinder2</h3>
+<p>IntegronFinder2 genera diferentes outputs, pero como hemos puesto la opción <strong>–gbk</strong>, de este podemos extraer mucho más fácil la información Por ello, usando SeqIO es fácil parsear el .gbk de forma directa</p>
 </section>
+</section>
+<section id="problema-con-integronfinder2" class="level2">
+<h2 class="anchored" data-anchor-id="problema-con-integronfinder2">PROBLEMA CON IntegronFinder2</h2>
+<p><span style="color: red;"><strong>FIXME</strong></span> Por ahora, al extraer la secuencia, me obtiene todo P2 (mirandolo a ojo, sin módulo de clasificción)</p>
+<p>MAÑANA: Voy a probar: - con otra especie, - probar hacineodlo sin la flag de filtering????</p>
+<p>y luego sino habrá que generar algún modulo de detección de promotores??? ver si existe????</p>
+</section>
+</section>
+<section id="martes-1509" class="level1">
+<h1>Martes 15/09</h1>
+<p>OBJETIVOS INICIAL</p>
+<ul>
+<li><p>hacer las pruebas de deteccion de promotores con:</p>
+<ol type="a">
+<li><p>otra especie u otro dataset</p></li>
+<li><p>sin la flag de filtering?</p></li>
+</ol></li>
+<li><p>tomar decision en base a los resultados obtenidos</p></li>
+<li><p>preparar tutoría</p></li>
+</ul>
 </section>
 <section id="pendiente-a-futuro" class="level1">
 <h1>PENDIENTE A FUTURO</h1>

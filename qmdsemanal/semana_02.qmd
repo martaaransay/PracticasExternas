@@ -164,6 +164,21 @@ MAÑANA: Voy a probar:
 
  y luego sino habrá que generar algún modulo de detección de promotores??? ver si existe????
 
+# Martes 15/09
+
+OBJETIVOS INICIAL
+
+- hacer las pruebas de deteccion de promotores con: 
+
+    a) otra especie u otro dataset
+
+    b) sin la flag de filtering?
+
+- tomar decision en base a los resultados obtenidos
+
+- preparar tutoría 
+
+
 # PENDIENTE A FUTURO
 
 añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
