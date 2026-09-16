@@ -231,6 +231,18 @@ OBJETIVOS INICIAL
 
 - leer sobre los umbrales de filtrado¿¿¿¿?
 
+## Revisión de scripts
+
+El script 1 (scripts/T1_abundancia_Integrall.py) en teoría está ya acabado -> He modificado la función que había y la he dividido en 4:
+
+- calcular la abundancia de Pc en todas las especies (lee .xlsx y calcula)
+
+- calcular sobre la tabla de conteo para las espcies eskapee
+
+- genera un .xlsx con la abundancia de ambas tablas
+
+- genera los plots para ambas tablas
+
 # PENDIENTE A FUTURO
 
 Jose: 
