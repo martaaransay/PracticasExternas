@@ -1,99 +1,128 @@
-# Import librerías 
+# Import libraries 
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Ruta a la tabla de Integrall
-path = "/home/marta/CNB/PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx"
-encabezado = 3 # Número de líneas en el encabezado a skippear
-
-df = pd.read_excel(path, skiprows = encabezado) # Lectura del excel
-df.columns = df.columns.str.strip() # Limpieza de columnas
-
-def abundancia_pc(df, 
-                  columnas, 
-                  path_out = "./results/pruebas_inicial_integrall/abundancia_pc_especie.xlsx"):
+# --------Definition of functions
+def calculate_Pc_abundance(path,
+                           n_header,
+                           columns_name):
     """
-    Genera un xlsx de abundancia de promotores por especie y un conjunto de gráficos.
-
-    Args
-    ----------
-    df (pd.DataFrame): Tabla de entrada con dos columnas (especies y Pcs)
-    columnas (list): Lista con el nombre de las columnas que contienen las especies y los Pcs.
-    path_out (str, optional): Ruta del archivo .xlsx de salida donde se guardarán las tablas de conteo.
+    FALTA DOCSTRING
     """
-    tabla_conteo = pd.crosstab(df[columnas[0]], df[columnas[1]]) # Conteo del número de Pc - especie
-    # Columna con el conteo total de Pc por especie
-    tabla_conteo["Total"] = tabla_conteo.sum(axis=1) 
-    # Ordenación de la tabla de mayor a menor número de Pc
-    tabla_conteo = tabla_conteo.sort_values("Total", ascending=False) # Ordena del que más al que menos
+    df = pd.read_excel(path, skiprows = n_header) # Read the .xlsx file
+    df.columns = df.columns.str.strip() # Clean columns
+    count_table = pd.crosstab(df[columns_name[0]], df[columns_name[1]]) # Count of Pc - species
+    # Column with the total count of Pc per species
+    count_table["Total"] = count_table.sum(axis=1) 
+    # Sort the table from highest to lowest Pc count
+    count_table = count_table.sort_values("Total", ascending=False) # Sorts from most to least
 
-    # ------------Filtro especies ESKAPEE------------
-    eskapee = ["Escherichia coli", 
-                "Klebsiella pneumoniae", 
-                "Pseudomonas aeruginosa",
-                "Acinetobacter baumannii",
-                "Enterobacter spp."] 
-    # Condición especie ESKAPEE 
-    especies = tabla_conteo.index # Nombre de las filas
-    # Condición: Coincida con ESKAPEE o empiece por Enterobacter (.str para aplicar startswith)
-    cond_eskapee = especies.isin(eskapee) | especies.str.startswith("Enterobacter ") 
+    return count_table
 
-    # Nueva tabla con el conteo único para el filtro
-    tabla_conteo_ESKAPEE = tabla_conteo[cond_eskapee].copy()
-    # Nueva fila con el sumatorio de todas las Enterobacter
-    cond_enterobacter = tabla_conteo_ESKAPEE.index.str.startswith("Enterobacter ")
-    suma_enterobacter = tabla_conteo_ESKAPEE[cond_enterobacter].sum()
-    # Adición de la nueva fila generada
-    tabla_conteo_ESKAPEE.loc["Enterobacter spp."] = suma_enterobacter
- 
-    # ----------Nuevo xlsx con ambos conteos-----------
-    with pd.ExcelWriter(path_out) as w:
-        tabla_conteo.to_excel(w, sheet_name="Conteo")
-        tabla_conteo_ESKAPEE.to_excel(w, sheet_name="Conteo_ESKAPEE")
+def calculate_Pc_abundance_eskapee(count_table,
+                                   eskapee = ["Escherichia coli", "Klebsiella pneumoniae", 
+                                              "Pseudomonas aeruginosa", "Acinetobacter baumannii",
+                                              "Enterobacter spp."] ):
+    """doctrsing"""
+    # ------------ESKAPEE species filter------------
 
-    # -----------Gráficas de ambos conteos------------
-    # Colores para los Pc:
-    colores = ["#A7A8A7", "#B3924F", "#984FB3", "#AAAA00", "#FF5733", 
-               "#FF8D1A", "#FFE400", "#FF96E8", "#96FFE5", "#4F80B3" ]
+    # ESKAPEE species condition 
+    species = count_table.index # Row names
+    # Condition: Matches ESKAPEE or starts with Enterobacter (.str to apply startswith)
+    eskapee_cond = species.isin(eskapee) | species.str.startswith("Enterobacter ") 
+
+    # New table with the unique count for the filter
+    eskapee_count_table = count_table[eskapee_cond].copy()
+    # New row with the sum of all Enterobacter
+    enterobacter_cond = eskapee_count_table.index.str.startswith("Enterobacter ")
+    enterobacter_sum = eskapee_count_table[enterobacter_cond].sum()
+    # Addition of the new row
+    eskapee_count_table.loc["Enterobacter spp."] = enterobacter_sum
     
+    return eskapee_count_table
+
+def write_count_table_xlsx(count_table,
+                           eskapee_count_table,
+                           out_path):
+    """doctrsing"""
+
+    # .xlsx with both counts
+    # Path of the directory
+    directory = os.path.dirname(out_path)
+    # Creates directory if it does not exist
+    os.makedirs(directory, exist_ok=True) 
+
+    with pd.ExcelWriter(out_path) as w:
+        count_table.to_excel(w, sheet_name="Count")
+        eskapee_count_table.to_excel(w, sheet_name="ESKAPEE_Count")
+
+    return
+
+def count_table_plots(count_table,
+                      eskapee_count_table,
+                      eskapee = ["Escherichia coli", "Klebsiella pneumoniae", 
+                                              "Pseudomonas aeruginosa", "Acinetobacter baumannii",
+                                              "Enterobacter spp."]):
+    """docstring"""
+    # Plots of both counts
+
+    # Colors for the Pcs:
+    colors = ["#A7A8A7", "#B3924F", "#984FB3", "#AAAA00", "#FF5733", 
+               "#FF8D1A", "#FFE400", "#FF96E8", "#96FFE5", "#4F80B3" ]
+
+    # Size of the plot
     plt.figure(figsize=(10, 6))
 
-    # Gráfica 1: Abundancia general (sin tener en cuenta la especie)
+    # Plot 1: General abundance (without considering the species)
     plt.subplot(1, 2, 1)
-    # Eliminación columna Total (no es Pc a printear)
-    df_plot = tabla_conteo.drop(columns=["Total"]).T # Transposición de la tabla
-    # Nuevo df con la abundancia general de los promotores (sin separar por especie individual)
+    # Remove Total column (not a Pc to print)
+    df_plot = count_table.drop(columns=["Total"]).T # Transpose
+    
+    # New df with the general abundance of Pc 
     df_total = df_plot.sum(axis=1) 
 
-    # Generación del gráfico de barras con los colores definidos anteriormente 
-    df_total.plot(kind="bar", color=colores, edgecolor="black")
+    # Bar chart with the defined colors 
+    df_total.plot(kind="bar", color=colors, edgecolor="black")
 
-    # Etiquetas del gráfico
-    plt.title("Abundancia relativa de promotores", fontweight="bold")
-    plt.xlabel("Promotores", fontweight="bold")
-    plt.ylabel("Conteo", fontweight="bold")
+    # Labels
+    plt.title("Relative abundance of promoters", fontweight="bold")
+    plt.xlabel("Pc", fontweight="bold")
+    plt.ylabel("Count", fontweight="bold")
     plt.xticks(rotation=45, ha="right")
 
-    # Gráfica 2: Especies ESKAPEE
+    # Plot 2: ESKAPEE Species
     plt.subplot(1, 2, 2)
     
-    # Filtro de las especies ESKAPEE y eliminación columna Total 
-    df_plot_eskapee = tabla_conteo_ESKAPEE.loc[eskapee].drop(columns=["Total"]) 
+    # ESKAPEE species filter and Total column removal 
+    df_plot_eskapee = eskapee_count_table.loc[eskapee].drop(columns=["Total"]) 
 
-    df_plot_eskapee.plot(kind="bar", 
-                         ax=plt.gca(), # Para que no genere dos gráficos
-                         stacked=True, # Barras apiladas
-                         color=colores, 
-                         edgecolor="black")
+    df_plot_eskapee.plot(kind = "bar", 
+                         ax = plt.gca(), # To avoid generating two plots
+                         stacked = True, # Stacked bars
+                         color = colors, 
+                         edgecolor = "black")
 
-    plt.title("Distribución de Promotores en especies ESKAPEE", fontweight="bold")
-    plt.xlabel("Especies ESKAPEE", fontweight="bold")
-    plt.ylabel("Conteo", fontweight="bold")
+    plt.title("Pc distribution in ESKAPEE species", fontweight="bold")
+    plt.xlabel("ESKAPEE Species", fontweight="bold")
+    plt.ylabel("Count", fontweight="bold")
     plt.xticks(rotation=45, ha="right")
-    # Leyenda de los gráficos (colores de los Pc)
-    plt.legend(title="Promotor (Pc)", bbox_to_anchor=(1.05, 1), loc="upper left")
-    plt.tight_layout() # AJuste de tamaño
+   
+    # Plot legend (Pc colors)
+    plt.legend(title="Promoter (Pc)", bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.tight_layout() # Size adjustment
     plt.show()
     return
 
-abundancia_pc(df, ["Organism", "Pc"])
+# -------- Main code
+# Path to the Integrall bbdd
+path = "/home/marta/CNB/PracticasExternas/data/Integrall/Integrons-Analysis-TJ-V23/Integrons-Analysis-TJ-V23_v2.xlsx"
+header = 3 # Number of header lines to skip
+
+general_table = calculate_Pc_abundance(path, n_header=header, columns_name = ["Organism", "Pc"])
+eskapee_table = calculate_Pc_abundance_eskapee(general_table)
+
+path_out = "./results/Integrall_analysis/Pc_abundance_Integrall.xlsx"
+write_count_table_xlsx(general_table, eskapee_table, path_out)
+
+count_table_plots(general_table, eskapee_table)
