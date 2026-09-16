@@ -91,15 +91,15 @@ def taxon_acc_flag(source, # taxon | accession | inputfile
         if not os.path.isfile(name): # Check in case the file does not exist
             raise ValueError(f"The file {name} was not found.")
             return
-        file_flag = ["accession", "--inputfile", name] # Flags to add with the name of the file
+        flag = ["accession", "--inputfile", name] # Flags to add with the name of the file
     
     else:
         names_flag = [] 
         for each_name in name.split(","): # Single element or several comma-separated
             names_flag.append(each_name)
 
-        source_flags = [source, *names_flag] # * unpacks, so it does not generate a nested list
-    return source_flags 
+        flag = [source, *names_flag] # * unpacks, so it does not generate a nested list
+    return flag
 
 #------------------------ Function to filter genomes
 def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(source, name) function
@@ -172,7 +172,8 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
         return
     
     accs_file_name = f"accessions_{os.path.basename(filename).split('.')[0]}.txt" # Name of the file
-    accs_file_path = os.path.join(filename, accs_file_name)
+    accs_file_path = os.path.join(os.path.dirname(filename), accs_file_name)
+    print(accs_file_path)
     
     with open(accs_file_path, "w") as f: # Create a file with the valid accs (one per line)
         for each_acc in valid_accs:
@@ -180,13 +181,14 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
         print(f"The accessions to be analyzed have been saved in the file '{accs_file_path}'.")
 
     accessions_tuple = ("inputfile", accs_file_path)
+
     return accessions_tuple
 
 
 ##------------------------ Function to download genomes
 def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, name) function
                      quality_filter_flag = False, # Flag to filter by quality metrics is needed
-                     filename="ncbi_dataset.zip", # Name of the file that will contain the genomes 
+                     filename = "ncbi_dataset.zip", # Name of the file that will contain the genomes 
                                                   # Can have a path to specify a target directory
                      flags = None): # Flags for the datasets command
     """
@@ -290,33 +292,34 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
 
 # -------- Main code
 
-# Code for Klebsiella pneumoniae without quality filtering
-flags = datasets_flags(assembly_source = "RefSeq", 
-                      assembly_level = "complete,chromosome",
-                      exclude_atypical = True, 
-                      mag = False)
+if __name__ == "__main__":
+    # Code for Klebsiella pneumoniae without quality filtering
+    flags = datasets_flags(assembly_source = "RefSeq", 
+                        assembly_level = "complete,chromosome",
+                        exclude_atypical = True, 
+                        mag = False)
 
-file = "results/T2_check/kpn_without_qfiltering.zip"
+    file = "results/T2_check/kpn_without_qfiltering.zip"
 
-# check = download_genomes(source = "taxon", 
-#                          name = "Klebsiella pneumoniae", 
-#                          filename = file, 
-#                          flags = flags)
+    # check = download_genomes(source = "taxon", 
+    #                          name = "Klebsiella pneumoniae", 
+    #                          filename = file, 
+    #                          flags = flags)
 
-# if check:
-#     unzip_rehydrate(filename = file)
+    # if check:
+    #     unzip_rehydrate(filename = file)
 
-# Code for Klebsiella pneumoniae WITH quality filtering
-filtered_file = "results/T2_check/kpn_filtered.zip"
+    # Code for Klebsiella pneumoniae WITH quality filtering
+    filtered_file = "results/T2_check/kpn_filtered.zip"
 
-check = download_genomes(source = "taxon", 
-                         name = "Klebsiella pneumoniae", 
-                         quality_filter_flag = True,
-                         filename = filtered_file, 
-                         flags = flags)
+    filtered_check = download_genomes(source = "taxon", 
+                                      name = "Klebsiella pneumoniae", 
+                                      quality_filter_flag = True,
+                                      filename = filtered_file, 
+                                      flags = flags)
 
-if filtered_check:
-    unzip_rehydrate(filename = filtered_file)
+    if filtered_check:
+        unzip_rehydrate(filename = filtered_file)
 
 # FIXME -> se puede cambiar facilmente para en vez de ejecutar decargar y unzip+ rehydrate hacerlo junto, pero bueno
 
