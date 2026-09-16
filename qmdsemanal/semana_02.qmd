@@ -187,10 +187,70 @@ Con el flag de filtrado en false en esas dos especies ocurre lo mismo
 
 ¿Posible solución? -> En lugar de usar la flag de --promoter--attI extraer algo upstream de la región de integrón idenfiticada y ahí utilzar las secuencias teóricas de promotores para comprar directamente 
 
+## Tutoría con Modesto
+
+- Opción a conectarme vía VPN-UAM a un ordenador de su laboratorio si la workstation no conseguimos ponerla a punto
+
+- Los umbrales para el filtrado de genomas los podemos sacar de papers de re-ensamblar y re-anotar genomas (ej. All the bacteria) --> Completeness y contaminacion
+
+- Añadir un módulo para hacer un CLUSTERIZADO de genomas (al 99% o 95% de similitud, idealmente al 95% pero ir probando). Así nos quedamos con el genoma representativo y reducimos mucho la carga computacional en pasos posteriores
+
+- Aprender sí o sí a PARALELIZAR en python. Por ejemplo, ir de 100 en 100 genomas: mientras los 100 primeros están rehidratandose, no pasa nada más, pero en los siguientes 100 genomas, mientras estos se rehidratan, los anteriores se están ya procesando (integron-filtering ect...)
+
+- Añadido en a futuro, pero poder hacer un TIPADO DE GENOMAS, es decir, buscar la relación y poder clasificar el integrón por el tipo de genoma (ej. A,B,C,D en Ecoli // multilocus sequence: mls) --> ya hay programas que lo hacen (para relacionarlo con la literatura).
+
+    - Esto se hace en entorno conda diferente ya que pueden estar desactualizados y puede dar problemas (coli phylogroups github // pyMLST github)
+
+    - Así conseguimos evitar que la seleccción de genomas (ej. filtrado) sesgue los resultados que obtenemos
+
+- Respecto a IF2: usar siempre --local-max; y probablemente haya que subir bastante el E-value (>1)
+
+    - Además, la flag de identificar promotores como habíamos visto funciona fatal, entonces acotar directamente la región que interpreta como integron y buscar ahí con BLAST (NCBI en terminal) los prommotores (haciendo una bbdd teórica con los 13 promotores identificados)
+
+    - El output podemos pedirselo en blast en una tabla que nos los ordena por los E-value (por ejemplo)
+
+    - Preguntar a Jose si hay que trabajar con COMPLETOS o INCOMPLETOS (clasificación que da IF2) -> Modesto opina que mejor completos!!!!
+
+- Revisar si los programas ya tienen checkpoints de parada -> si se para la ejecución del programa no hay ningún tipo de problema siempre que se indiqué qué ha fallado (si ya tienen los programas, no hacer otro checkpoint!)
+
+- Si no se ha encontrado integron en el genoma -> se borran todos los datos (incluso el genoma entero descargado, lo de interon-filtering...) todo para liberar espacio
+
+    - En relación con esto generar una tabla con los datos positivos y de ahí puedo coger el ID assembly (y esos al IF2 solo) -> TABLA SOLO CON LOS DATOS POSITIVOS
+
+- para hacer esquemas de forma mucho más rápida podemos usar mermaid (GITHUB)
+
+# Miércoles 16/09
+
+OBJETIVOS INICIAL
+
+- ir traduciendo el código desde el inicio
+
+- cambiar los checkpoints que sobren
+
+- añadir el módulo de clusterizado (se añade la función pero no tiene porqué ejecutarse siempre)
+
+- leer sobre los umbrales de filtrado¿¿¿¿?
+
 # PENDIENTE A FUTURO
 
+Jose: 
+
+- Preguntar a Jose si hay que trabajar con COMPLETOS o INCOMPLETOS (clasificación que da IF2) -> Modesto opina que mejor completos!!!!
+
+- A qué nivel de assembly_level vamos a trabajar??? -> En función del nivel podríamos definir un --topology-file para IF2 (o directamente --circular)
+
+- Igual sí que podemos quitar los contigs o filtrar por el N50 -> ( o directamente hacerlo a la inversa y luego con los datos ya descargados de IF2 filtrar a posterior)
+
 añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
+
+Se puede incorporar un umbral de N50 para decidir si hacer el blast en: todo el assembly o en 1 contig concreto --> en función también del assembly_level que hayamos puesto
 
 para añadir tiempo de rendimiento -> Si se usa el flag de intergon-filtering, y el .fasta está vacío, directamente -> No se han detectado integrones ( evitar que pase por IntegronFinder2)
 
 __file__ es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????
+
+- Añadido en a futuro, pero poder hacer un TIPADO DE GENOMAS, es decir, buscar la relación y poder clasificar el integrón por el tipo de genoma (ej. A,B,C,D en Ecoli // multilocus sequence: mls) --> ya hay programas que lo hacen (para relacionarlo con la literatura).
+
+    - Esto se hace en entorno conda diferente ya que pueden estar desactualizados y puede dar problemas (coli phylogroups github // pyMLST github)
+
+    - Así conseguimos evitar que la seleccción de genomas (ej. filtrado) sesgue los resultados que obtenemos
