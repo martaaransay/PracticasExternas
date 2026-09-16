@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # --------Definition of functions
+#------------------------ Function to calculate the Pc abundance
 def calculate_Pc_abundance(path,
                            n_header,
                            columns_name):
@@ -31,6 +32,7 @@ def calculate_Pc_abundance(path,
 
     return count_table
 
+#------------------------ Function to calculate the Pc abundance of eskapee species
 def calculate_Pc_abundance_eskapee(count_table,
                                    eskapee = ["Escherichia coli", "Klebsiella pneumoniae", 
                                               "Pseudomonas aeruginosa", "Acinetobacter baumannii",
@@ -66,6 +68,7 @@ def calculate_Pc_abundance_eskapee(count_table,
     
     return eskapee_count_table
 
+#------------------------ Function to write into a .xlsx file
 def write_count_table_xlsx(count_table,
                            eskapee_count_table,
                            out_path):
@@ -92,6 +95,7 @@ def write_count_table_xlsx(count_table,
 
     return
 
+#------------------------ Function to plot count tables
 def count_table_plots(count_table,
                       eskapee_count_table,
                       eskapee = ["Escherichia coli", "Klebsiella pneumoniae", 
