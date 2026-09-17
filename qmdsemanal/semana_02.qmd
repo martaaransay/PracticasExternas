@@ -159,7 +159,9 @@ Por ello, usando SeqIO es fácil parsear el .gbk de forma directa
 [**FIXME**]{style="color: red;"} Por ahora, al extraer la secuencia, me obtiene todo P2 (mirandolo a ojo, sin módulo de clasificción)
 
 MAÑANA: Voy a probar:
+
 -  con otra especie,
+
 -  probar hacineodlo sin la flag de filtering????
 
  y luego sino habrá que generar algún modulo de detección de promotores??? ver si existe????
@@ -233,7 +235,9 @@ OBJETIVOS INICIAL
 
 ## Revisión de scripts
 
-El script 1 (scripts/T1_abundancia_Integrall.py) en teoría está ya acabado -> He modificado la función que había y la he dividido en 4:
+### Script 1: T1_Integrall_Pc_abundance.py
+
+El script 1 (scripts/T1_Integrall_Pc_abundance.py) en teoría está ya acabado -> He modificado la función que había y la he dividido en 4:
 
 - calcular la abundancia de Pc en todas las especies (lee .xlsx y calcula)
 
@@ -243,6 +247,267 @@ El script 1 (scripts/T1_abundancia_Integrall.py) en teoría está ya acabado -> 
 
 - genera los plots para ambas tablas
 
+
+### Script 1: T2_downloadgenomes.py
+
+Se han cambiado las métricas de calidad (se pueden introducir nuevas). Para fijar los valores default he utilizado el proyecto AllTheBacteria:
+Indican que utilizan en su [documentacion](https://allthebacteria.org/docs/release_history/#:~:text=The%20defaults%20were%20used%20to%20define%20the,15Mbp.%20*%20Maximum%20number%20of%20contigs%202%2C000) los siguientes parámetros:
+
+::: {.callout-note appearance="minimal" icon=false}
+
+The species calls and high quality dataset are generated with the script make_hq_sample_list.py. 
+The high quality dataset has 1,858,610 samples.
+
+This script is updated since version 0.1 to expose all parameters to the user, so it can be rerun with different cutoffs. 
+The defaults were used to define the high quality dataset here, which meant a sample must pass all of these requirements to be included as high quality:
+
+- Have a sylph call with at least 99 percent minimum abundance. 
+
+- If a sample has more than one call (eg where it has more than one run), then require all species calls to be the same
+
+- Minimum checkm2 completeness of 90%
+
+- Maximum checkm2 contamination of 5%
+
+- Total assembly length between 100kbp and 15Mbp
+
+- Maximum number of contigs 2,000
+
+- Minimum N50 2,000
+:::
+
+[**#### FIXME**]{style="color: red;"} --> se pueden añadir entonces más métricas basandonos en este proyecto (sylph call, more than one call..., total assembly length, max num of contigs...)
+
+Para descargar el script, desde la [web](https://osf.io/xv7q9/overview) > Files Preview > Metadata > make_hq_sample_list.py
+
+Además, en el script, si no hay checkm info, se analiza también ese acc, así que procedo de la misma forma
+
+Luego:
+
+- he traducido completamente el script y limpiado el main code de abajo
+
+- he quitado los chekcpoints que había introducido manualmente para que se usen directamente los del comadno datasets (he miardo y están bastgante bien explicados)
+
+- he añadido los umbrales indicados en AllTheBacteria
+
+Para añadir el módulo de clusterización:
+
+### Clusterización de genomas
+
+Para hacer la clusterización de genomas tiene que ser POSTERIOR a la descarga de los genomas (--rehydrate) y vamos a probar la herramienta skani:
+
+[Skani](https://github.com/bluenote-1577/skani) permite calcular ANI (average nucleotide identity) y AF (aligned fraction) para secuencias.
+>> Lo vamos a usar ya que es mucho más rápido que los BLAST-based y casi igual de precisos
+
+
+ADEMÁS, vamos a utlizar la herramienta [dRep](https://github.com/MrOlm/drep) que utliza este algoritmo de skani y lo que hace es...
+
+Lo introducimos en el .yml del entorno conda y creamos un nuevo archivo para clsuterizar (previo a integron-filtering), pero usamos ya las funciones creadas en el T3 entero.
+
+```
+dRep dereplicate [-p PROCESSORS] [-d] [-h] [-g [GENOMES ...]] [-l LENGTH] [-comp COMPLETENESS] 
+                 [-con CONTAMINATION] [--ignoreGenomeQuality] [--genomeInfo GENOMEINFO]
+                 [--checkM_method {lineage_wf,taxonomy_wf}] [--set_recursion SET_RECURSION] 
+                 [--checkm_group_size CHECKM_GROUP_SIZE] [--S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}]
+                 [-ms MASH_SKETCH] [--SkipMash] [--SkipSecondary] [--skani_extra SKANI_EXTRA] 
+                 [--n_PRESET {normal,tight}] [-pa P_ANI] [-sa S_ANI] [-nc COV_THRESH] [-cm {total,larger}]
+                 [--clusterAlg {single,ward,complete,weighted,average,centroid,median}] [--low_ram_primary_clustering] 
+                 [--multiround_primary_clustering] [--primary_chunksize PRIMARY_CHUNKSIZE] 
+                 [--greedy_secondary_clustering] [--run_tertiary_clustering] [-comW COMPLETENESS_WEIGHT] 
+                 [-conW CONTAMINATION_WEIGHT] [-strW STRAIN_HETEROGENEITY_WEIGHT] [-N50W N50_WEIGHT] 
+                 [-sizeW SIZE_WEIGHT] [-centW CENTRALITY_WEIGHT] [-extraW EXTRA_WEIGHT_TABLE] [--gen_warnings]
+                 [--warn_dist WARN_DIST] [--warn_sim WARN_SIM] [--warn_aln WARN_ALN] [--skip_plots]
+                 work_directory
+```
+
+::: {.callout-important collapse="true"}
+# Argumentos que acepta dRep
+
+*He marcado en azul aquellos argumentos que pueden tener sentido para la búsqueda y clasificación de Pcs:*
+
+positional arguments:
+
+- [**work_directory**]{style="color: blue;"}: Directory where data and output are stored    *** USE THE SAME WORK DIRECTORY FOR ALL DREP OPERATIONS ***
+
+SYSTEM PARAMETERS:
+
+- [**-p PROCESSORS, --processors PROCESSORS**]{style="color: blue;"}: threads (default: 6)
+
+- **-d, --debug**: make extra debugging output (default: False)
+- **-h, --help**: show this help message and exit
+
+GENOME INPUT:
+
+- [**-g [GENOMES ...], --genomes [GENOMES ...]**]{style="color: blue;"}: genomes to filter in .fasta format. 
+                                                      Can also input a text file with paths to genomes, which results in fewer OS issues than wildcard expansion (default: None)
+
+GENOME FILTERING OPTIONS:
+
+- [**-l LENGTH, --length LENGTH**]{style="color: blue;"}: Minimum genome length (default: 50000) -> habría que añadirlo si usamosc ontigs o scaffolds pro si acaso
+
+- [**-comp COMPLETENESS, --completeness COMPLETENESS**]{style="color: blue;"}: Minimum genome completeness (default: 75)
+
+- [**-con CONTAMINATION, --contamination CONTAMINATION**]{style="color: blue;"}:  Maximum genome contamination (default: 25)
+
+GENOME QUALITY ASSESSMENT OPTIONS:
+
+[**FIXME**]{style="color: red;"}: En teoría nosotros ya limpiamos los genomas por checkM info (si se habilita la flag) PERO no conviene mezclar información de lNCBI.
+Así que vamos a intentar correr externamente CheckM2 y de ahí pasarle la información a dRep
+
+- **--ignoreGenomeQuality**: Don't run checkM or do any quality filtering. NOT RECOMMENDED! This is useful for use with bacteriophages or eukaryotes or things where checkM scoring does not work. 
+                              Will only choose genomes based on length and N50 (default: False)
+                              NO vamos a usarlo
+
+- **--genomeInfo GENOMEINFO**: location of .csv file containing quality information on the genomes. 
+                                Must contain: ["genome"(filename of .fasta file of that genome, including extension e.g. genome.fasta), 
+                                "completeness"(0-100 value for completeness of the genome), "contamination"(0-100 value of the contamination of the genome)] (default: None)
+
+- **--checkM_method {lineage_wf,taxonomy_wf}**: Either lineage_wf (more accurate) or taxonomy_wf (faster) (default: lineage_wf)
+
+- **--set_recursion SET_RECURSION**: Increases the python recursion limit. NOT RECOMMENDED unless checkM is crashing due to recursion issues. 
+                                    Recommended to set to 2000 if needed, but setting this could crash python (default: 0)
+
+- **--checkm_group_size CHECKM_GROUP_SIZE**: The number of genomes passed to checkM at a time. Increasing this increases RAM but makes checkM faster (default: 2000)
+
+GENOME COMPARISON OPTIONS:
+
+- [**--S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}**]{style="color: blue;"}: Algorithm for secondary clustering comaprisons:
+                                                                                    fastANI = Kmer-based approach; very fast
+                                                                                    **skani** = Even faster Kmer-based approacht
+                                                                                    ANImf   = (DEFAULT) Align whole genomes with nucmer; filter alignment; compare aligned regions
+                                                                                    ANIn    = Align whole genomes with nucmer; compare aligned regions
+                                                                                    gANI    = Identify and align ORFs; compare aligned ORFS
+                                                                                    goANI   = Open source version of gANI; requires nsmimscan
+                                                                                    (default: fastANI)
+
+- **-ms MASH_SKETCH, --MASH_sketch MASH_SKETCH**: MASH sketch size (default: 1000)
+
+- **--SkipMash**: Skip MASH clustering, just do secondary clustering on all genomes (default: False)
+
+- **--SkipSecondary**: Skip secondary clustering, just perform MASH clustering (default: False)
+
+- **[--skani_extra SKANI_EXTRA**]{style="color: blue;"}: Extra arguments to pass to skani triangle (default: )
+
+- **--n_PRESET {normal,tight}**: Presets to pass to nucmer
+                                  tight   = only align highly conserved regions
+                                  normal  = default ANIn parameters (default: normal)
+
+GENOME CLUSTERING OPTIONS:
+
+- **-pa P_ANI, --P_ani P_ANI**: ANI threshold to form primary (MASH) clusters (default: 0.9)
+
+- **[-sa S_ANI, --S_ani S_ANI**]{style="color: blue;"}: ANI threshold to form secondary clusters (default: 0.95)
+
+- **[-nc COV_THRESH, --cov_thresh COV_THRESH**]{style="color: blue;"}: Minmum level of overlap between genomes when doing secondary comparisons (default: 0.1)
+
+- **-cm {total,larger}, --coverage_method {total,larger}**: Method to calculate coverage of an alignment
+                                                            (for ANIn/ANImf only; gANI and fastANI can only do larger method)
+                                                            total   = 2*(aligned length) / (sum of total genome lengths)
+                                                            larger  = max((aligned length / genome 1), (aligned_length / genome2))
+                                                            (default: larger)
+
+- **--clusterAlg {single,ward,complete,weighted,average,centroid,median}**: Algorithm used to cluster genomes (passed to scipy.cluster.hierarchy.linkage (default: average)
+
+- **[--low_ram_primary_clustering**]{style="color: blue;"}: Use a memory-efficient algorithm for primary clustering. 
+                                                            This only affects primary clustering and not secondary clustering. (default: False)
+
+GREEDY CLUSTERING OPTIONS
+These decrease RAM use and runtime at the expense of a minor loss in accuracy.
+
+Recommended when clustering 5000+ genomes:
+
+- **[--multiround_primary_clustering**]{style="color: blue;"}: Cluster each primary clunk separately and merge at the end with single linkage. 
+                                                                Decreases RAM usage and increases speed, and the cost of a minor loss in precision and the
+                                                                inability to plot primary_clustering_dendrograms. 
+                                                                Especially helpful when clustering 5000+ genomes. 
+                                                                Will be done with single linkage clustering (default: False)
+
+- **[--primary_chunksize PRIMARY_CHUNKSIZE**]{style="color: blue;"}: Impacts multiround_primary_clustering. 
+                                                                    If you have more than this many genomes, process them in chunks of this size. 
+                                                                    (default: 5000)
+
+- **[--greedy_secondary_clustering**]{style="color: blue;"}: Use a heuristic to avoid pair-wise comparisons when doing secondary clustering. 
+                                                              Will be done with single linkage clustering. 
+                                                              Only works for fastANI S_algorithm option at the moment (default: False)
+
+- **[--run_tertiary_clustering**]{style="color: blue;"}: Run an additional round of clustering on the final genome set. 
+                                                          This is especially useful when greedy clustering is performed and/or to handle cases where similar genomes
+                                                          end up in different primary clusters. 
+                                                          Only works with dereplicate, not compare. (default: False)
+
+SCORING CRITERIA
+Based off of the formula: 
+A*Completeness - B*Contamination + C*(Contamination * (strain_heterogeneity/100)) + D*log(N50) + E*log(size) + F*(centrality - S_ani)
+
+A = completeness_weight; B = contamination_weight; C = strain_heterogeneity_weight; D = N50_weight; E = size_weight; F = cent_weight:
+
+- **-comW COMPLETENESS_WEIGHT, --completeness_weight COMPLETENESS_WEIGHT**: completeness weight (default: 1)
+
+- **-conW CONTAMINATION_WEIGHT, --contamination_weight CONTAMINATION_WEIGHT**: contamination weight (default: 5)
+
+- **-strW STRAIN_HETEROGENEITY_WEIGHT, --strain_heterogeneity_weight STRAIN_HETEROGENEITY_WEIGHT**:  strain heterogeneity weight (default: 1)
+
+- **-N50W N50_WEIGHT, --N50_weight N50_WEIGHT**: weight of log(genome N50) (default: 0.5)
+
+- **-sizeW SIZE_WEIGHT, --size_weight SIZE_WEIGHT**: weight of log(genome size) (default: 0)
+
+- **-centW CENTRALITY_WEIGHT, --centrality_weight CENTRALITY_WEIGHT**: Weight of (centrality - S_ani) (default: 1)
+
+- **-extraW EXTRA_WEIGHT_TABLE, --extra_weight_table EXTRA_WEIGHT_TABLE**: Path to a tab-separated file with two-columns, no headers, listing genome and extra score to apply to that genome (default: None)
+
+WARNINGS:
+
+- **--gen_warnings**:        Generate warnings (default: False)
+
+- **--warn_dist WARN_DIST**:   How far from the threshold to throw cluster warnings (default: 0.25)
+
+- **--warn_sim WARN_SIM**:   Similarity threshold for warnings between dereplicated genomes (default: 0.98)
+
+- **--warn_aln WARN_ALN**:   Minimum aligned fraction for warnings between dereplicated genomes (ANIn) (default: 0.25)
+
+ANALYZE:
+
+- **[----skip_plots**]{style="color: blue;"}: Dont make plots (default: False)
+
+Example: dRep dereplicate output_dir/ -g /path/to/genomes/*.fasta
+
+:::
+
+Es decir, el nuevo uso del comando quedaría como:
+
+```
+dRep dereplicate [-p PROCESSORS] [-g [GENOMES ...]] [-l LENGTH] [-comp COMPLETENESS] 
+                 [-con CONTAMINATION] [--genomeInfo GENOMEINFO]
+                 [--S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}]
+                 [--skani_extra SKANI_EXTRA] [-sa S_ANI] [-nc COV_THRESH] 
+                 [--low_ram_primary_clustering] [--multiround_primary_clustering] 
+                 [--primary_chunksize PRIMARY_CHUNKSIZE] [--greedy_secondary_clustering] 
+                 [--run_tertiary_clustering] [--skip_plots] work_directory
+```
+
+
+Me está dando problemas el dRep ya que me consume toda la RAM creo???
+He añadido flags para ver si funciona mejor (al menos en este ordenador), pero aunque sea para poder adaptar el código al resultado que dé.
+Ej: [--low_ram_primary_clustering] [--multiround_primary_clustering] [--primary_chunksize PRIMARY_CHUNKSIZE] [--greedy_secondary_clustering] [--run_tertiary_clustering]  [--skip_plots]
+
+Probar lo primero mañana ver si lo consigo aunuqe sea
+
+He empezdo a traducir el T3 pero aun así creo que no se ha guardado
+
+>> Como algoritmo vamos a usar skani y antes para la info de CheckM para seleccionar el genoma dentro de los que se parecen -> CheckM2
+
+# Jueves 17/09
+
+OBJETIVOS INICIAL:
+Intentar arreglar lo de dRep y conseguir clusterizar
+Seguir traduciendo y adaptando T3 - (borrar la parte de extraer Pcs...)
+empezar a aprender a paralelizar?
+
+He probado a ejectuar el script de clustering con la opción: "--ignoreGenomeQuality"; y ahí sí consigo ejecutarlo.
+Hay que revisar bien las opciones que dejo finalmente para que clusterice bien.
+
+Aun así podemos empezar a procesar los resultados que da
+
 # PENDIENTE A FUTURO
 
 Jose: 
@@ -251,7 +516,11 @@ Jose:
 
 - A qué nivel de assembly_level vamos a trabajar??? -> En función del nivel podríamos definir un --topology-file para IF2 (o directamente --circular)
 
+- Definir las métricas de calidad que vamos a usar para el filtrado!
+
 - Igual sí que podemos quitar los contigs o filtrar por el N50 -> ( o directamente hacerlo a la inversa y luego con los datos ya descargados de IF2 filtrar a posterior)
+
+datasets permite descargar también todos los metadatos del genoma (creo recordad que es con la función summary, pero no estoy seguro) y eso te puede venir bien también para clasificar los integrones por el ambiente, hospedador, etc. Es algo que está en el título de la propuesta de Prácticas pero se me había pasado y puede merecer la pena que lo tengas en cuenta ahora.
 
 añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
 
