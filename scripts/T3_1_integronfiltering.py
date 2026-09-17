@@ -38,61 +38,57 @@ def output_integronfiltering(outdir):
         if each_result.endswith("attC_filtered.fasta"):
             # Complete path to the file
             outfile = os.path.join(outdir, each_result)
-            
             return outfile
 
 
-def integron_filtering(ruta_genoma, # Ruta al genoma
-                       outdir, # Directorio de salida de los resultados
-                       modelo_covarianza = os.path.join(actual_dir, "T3_integronfiltering/attCs.cm"), # default, modelo covarianza definido
-                       cutoff_bit = 20, # cut-off del bit score del modelo de covarianza (default en el .sh)
-                       min_pb = 500, # mínimo tamaño de la secuencia reconocida (default en el .sh)
-                       cpu = os.cpu_count() -1 # número de CPUs a utilizar (cambiado, default en el .sh es 1)
+def integron_filtering(genome_path, # Path to the genome
+                       outdir, # Output directory for the results
+                       covariance_model = os.path.join(current_dir, "T3_integronfiltering/attCs.cm"), # default, defined covariance model
+                       cutoff_bit = 20, # bit score cut-off for the covariance model (default in the .sh)
+                       min_bp = 500, # minimum size of the recognized sequence in base pairs (default in the .sh)
+                       cpu = 1 # number of CPUs to use (default in the .sh)
                        ):
     """
-    Ejecuta el script de filtrado de integrones (attC-screening).
+    Executes the integron filtering script (attC-screening).
 
     Args
     ------
-    ruta_genoma (str): Ruta al archivo del genoma que se va a procesar.
-    outdir (str): Directorio de salida donde se guardarán los resultados.
-    modelo_covarianza (str, opcional): Ruta al archivo del modelo de covarianza. 
-                                       Por defecto es 'T3_integronfiltering/attCs.cm'.
-    cutoff_bit (int/float, opcional): Valor de corte (cut-off) del bit score para el filtrado. 
-                                      Por defecto es 20.
-    min_pb (int, opcional): Tamaño mínimo en pares de bases de la secuencia reconocida. 
-                            Por defecto es 500.
-    cpu (int, opcional): Número de CPUs a utilizar para el proceso. 
-                         Por defecto usa el total disponible menos 1.
+    genome_path (str): Path to the genome file to be processed.
+    outdir (str): Output directory where the results will be saved.
+    covariance_model (str, optional): Path to the covariance model file. 
+                                      Defaults to 'T3_integronfiltering/attCs.cm'.
+    cutoff_bit (int/float, optional): Bit score cut-off value for filtering. 
+                                      Defaults to 20.
+    min_bp (int, optional): Minimum size in base pairs of the recognized sequence. 
+                            Defaults to 500.
+    cpu (int, optional): Number of CPUs to use for the process. 
+                         Defaults to 1.
 
     Return
     ------
-    ruta_genoma_filtrado (str): La ruta al genoma filtrado generado si el proceso es exitoso. 
-                                Si ocurre un error durante la ejecución de subprocess, devuelve la ruta original del genoma (ruta_genoma).
+    ruta_genoma_filtrado (str): The path to the generated filtered genome. 
+                                If an error occurs, returns the original genome path (genome_path).
     """
-    # Comando integron_filtering 
-    comando_integronfiltering = ["./scripts/T3_integronfiltering/attC-screening.sh", # ruta al .sh
-                                 "-m", modelo_covarianza, 
-                                 "-i", ruta_genoma,
-                                 "-o", outdir,
-                                 # Los números deben pasarse como str
-                                 "-b", str(cutoff_bit), 
-                                 "-l", str(min_pb),
-                                 "-t", str(cpu)]
+    # integron_filtering command 
+    integronfiltering_cmd = ["./scripts/T3_integronfiltering/attC-screening.sh", # path to the .sh
+                             "-m", covariance_model, "-i", genome_path, "-o", outdir,
+                              # Numbers must be a str
+                             "-b", str(cutoff_bit), "-l", str(min_bp), "-t", str(cpu)]
 
-    print(f"Ejecutando: \n {shlex.join(comando_integronfiltering)}")
+    print(f"Executing: \n{shlex.join(integronfiltering_cmd)}")
     try:
-        subprocess.run(comando_integronfiltering, 
+        subprocess.run(integronfiltering_cmd, 
                        capture_output = True, text = True, check = True) 
-    # Capturar la excepción
     except subprocess.CalledProcessError as e:
-        print(f"Error al ejecutar integron_filtering :\n{e.stderr}")
-        return ruta_genoma # Ruta inicial
-    # Función para adaptar la ruta al nuevo genoma filtrado
-    ruta_genoma_filtrado = adaptar_dir_integronfiltering(outdir)
-    # Control por si no se ha generado el archivo correctamente
-    if not ruta_genoma_filtrado:
-        print(f"Error al ejecutar integron_filtering")
-        return ruta_genoma
+        print(f"Error executing integron_filtering:\n{e.stderr}")
+        return genome_path # Initial path
+
+    # Function to adapt the path to the new filtered genome
+    filtered_genome_path = output_integronfiltering(outdir)
     
-    return ruta_genoma_filtrado
+    # Control to check correct generation of the file
+    if not filtered_genome_path:
+        print(f"Error executing integron_filtering.")
+        return genome_path
+    
+    return filtered_genome_path
