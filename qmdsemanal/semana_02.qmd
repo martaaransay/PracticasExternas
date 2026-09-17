@@ -467,7 +467,7 @@ WARNINGS:
 
 ANALYZE:
 
-- [**----skip_plots**]{style="color: blue;"}: Dont make plots (default: False)
+- [**--skip_plots**]{style="color: blue;"}: Dont make plots (default: False)
 
 Example: dRep dereplicate output_dir/ -g /path/to/genomes/*.fasta
 

@@ -1,0 +1,33 @@
+---
+title: "FUTURO"
+number-sections: false
+---
+
+# PENDIENTE A FUTURO
+
+me gusatría probar bien lo de clusterizar genomas y a qué procentaje de similitud hacerlo!
+Jose: 
+
+- Preguntar a Jose si hay que trabajar con COMPLETOS o INCOMPLETOS (clasificación que da IF2) -> Modesto opina que mejor completos!!!!
+
+- A qué nivel de assembly_level vamos a trabajar??? -> En función del nivel podríamos definir un --topology-file para IF2 (o directamente --circular)
+
+- Definir las métricas de calidad que vamos a usar para el filtrado!
+
+- Igual sí que podemos quitar los contigs o filtrar por el N50 -> ( o directamente hacerlo a la inversa y luego con los datos ya descargados de IF2 filtrar a posterior)
+
+datasets permite descargar también todos los metadatos del genoma (creo recordad que es con la función summary, pero no estoy seguro) y eso te puede venir bien también para clasificar los integrones por el ambiente, hospedador, etc. Es algo que está en el título de la propuesta de Prácticas pero se me había pasado y puede merecer la pena que lo tengas en cuenta ahora.
+
+añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2
+
+Se puede incorporar un umbral de N50 para decidir si hacer el blast en: todo el assembly o en 1 contig concreto --> en función también del assembly_level que hayamos puesto
+
+para añadir tiempo de rendimiento -> Si se usa el flag de intergon-filtering, y el .fasta está vacío, directamente -> No se han detectado integrones ( evitar que pase por IntegronFinder2)
+
+__file__ es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????
+
+- Añadido en a futuro, pero poder hacer un TIPADO DE GENOMAS, es decir, buscar la relación y poder clasificar el integrón por el tipo de genoma (ej. A,B,C,D en Ecoli // multilocus sequence: mls) --> ya hay programas que lo hacen (para relacionarlo con la literatura).
+
+    - Esto se hace en entorno conda diferente ya que pueden estar desactualizados y puede dar problemas (coli phylogroups github // pyMLST github)
+
+    - Así conseguimos evitar que la seleccción de genomas (ej. filtrado) sesgue los resultados que obtenemos
