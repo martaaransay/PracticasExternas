@@ -347,10 +347,10 @@ if __name__ == "__main__":
     # Code for Klebsiella pneumoniae without quality filtering
     flags_general = datasets_flags()
 
-    file_general = "results/T2_check/Deinococcus.zip"
+    file_general = "results/T2_check/Klebsiella.zip"
 
     check_general = download_genomes(source = "taxon", 
-                             name = "Deinococcus radiodurans", 
+                             name = "Klebsiella pneumoniae", 
                              filename = file_general, 
                              flags = flags_general)
 

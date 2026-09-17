@@ -3,8 +3,8 @@ import os
 import glob
 from T3_0_clusters import cluster_genomes
 from T3_1_integronfiltering import integron_filtering
-from T3_1_integronfinder import Integron_Finder
-from T3_2_Pc import extraer_Pc_gbk
+from T3_2_integronfinder import Integron_Finder
+from T3_3_Pc import extract_Pc_region_gbk
 
 # --------Definition of functions
 #------------------------ Function to define flags for genome download (datasets download)
@@ -58,6 +58,7 @@ def recorrer_genomas(rutas_genomas,
     """
     FIXME -> Falta docstring cuando se acabe la función
     """
+    print(len(rutas_genomas))
     dir_parental = directorio.replace("/ncbi_dataset/data", "") # Utiliza como referencia el directorio parental 
     
     for ruta_genoma_individual in rutas_genomas: # Recorre cada archivo con los genomas
@@ -71,6 +72,8 @@ def recorrer_genomas(rutas_genomas,
             os.makedirs(directorio_integronfiltering, exist_ok=True) 
             # Filtrado vía integron-filtering y actualización de la ruta con el genoma filtrado
             ruta_genoma_individual = integron_filtering(ruta_genoma_individual, directorio_integronfiltering)
+            if not ruta_genoma_individual:
+                continue
             # Actualización del accession filtrado
             archivo = os.path.basename(ruta_genoma_individual)
             acc_genoma = os.path.splitext(os.path.basename(archivo))[0]
@@ -87,14 +90,21 @@ def recorrer_genomas(rutas_genomas,
             print(f"IntegronFinder2 no ha detectado integrones en el genoma {ruta_genoma_individual}.")
             # FIXME: Habría que borrar aquí algún archivo / directorio para que no de problemas al extraer PCs y clasificar??
             continue
-            
+        print(archivos_gbk_integronfinder)
+        pc = extract_Pc_region_gbk(acc_genoma, archivos_gbk_integronfinder)
+        for a in pc:
+            print(a["secuencia"])  
+
+        return
         ## EXTRAER INFORMACIÓN SOBRE PCs
-        lista_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
-        for element in lista_pc:
-            print(element["secuencia"])
+        # lista_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
+        # for element in lista_pc:
+            # print(element["secuencia"])
         
         ### falta generar el módulo de clasificación de Pcs!
 
+# FIXME: hay q añadir lo de la tabla de + y que borre los genomas q no tienen integrones!
+# FIXME: igual tmb que borre los genomast ras el clusterizado (con flag opcional!)
 
 ### FIXME -> Falta arreglar la parte de que no salga Promotor en los .gbk por ejemplo!!!!
 ### FIXME -> Muchas veces aparece además el mensaje de: 
@@ -105,14 +115,14 @@ def recorrer_genomas(rutas_genomas,
 
 if __name__ == "__main__":
     # PRUEBA CON CLUSTERIZADO
-    file = "results/T2_check/Deinococcus.zip"
-    adapted_file = adjust_path(file)
-    genomes_files = list_fasta_files(adapted_file)
-    clustered_files = cluster_genomes(genomes_files, adapted_file)
-
-
-    # PRUEBA SIN CLUSTERIZADO
     # file = "results/T2_check/Deinococcus.zip"
     # adapted_file = adjust_path(file)
     # genomes_files = list_fasta_files(adapted_file)
-    # recorrer_genomas(genomes_files, adapted_file, flag_integronfiltering=True)
+    # clustered_files = cluster_genomes(genomes_files, adapted_file)
+
+
+    # PRUEBA SIN CLUSTERIZADO
+    file = "results/T2_check/Acinetobacter.zip"
+    adapted_file = adjust_path(file)
+    genomes_files = list_fasta_files(adapted_file)
+    recorrer_genomas(genomes_files, adapted_file, flag_integronfiltering=True)

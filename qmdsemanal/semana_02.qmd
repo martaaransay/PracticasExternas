@@ -613,8 +613,18 @@ he acabdo el script de T3_0_clusters.py para poder clusterizar (primero hacer Ch
 
 Voy a intentar extraer la parte del integron y empezar a hacer la bbdd de blast para empezar a clasificar los Pc
 
+Hay que hacer cambios en los argumentos que usa IntegronFinder2 tras la tutoría con Modesto.
+
+- Por un lado, --local-max debe ir siempre obligatorio
+
+- Además, como ya no vamos a extraer el Pc que encuentra IF2 sino que vamos a acotar directamente la región, vamos a eliminar el flag de --promoter
+
+> Voy a probar a extraer la secuenica del integrón entera (con 100 pb upstream) y ahí hacer blast
 
 # Viernes 18/09
+
+Acabar de extraer bien la secuencia de Pc
+hacer blast generando una bbdd con los promotores???
 
 Empezar a aprender a paralelizar
 
