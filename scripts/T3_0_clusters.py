@@ -12,7 +12,23 @@ def run_checkm2(genomes_paths,
                 lowmem = None, 
                 threads = 4):
     """
-    docstring
+    Executes CheckM2 predict to assess the quality of genomes using a conda environment.
+
+    Args:
+    ------
+    genomes_paths (list): List of paths to the input genome files.
+    out_dir (str): Path to the output directory where results will be saved.
+    genome_ext (str, optional): File extension of the input genome files. 
+                                Defaults to "fna".
+    lowmem (bool, optional): If provided and evaluates to True, runs CheckM2 in low memory mode. 
+                             Defaults to None.
+    threads (int, optional): Number of threads to use for the CheckM2 execution. 
+                             Defaults to 4.
+
+    Return:
+    ------
+    checkm2_report (str or None): The complete path to the generated 'quality_report.tsv' file. 
+                                  Returns None if an error occurs during execution.
     """
     #FIXME: poner en el readme o así del script la creación del entorno conda:
     # subprocess.run(["conda", "create", "-n", "checkm2", "-c", "conda-forge", "checkm2", "-y"], check=True)
@@ -49,7 +65,18 @@ def run_checkm2(genomes_paths,
 #------------------------ Function to adapt the quality report to use dRep (genome_info)
 def checkm2_to_genomeinfo(quality_report_tsv, genome_info_csv, genome_ext = "fna"):
     """
-    docstring
+    Converts a CheckM2 quality report TSV file into a dRep-compatible genome_info CSV file.
+
+    Args:
+    ------
+    quality_report_tsv (str): Path to the input TSV file containing the CheckM2 quality report.
+    genome_info_csv (str): Path where the output genome info CSV file will be saved.
+    genome_ext (str, optional): File extension to append to the genome names. 
+                                Defaults to "fna".
+
+    Return:
+    ------
+    genome_info_csv (str): The path to the generated genome info CSV file.
     """
     # Opens both files to read and write (tsv and csv)
     with open(quality_report_tsv) as tsv_in, \
@@ -84,11 +111,39 @@ def cluster_genomes(genomes_paths,
                     skani_extra = None,
                     cov_thresh = 0.1,
                     chunksize = 500):
-    """docstring"""
+    """
+    Executes genome clustering and dereplication using dRep (skani algorithm).
+
+    Args:
+    ------
+    genomes_paths (list): List of paths to the input genome files.
+    adapted_file (str): Reference file path used to determine the output directory structure.
+    threshold (float, optional): Average Nucleotide Identity (ANI) threshold for secondary clustering. 
+                                 Defaults to 0.99.
+    threads (int, optional): Number of threads to use for CheckM2 and dRep. 
+                             Defaults to 4.
+    length (int, optional): Minimum genome length in base pairs. 
+                            Defaults to 50000.
+    completeness (float/int, optional): Minimum genome completeness percentage. 
+                                        Defaults to 75.
+    contamination (float/int, optional): Maximum genome contamination percentage. 
+                                         Defaults to 25.
+    skani_extra (str or list, optional): Additional arguments to pass to the skani algorithm. 
+                                         Defaults to None.
+    cov_thresh (float, optional): Minimum alignment coverage threshold. 
+                                  Defaults to 0.1.
+    chunksize (int, optional): Chunk size for multiround primary clustering. 
+                               Defaults to 500.
+
+    Return:
+    ------
+    genomes_path (str or None): A pattern path to the clustered genome files. 
+                                Returns None if an error occurs during CheckM2 or dRep execution.
+    """
     # Parental directory
     parental_dir = adapted_file.replace("/ncbi_dataset/data", "") 
         
-    # name of the folder with the clustering threshold
+    # Name of the folder with the clustering threshold
     folder_name = f"clustering_{threshold}"
     
     # New path
