@@ -2,7 +2,7 @@
 import os
 import glob
 from T3_0_clusters import cluster_genomes
-from T3_0_integronfiltering import integron_filtering
+from T3_1_integronfiltering import integron_filtering
 from T3_1_integronfinder import Integron_Finder
 from T3_2_Pc import extraer_Pc_gbk
 
