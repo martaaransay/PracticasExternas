@@ -7,6 +7,7 @@ book:
     - index.qmd
     - semana_01.qmd
     - semana_02.qmd
+    - w_futuro.qmd
 
 format:
   html:
