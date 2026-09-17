@@ -12,9 +12,6 @@ dependencies:
   - conda-forge::gcc  
   - conda-forge::make     
   - conda-forge::ncbi-datasets-cli
-  - perl
-  - perl-net-ssleay
-  - perl-io-socket-ssl
   - pandas
-  - conda-forge::openpyxl
-  - bioconda::entrez-direct # para efetch
+  - bioconda::skani
+  - drep

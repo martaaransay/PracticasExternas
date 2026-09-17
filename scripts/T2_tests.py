@@ -41,7 +41,7 @@ source_name03 = taxon_acc_flag(source = "accession",
                                name = "GCF_000001405.40") 
 print(source_name03)    
 
-# Check valid arguments with inputfile -> raise ValueError (file not found)
+# Check valid arguments with inputfile -> raise FileNotFoundError
 # source_name04 = taxon_acc_flag(source = "inputfile",
 #                                name = "prueba.txt") 
 # print(source_name04)    

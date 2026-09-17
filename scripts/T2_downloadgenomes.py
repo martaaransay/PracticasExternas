@@ -89,7 +89,7 @@ def taxon_acc_flag(source, # taxon | accession | inputfile
     
     if source == "inputfile": # File
         if not os.path.isfile(name): # Check in case the file does not exist
-            raise ValueError(f"The file {name} was not found.")
+            raise FileNotFoundError(f"The file {name} was not found.")
             return
         flag = ["accession", "--inputfile", name] # Flags to add with the name of the file
     
@@ -254,7 +254,7 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
                               Default is "ncbi_dataset.zip".
     """
     if not os.path.isfile(filename): # Check that the file exists
-        raise ValueError(f"The file {filename} was not found")
+        raise FileNotFoundError(f"The file {filename} was not found")
 
     ############# ------------------- unzip
     # If there' is no path in the filename, returns "."
@@ -312,14 +312,14 @@ if __name__ == "__main__":
     # Code for Klebsiella pneumoniae WITH quality filtering
     filtered_file = "results/T2_check/kpn_filtered.zip"
 
-    filtered_check = download_genomes(source = "taxon", 
-                                      name = "Klebsiella pneumoniae", 
-                                      quality_filter_flag = True,
-                                      filename = filtered_file, 
-                                      flags = flags)
+    # filtered_check = download_genomes(source = "taxon", 
+    #                                   name = "Klebsiella pneumoniae", 
+    #                                   quality_filter_flag = True,
+    #                                   filename = filtered_file, 
+    #                                   flags = flags)
 
-    if filtered_check:
-        unzip_rehydrate(filename = filtered_file)
+    # if filtered_check:
+    #     unzip_rehydrate(filename = filtered_file)
 
 # FIXME -> se puede cambiar facilmente para en vez de ejecutar decargar y unzip+ rehydrate hacerlo junto, pero bueno
 
@@ -341,3 +341,18 @@ if __name__ == "__main__":
 #                           filename=file01, 
 #                           flags=flags01)
 
+####PRUEBAS CLUSTERIZADO 17/09
+
+if __name__ == "__main__":
+    # Code for Klebsiella pneumoniae without quality filtering
+    flags_general = datasets_flags()
+
+    file_general = "results/T2_check/Deinococcus.zip"
+
+    check_general = download_genomes(source = "taxon", 
+                             name = "Deinococcus radiodurans", 
+                             filename = file_general, 
+                             flags = flags_general)
+
+    if check_general:
+        unzip_rehydrate(filename = file_general)
