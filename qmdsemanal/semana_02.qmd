@@ -426,9 +426,9 @@ Recommended when clustering 5000+ genomes:
                                                                     If you have more than this many genomes, process them in chunks of this size. 
                                                                     (default: 5000)
 
-- **[--greedy_secondary_clustering**]{style="color: blue;"}: Use a heuristic to avoid pair-wise comparisons when doing secondary clustering. 
-                                                              Will be done with single linkage clustering. 
-                                                              Only works for fastANI S_algorithm option at the moment (default: False)
+- **--greedy_secondary_clustering**: Use a heuristic to avoid pair-wise comparisons when doing secondary clustering. 
+                                     Will be done with single linkage clustering. 
+                                     Only works for fastANI S_algorithm option at the moment (default: False) -> NO para skani
 
 - **[--run_tertiary_clustering**]{style="color: blue;"}: Run an additional round of clustering on the final genome set. 
                                                           This is especially useful when greedy clustering is performed and/or to handle cases where similar genomes
@@ -481,7 +481,7 @@ dRep dereplicate [-p PROCESSORS] [-g [GENOMES ...]] [-l LENGTH] [-comp COMPLETEN
                  [--S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}]
                  [--skani_extra SKANI_EXTRA] [-sa S_ANI] [-nc COV_THRESH] 
                  [--low_ram_primary_clustering] [--multiround_primary_clustering] 
-                 [--primary_chunksize PRIMARY_CHUNKSIZE] [--greedy_secondary_clustering] 
+                 [--primary_chunksize PRIMARY_CHUNKSIZE] 
                  [--run_tertiary_clustering] [--skip_plots] work_directory
 ```
 
@@ -579,7 +579,7 @@ additional arguments:
 
 - **--tmpdir TMPDIR**: specify an alternative directory for temporary files
 
-- **--force**: overwrite output directory [default: do not overwrite]
+- [**--force**]{style="color: blue;"}: overwrite output directory [default: do not overwrite]
 
 - **--resume**: Reuse Prodigal and DIAMOND results found in output directory [default: not set]
  
@@ -602,12 +602,26 @@ additional arguments:
 Entonces el uso queda tal que:
 
 ```
-checkm2 predict [--lowmem] --input INPUT [INPUT ...] --output-directory OUTPUT_DIRECTORY 
+checkm2 predict [--lowmem] --input INPUT [INPUT ...] [--force]
+                --output-directory OUTPUT_DIRECTORY 
                 [-x EXTENSION] [--threads num_threads] [--remove_intermediates] 
 ```
 
+he acabdo el script de T3_0_clusters.py para poder clusterizar (primero hacer CheckM2 para obtener info + dRep)
+
+## IntegronFinder2 + BLAST
+
+Voy a intentar extraer la parte del integron y empezar a hacer la bbdd de blast para empezar a clasificar los Pc
+
+
+# Viernes 18/09
+
+Empezar a paralelizar!
+
+
 # PENDIENTE A FUTURO
 
+me gusatría probar bien lo de clusterizar genomas y a qué procentaje de similitud hacerlo!
 Jose: 
 
 - Preguntar a Jose si hay que trabajar con COMPLETOS o INCOMPLETOS (clasificación que da IF2) -> Modesto opina que mejor completos!!!!
