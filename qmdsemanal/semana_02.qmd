@@ -386,7 +386,7 @@ GENOME COMPARISON OPTIONS:
 
 - **--SkipSecondary**: Skip secondary clustering, just perform MASH clustering (default: False)
 
-- **[--skani_extra SKANI_EXTRA**]{style="color: blue;"}: Extra arguments to pass to skani triangle (default: )
+- [**--skani_extra SKANI_EXTRA**]{style="color: blue;"}: Extra arguments to pass to skani triangle (default: )
 
 - **--n_PRESET {normal,tight}**: Presets to pass to nucmer
                                   tight   = only align highly conserved regions
@@ -396,9 +396,9 @@ GENOME CLUSTERING OPTIONS:
 
 - **-pa P_ANI, --P_ani P_ANI**: ANI threshold to form primary (MASH) clusters (default: 0.9)
 
-- **[-sa S_ANI, --S_ani S_ANI**]{style="color: blue;"}: ANI threshold to form secondary clusters (default: 0.95)
+- [**-sa S_ANI, --S_ani S_ANI**]{style="color: blue;"}: ANI threshold to form secondary clusters (default: 0.95)
 
-- **[-nc COV_THRESH, --cov_thresh COV_THRESH**]{style="color: blue;"}: Minmum level of overlap between genomes when doing secondary comparisons (default: 0.1)
+- [**-nc COV_THRESH, --cov_thresh COV_THRESH**]{style="color: blue;"}: Minmum level of overlap between genomes when doing secondary comparisons (default: 0.1)
 
 - **-cm {total,larger}, --coverage_method {total,larger}**: Method to calculate coverage of an alignment
                                                             (for ANIn/ANImf only; gANI and fastANI can only do larger method)
@@ -408,7 +408,7 @@ GENOME CLUSTERING OPTIONS:
 
 - **--clusterAlg {single,ward,complete,weighted,average,centroid,median}**: Algorithm used to cluster genomes (passed to scipy.cluster.hierarchy.linkage (default: average)
 
-- **[--low_ram_primary_clustering**]{style="color: blue;"}: Use a memory-efficient algorithm for primary clustering. 
+- [**--low_ram_primary_clustering**]{style="color: blue;"}: Use a memory-efficient algorithm for primary clustering. 
                                                             This only affects primary clustering and not secondary clustering. (default: False)
 
 GREEDY CLUSTERING OPTIONS
@@ -416,13 +416,13 @@ These decrease RAM use and runtime at the expense of a minor loss in accuracy.
 
 Recommended when clustering 5000+ genomes:
 
-- **[--multiround_primary_clustering**]{style="color: blue;"}: Cluster each primary clunk separately and merge at the end with single linkage. 
+- [**--multiround_primary_clustering**]{style="color: blue;"}: Cluster each primary clunk separately and merge at the end with single linkage. 
                                                                 Decreases RAM usage and increases speed, and the cost of a minor loss in precision and the
                                                                 inability to plot primary_clustering_dendrograms. 
                                                                 Especially helpful when clustering 5000+ genomes. 
                                                                 Will be done with single linkage clustering (default: False)
 
-- **[--primary_chunksize PRIMARY_CHUNKSIZE**]{style="color: blue;"}: Impacts multiround_primary_clustering. 
+- [**--primary_chunksize PRIMARY_CHUNKSIZE**]{style="color: blue;"}: Impacts multiround_primary_clustering. 
                                                                     If you have more than this many genomes, process them in chunks of this size. 
                                                                     (default: 5000)
 
@@ -430,7 +430,7 @@ Recommended when clustering 5000+ genomes:
                                      Will be done with single linkage clustering. 
                                      Only works for fastANI S_algorithm option at the moment (default: False) -> NO para skani
 
-- **[--run_tertiary_clustering**]{style="color: blue;"}: Run an additional round of clustering on the final genome set. 
+- [**--run_tertiary_clustering**]{style="color: blue;"}: Run an additional round of clustering on the final genome set. 
                                                           This is especially useful when greedy clustering is performed and/or to handle cases where similar genomes
                                                           end up in different primary clusters. 
                                                           Only works with dereplicate, not compare. (default: False)
@@ -467,7 +467,7 @@ WARNINGS:
 
 ANALYZE:
 
-- **[----skip_plots**]{style="color: blue;"}: Dont make plots (default: False)
+- [**----skip_plots**]{style="color: blue;"}: Dont make plots (default: False)
 
 Example: dRep dereplicate output_dir/ -g /path/to/genomes/*.fasta
 
@@ -616,7 +616,7 @@ Voy a intentar extraer la parte del integron y empezar a hacer la bbdd de blast 
 
 # Viernes 18/09
 
-Empezar a paralelizar!
+Empezar a aprender a paralelizar
 
 
 # PENDIENTE A FUTURO
