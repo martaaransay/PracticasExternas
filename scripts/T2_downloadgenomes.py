@@ -36,7 +36,7 @@ def datasets_flags(assembly_source = None, # RefSeq | GenBank | None =all
     
     flags = [] # List of flags to fill
 
-    if assembly_source: # If an argument was provided, add it to the flags list
+    if assembly_source: # If an argument was provided, adds it to the flags list
         # datasets has a checkpoint control in case the argument is not valid
         flags += ["--assembly-source", assembly_source] # Add the argument to the list
         

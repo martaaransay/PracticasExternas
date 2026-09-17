@@ -506,7 +506,105 @@ empezar a aprender a paralelizar?
 He probado a ejectuar el script de clustering con la opción: "--ignoreGenomeQuality"; y ahí sí consigo ejecutarlo.
 Hay que revisar bien las opciones que dejo finalmente para que clusterice bien.
 
-Aun así podemos empezar a procesar los resultados que da
+## CheckM2
+
+Voy a mirar para ejecutar primero [CheckM2](https://github.com/chklovski/CheckM2) y meterle la información por un .csv vía "--genomeInfo"
+
+Información de CheckM2:
+
+                ...::: CheckM2 v1.1.0 :::...
+
+  General usage:
+
+    predict         -> Predict the completeness and contamination of genome bins in a folder. Example usage: 
+
+        checkm2 predict --threads 30 --input <folder_with_bins> --output-directory <output_folder>
+    
+    testrun         -> Runs Checkm2 on internal test genomes to ensure it runs without errors. Example usage: 
+
+         checkm2 testrun --threads 10
+    
+    database        -> Download and set up required CheckM2 DIAMOND database for annotation
+
+  Use checkm2 <command> -h for command-specific help.
+
+```
+checkm2 predict [-h] [--debug] [--version] [--quiet] [--lowmem] --input INPUT [INPUT ...] 
+                --output-directory OUTPUT_DIRECTORY [--general] [--specific] [--allmodels] 
+                [--genes] [-x EXTENSION] [--tmpdir TMPDIR] [--force] [--resume] 
+                [--threads num_threads] [--stdout] [--remove_intermediates] [--ttable ttable] 
+                [--database_path DATABASE_PATH] [--dbg_cos] [--dbg_vectors]
+```
+
+::: {.callout-important collapse="true"}
+# Argumentos que acepta checkm2
+
+*He marcado en azul aquellos argumentos que pueden tener sentido para la búsqueda y clasificación de Pcs:*
+
+Predict the completeness and contamination of genome bins in a folder. Example usage: 
+
+        checkm2 predict --threads 30 --input <folder_with_bins> --output-directory <output_folder>
+
+options:
+
+- **-h, --help**: show this help message and exit
+
+- **--debug**: output debug information
+
+- **--version**: output version information and quit
+
+- **--quiet**: only output errors
+
+- [**--lowmem**]{style="color: blue;"}:   Low memory mode. 
+                            Reduces DIAMOND blocksize to significantly reduce RAM usage at the expense of longer runtime
+
+required arguments:
+
+- [**--input INPUT [INPUT ...], -i INPUT [INPUT ...]**]{style="color: blue;"}: Path to folder containing MAGs or list of MAGS to be analyzed
+  
+- [**--output-directory OUTPUT_DIRECTORY, --output_directory OUTPUT_DIRECTORY, -o OUTPUT_DIRECTORY**]{style="color: blue;"}:  
+                        Path output to folder
+
+additional arguments:
+
+- **--general**: Force the use of the general quality prediction model (gradient boost)
+
+- **--specific**: Force the use of the specific quality prediction model (neural network)
+
+- **--allmodels**: Output quality prediction for both models for each genome.
+
+- **--genes**: Treat input files as protein files. [Default: False]
+
+- [**-x EXTENSION, --extension EXTENSION**]{style="color: blue;"}: Extension of input files. [Default: .fna]
+
+- **--tmpdir TMPDIR**: specify an alternative directory for temporary files
+
+- **--force**: overwrite output directory [default: do not overwrite]
+
+- **--resume**: Reuse Prodigal and DIAMOND results found in output directory [default: not set]
+ 
+- [**--threads num_threads, -t num_threads**]{style="color: blue;"}: number of CPUS to use [default: 1]
+ 
+- **--stdout**: Print results to stdout [default: write to file]
+ 
+- [**--remove_intermediates**]{style="color: blue;"}: Remove all intermediate files (protein files, diamond output) [default: don't]
+ 
+- **--ttable ttable**: Provide a specific progidal translation table for bins [default: automatically determine either 11 or 4]
+ 
+- **--database_path DATABASE_PATH**: Provide a location for the CheckM2 database for a given predict run [default: use either internal path set via <checkm2 database> or CHECKM2DB environmental variable]
+  
+- **--dbg_cos**: DEBUG: write cosine similarity values to file [default: don't]
+ 
+- **--dbg_vectors**: DEBUG: dump pickled feature vectors to file [default: don't]
+
+:::
+
+Entonces el uso queda tal que:
+
+```
+checkm2 predict [--lowmem] --input INPUT [INPUT ...] --output-directory OUTPUT_DIRECTORY 
+                [-x EXTENSION] [--threads num_threads] [--remove_intermediates] 
+```
 
 # PENDIENTE A FUTURO
 
