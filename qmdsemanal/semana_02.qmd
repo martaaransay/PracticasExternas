@@ -1020,5 +1020,7 @@ DESCRIPTION:   Nucleotide-Nucleotide BLAST 2.17.0+
 :::
 
 Aun así, PROBLEMA -> creo que blast para secuencias tan peuqeñas como son los Pc no es útli.
+Por ello voy a intentar hacerlo con expresiones regulares, ya que ya me sé las secuencias bien de los promotores:
+
 
 FIXME: Tengo que añadir el resto de Pc para generar la bbdd

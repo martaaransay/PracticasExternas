@@ -1,10 +1,11 @@
 # Import libraries 
 import os
 import glob
+import csv
 from T3_0_clusters import cluster_genomes
 from T3_1_integronfiltering import integron_filtering
 from T3_2_integronfinder import Integron_Finder
-from T3_3_Pc import extract_Pc_region_gbk, clasificar_Pc_regex
+from T3_3_Pc import extract_integron_info_gbk, clasificar_Pc_regex, adjust_Pc_info, adjust_calin_info
 
 # --------Definition of functions
 #------------------------ Function to define flags for genome download (datasets download)
@@ -58,7 +59,7 @@ def recorrer_genomas(rutas_genomas,
     """
     FIXME -> Falta docstring cuando se acabe la función
     """
-    print(len(rutas_genomas))
+
     dir_parental = directorio.replace("/ncbi_dataset/data", "") # Utiliza como referencia el directorio parental 
     
     for ruta_genoma_individual in rutas_genomas: # Recorre cada archivo con los genomas
@@ -95,17 +96,20 @@ def recorrer_genomas(rutas_genomas,
         # Crea el directorio (no error si ya existe)
         os.makedirs(directorio_pc, exist_ok=True)  # FIXME -> LO HACE MCUHAS VECES
         
-        pc = extract_Pc_region_gbk(acc_genoma, archivos_gbk_integronfinder)
+        integron_info = extract_integron_info_gbk(acc_genoma, archivos_gbk_integronfinder)
 
-        for a in pc:
-            if a["calin"]:
-                with open(os.path.join(directorio_pc, "calin.csv"), "a") as calin_csv:
-                    calin_csv_file = csv.writerow(a)
+        for each_integron in integron_info:
+            if each_integron["calin"]:
+                calin_file = os.path.join(directorio_pc, "calin.csv")
+                adjust_calin_info(each_integron, calin_file)
+
             else:
-                res = clasificar_Pc_regex(a["secuencia"])
-                with open(os.path.join(directorio_pc, "pc.csv"), "a") as pc_csv:
-                    pc_csv_file = csv.writerow(a)
-                    pc_csv_file = csv.writerow(res)
+                Pc_info = clasificar_Pc_regex(each_integron["sequence"])
+                if not Pc_info:
+                    continue
+                Pc_file = os.path.join(directorio_pc, "pc.csv")
+                adjust_Pc_info(each_integron, Pc_info, Pc_file)
+                    
 
         ## EXTRAER INFORMACIÓN SOBRE PCs
         # lista_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
@@ -134,6 +138,13 @@ if __name__ == "__main__":
 
     # PRUEBA SIN CLUSTERIZADO
     file = "results/T2_check/Acinetobacter.zip"
-    adapted_file = adjust_path(file)
-    genomes_files = list_fasta_files(adapted_file)
-    recorrer_genomas(genomes_files, adapted_file, flag_integronfiltering=True)
+    # adapted_file = adjust_path(file)
+    # genomes_files = list_fasta_files(adapted_file)
+    # recorrer_genomas(genomes_files, adapted_file, flag_integronfiltering=True)
+
+    # prueba con EC
+    file_EC="results/T2_check/EC.zip"
+    adapted_file_EC = adjust_path(file_EC)
+    genomes_files_EC = list_fasta_files(adapted_file_EC)
+    recorrer_genomas(genomes_files_EC, adapted_file_EC, flag_integronfiltering=True)
+
