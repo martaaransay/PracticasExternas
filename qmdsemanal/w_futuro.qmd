@@ -31,3 +31,7 @@ __file__ es una variable que python rellena automáticamente con la ruta del .py
     - Esto se hace en entorno conda diferente ya que pueden estar desactualizados y puede dar problemas (coli phylogroups github // pyMLST github)
 
     - Así conseguimos evitar que la seleccción de genomas (ej. filtrado) sesgue los resultados que obtenemos
+
+- mirar IF2 que detecta integrones de clase 1, 2 y 3 -> ver si los Pc de clase 2 y clase 3 se parecen a los de clase 1 y sino con el blsat se van
+
+se podría acotar aun más la secuencia extraida para reducir carga computacional a, en lugar del integrón entero, la integrasa (que es donde se encuentra el Pc)

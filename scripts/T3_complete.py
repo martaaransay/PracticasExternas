@@ -4,7 +4,7 @@ import glob
 from T3_0_clusters import cluster_genomes
 from T3_1_integronfiltering import integron_filtering
 from T3_2_integronfinder import Integron_Finder
-from T3_3_Pc import extract_Pc_region_gbk
+from T3_3_Pc import extract_Pc_region_gbk, clasificar_Pc_regex
 
 # --------Definition of functions
 #------------------------ Function to define flags for genome download (datasets download)
@@ -90,12 +90,23 @@ def recorrer_genomas(rutas_genomas,
             print(f"IntegronFinder2 no ha detectado integrones en el genoma {ruta_genoma_individual}.")
             # FIXME: Habría que borrar aquí algún archivo / directorio para que no de problemas al extraer PCs y clasificar??
             continue
-        print(archivos_gbk_integronfinder)
+        
+        directorio_pc = os.path.join(dir_parental, "results_Pc")
+        # Crea el directorio (no error si ya existe)
+        os.makedirs(directorio_pc, exist_ok=True)  # FIXME -> LO HACE MCUHAS VECES
+        
         pc = extract_Pc_region_gbk(acc_genoma, archivos_gbk_integronfinder)
-        for a in pc:
-            print(a["secuencia"])  
 
-        return
+        for a in pc:
+            if a["calin"]:
+                with open(os.path.join(directorio_pc, "calin.csv"), "a") as calin_csv:
+                    calin_csv_file = csv.writerow(a)
+            else:
+                res = clasificar_Pc_regex(a["secuencia"])
+                with open(os.path.join(directorio_pc, "pc.csv"), "a") as pc_csv:
+                    pc_csv_file = csv.writerow(a)
+                    pc_csv_file = csv.writerow(res)
+
         ## EXTRAER INFORMACIÓN SOBRE PCs
         # lista_pc = extraer_Pc_gbk(acc_genoma, archivos_gbk_integronfinder)
         # for element in lista_pc:
