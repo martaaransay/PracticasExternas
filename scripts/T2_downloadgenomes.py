@@ -183,6 +183,52 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
     accessions_tuple = ("inputfile", accs_file_path)
 
     return accessions_tuple
+##------------------------ Function to unzip and rehydrate the genomes
+def unzip_rehydrate(filename = "ncbi_dataset.zip"): 
+    """
+    Unzips an NCBI ZIP file and executes the datasets rehydrate command.
+
+    Args
+    -------
+    filename (str, optional): Path to the ZIP file to decompress. 
+                              Default is "ncbi_dataset.zip".
+    """
+    if not os.path.isfile(filename): # Check that the file exists
+        raise FileNotFoundError(f"The file {filename} was not found")
+
+    ############# ------------------- unzip
+    # If there' is no path in the filename, returns "."
+    out_dir = os.path.dirname(filename) or "." 
+    new_file = os.path.basename(filename)
+    new_folder = os.path.splitext(new_file)[0]
+    target_dir = os.path.join(out_dir, new_folder)
+
+    unzip_cmd = ["unzip",
+                 "-q", # Quiet
+                 "-o", # Overwrite files to avoid errors
+                 filename,
+                 "-d", target_dir] # Directory where it is unzipped
+    
+    print(f"Executing: \n{shlex.join(unzip_cmd)}")
+    try:
+        subprocess.run(unzip_cmd, 
+                       check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing unzip:\n{e.stderr}")
+        return
+
+    ############ ------------------- datasets rehydrate
+    rehydrate_cmd = ["datasets", "rehydrate", 
+                     "--directory", target_dir]
+    print(f"Executing: \n{shlex.join(rehydrate_cmd)}")
+    try:
+        subprocess.run(rehydrate_cmd, 
+                        check=True, capture_output=True, text=True) 
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing datasets rehydrate:\n{e.stderr}")
+        return
+
+    return
 
 
 ##------------------------ Function to download genomes
@@ -241,54 +287,8 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
             if not os.listdir(out_dir): 
                 os.removedirs(out_dir) # Removes empty directories (parent directories too)
         return None
-    return True
+    unzip_rehydrate(filename)
 
-##------------------------ Function to unzip and rehydrate the genomes
-def unzip_rehydrate(filename = "ncbi_dataset.zip"): 
-    """
-    Unzips an NCBI ZIP file and executes the datasets rehydrate command.
-
-    Args
-    -------
-    filename (str, optional): Path to the ZIP file to decompress. 
-                              Default is "ncbi_dataset.zip".
-    """
-    if not os.path.isfile(filename): # Check that the file exists
-        raise FileNotFoundError(f"The file {filename} was not found")
-
-    ############# ------------------- unzip
-    # If there' is no path in the filename, returns "."
-    out_dir = os.path.dirname(filename) or "." 
-    new_file = os.path.basename(filename)
-    new_folder = os.path.splitext(new_file)[0]
-    target_dir = os.path.join(out_dir, new_folder)
-
-    unzip_cmd = ["unzip",
-                 "-q", # Quiet
-                 "-o", # Overwrite files to avoid errors
-                 filename,
-                 "-d", target_dir] # Directory where it is unzipped
-    
-    print(f"Executing: \n{shlex.join(unzip_cmd)}")
-    try:
-        subprocess.run(unzip_cmd, 
-                       check=True, capture_output=True, text=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing unzip:\n{e.stderr}")
-        return
-
-    ############ ------------------- datasets rehydrate
-    rehydrate_cmd = ["datasets", "rehydrate", 
-                     "--directory", target_dir]
-    print(f"Executing: \n{shlex.join(rehydrate_cmd)}")
-    try:
-        subprocess.run(rehydrate_cmd, 
-                        check=True, capture_output=True, text=True) 
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing datasets rehydrate:\n{e.stderr}")
-        return
-
-    return
 
 # -------- Main code
 
@@ -321,14 +321,13 @@ if __name__ == "__main__":
     # if filtered_check:
     #     unzip_rehydrate(filename = filtered_file)
 
-# FIXME -> se puede cambiar facilmente para en vez de ejecutar decargar y unzip+ rehydrate hacerlo junto, pero bueno
 
 # FIXME -> no salen las barras de progreso al ejecutar este script, pero si quitamos el argumento (capture_output=True)
 #          en subprocess.run, sale -> solo que ya no se captura el error así (habría que eliminar esa parte de:
 #          (except subprocess.CalledProcessError as e:)
 #          PERO OJO -> SOLO EN LAS QUE HAGA FALTA (EJ. en unzip no!)
 
-# ###########PRUEBAS 16/09  - FIXME (habrá que eliminarlo):
+# ###########PRUEBAS 16/09  -(habrá que eliminarlo):
 # # Para probar si IntegronFinder2 solo identifica P2
 # file01 = "results/pruebas_IntegronFinderCheck/EC.zip"
 # flags01 = definir_flags(assembly_source="RefSeq", 
@@ -349,10 +348,7 @@ if __name__ == "__main__":
 
     file_general = "results/T2_check/Klebsiella.zip"
 
-    check_general = download_genomes(source = "taxon", 
-                             name = "Klebsiella pneumoniae", 
-                             filename = file_general, 
-                             flags = flags_general)
-
-    if check_general:
-        unzip_rehydrate(filename = file_general)
+    download_genomes(source = "taxon", 
+                     name = "Klebsiella pneumoniae", 
+                     filename = file_general, 
+                     flags = flags_general)

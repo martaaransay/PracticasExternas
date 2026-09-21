@@ -10,7 +10,6 @@ from T3_3_Pc import extract_integron_info_gbk, classify_pc_regex, adjust_Pc_info
 # --------Definition of functions
 #------------------------ Function to define flags for genome download (datasets download)
 def adjust_path(filename):
-    #FIXME: no me convence que esta función esté aquí
     """
     Adapts the directory indicated in the previous script to the one needed to continue the pipeline.
     
@@ -123,11 +122,6 @@ def recorrer_genomas(filename,
 
 # FIXME: hay q añadir lo de la tabla de + y que borre los genomas q no tienen integrones!
 # FIXME: igual tmb que borre los genomast ras el clusterizado (con flag opcional!)
-
-### FIXME -> Falta arreglar la parte de que no salga Promotor en los .gbk por ejemplo!!!!
-### FIXME -> Muchas veces aparece además el mensaje de: 
-# "No se ha podido procesar el genoma results/pruebas_T2/kpn/results_IntegronFiltering/GCF_001663295.1_ASM166329v1_genomic/GCF_001663295.1_ASM166329v1_genomic.attC_filtered.fasta por IntegronFinder2"
-
 
 # EJEMPLOS USADOS:
 
