@@ -1,0 +1,13 @@
+---
+title: "Semana del 21 al 25 de Septiembre"
+number-sections: false
+---
+
+# Lunes 21/09
+
+OBJETIVOS INICIALES:
+
+- Dejar bien hechos scripts T3_3 y T3_complete
+
+- Aprender a paralelizar 
+

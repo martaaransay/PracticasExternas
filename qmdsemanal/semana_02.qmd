@@ -1023,4 +1023,4 @@ Aun así, PROBLEMA -> creo que blast para secuencias tan peuqeñas como son los 
 Por ello voy a intentar hacerlo con expresiones regulares, ya que ya me sé las secuencias bien de los promotores:
 
 
-FIXME: Tengo que añadir el resto de Pc para generar la bbdd
+He añadido el retso de Pc para completar la bbdd, pero en ralidad ahora en lugar de bbdd lo hacemos con RE
