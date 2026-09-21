@@ -35,3 +35,6 @@ __file__ es una variable que python rellena automáticamente con la ruta del .py
 - mirar IF2 que detecta integrones de clase 1, 2 y 3 -> ver si los Pc de clase 2 y clase 3 se parecen a los de clase 1 y sino con el blsat se van
 
 se podría acotar aun más la secuencia extraida para reducir carga computacional a, en lugar del integrón entero, la integrasa (que es donde se encuentra el Pc)
+
+posibilidad a añadir que busque en los CALIN en la parte upstream la integradsa (el inciio por ejemplo, 40 pb) y en aquellos qeu dé positivo buscar el Pc (por ejemplo)
+* las enterobact los integrones que tienen son todos moviles (exógenos), pero bact como vibrio por ejemplo pueden tener calin que se haya fragmetado la Integrasaf

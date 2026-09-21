@@ -53,14 +53,18 @@ def list_fasta_files(directory):
     
     return genomes_path_glob
 
-def recorrer_genomas(rutas_genomas,
-                     directorio,
+def recorrer_genomas(filename,
+                     flag_clustering = True,
                      flag_integronfiltering = True): # Por defecto se filtra previamente con integron_filtering
     """
     FIXME -> Falta docstring cuando se acabe la función
     """
+    adjusted_path = adjust_path(filename)
+    rutas_genomas = list_fasta_files(adjusted_path)
+    if flag_clustering:
+        rutas_genomas = cluster_genomes(rutas_genomas, adjusted_path)
 
-    dir_parental = directorio.replace("/ncbi_dataset/data", "") # Utiliza como referencia el directorio parental 
+    dir_parental = adjusted_path.replace("/ncbi_dataset/data", "") # Utiliza como referencia el directorio parental 
     
     for ruta_genoma_individual in rutas_genomas: # Recorre cada archivo con los genomas
         archivo = os.path.basename(ruta_genoma_individual) # Extrae el nombre y extensión del archivo
@@ -92,7 +96,7 @@ def recorrer_genomas(rutas_genomas,
             # FIXME: Habría que borrar aquí algún archivo / directorio para que no de problemas al extraer PCs y clasificar??
             continue
         
-        directorio_pc = os.path.join(dir_parental, "results_Pc")
+        directorio_pc = os.path.join(dir_parental, "results_AAAA")
         # Crea el directorio (no error si ya existe)
         os.makedirs(directorio_pc, exist_ok=True)  # FIXME -> LO HACE MCUHAS VECES
         
@@ -143,7 +147,6 @@ if __name__ == "__main__":
 
     # prueba con EC
     file_EC="results/T2_check/EC.zip"
-    adapted_file_EC = adjust_path(file_EC)
-    genomes_files_EC = list_fasta_files(adapted_file_EC)
-    recorrer_genomas(genomes_files_EC, adapted_file_EC, flag_integronfiltering=True)
+
+    recorrer_genomas(file_EC)
 

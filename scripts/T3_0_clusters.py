@@ -3,6 +3,7 @@ import subprocess
 import shlex
 import os
 import csv
+import glob
 
 # --------Definition of functions
 #------------------------ Function to run CheckM2 using the conda environment
@@ -104,7 +105,7 @@ def checkm2_to_genomeinfo(quality_report_tsv, genome_info_csv, genome_ext = "fna
 def cluster_genomes(genomes_paths,
                     adapted_file, 
                     threshold = 0.99,
-                    threads = 4,
+                    threads = 1,
                     length = 50000,
                     completeness = 75,
                     contamination = 25,
@@ -147,7 +148,7 @@ def cluster_genomes(genomes_paths,
     folder_name = f"clustering_{threshold}"
     
     # New path
-    out_dir = os.path.join(os.path.dirname(parental_dir), folder_name)
+    out_dir = os.path.join(parental_dir, folder_name)
 
     # Create the output directory to avoid errors
     os.makedirs(out_dir, exist_ok=True)
@@ -202,4 +203,5 @@ def cluster_genomes(genomes_paths,
         return
     # Get the new paths to the clustered genome files
     genomes_path = os.path.join(out_dir, "dereplicated_genomes","*.fna")
-    return genomes_path
+    genomes_path_glob = sorted(glob.glob(genomes_path))
+    return genomes_path_glob
