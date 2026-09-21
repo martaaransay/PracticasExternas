@@ -16,4 +16,9 @@ OBJETIVOS INICIALES:
 he dejado bien hecho (comentado + traducido) el script de extracción, búsqueda y clasificación de Pcs
 
 [**FIXME**]{style="color: red;"}:
-Aun así, Creo que da problemas porque detecta dos Pc como en la misma región¿ revisar eso
+Aun así, Creo que da problemas porque detecta dos Pc como en la misma región¿ revisar eso -> igual con clustering se solcuionarlo
+
+## Script T3_0_clusters 
+
+Sigo sin poder hacer clustering ya que no me da el ordenador, probar ya con la workstation
+

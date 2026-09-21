@@ -17,7 +17,7 @@ OBJETIVOS INICIAL HOY:
 
 ## Problema con el integron-filtering
 
-[**FIXME**]{style="color: red;"} 
+
 
 Para que Integron-filtering funcione, requiere un binario externo (HattCI) en el PATH. Para solcuionarlo voy a adaptar la ruta al repositorio (ya que en teoría se debe instalar todo para que luego funcione el pipeline automatizado)
 Añadido al script -> ./scripts/T3_0_integronfiltering.py
@@ -156,7 +156,7 @@ IntegronFinder2 genera diferentes outputs, pero como hemos puesto la opción **-
 Por ello, usando SeqIO es fácil parsear el .gbk de forma directa
 
 ## PROBLEMA CON IntegronFinder2
-[**FIXME**]{style="color: red;"} Por ahora, al extraer la secuencia, me obtiene todo P2 (mirandolo a ojo, sin módulo de clasificción)
+Por ahora, al extraer la secuencia, me obtiene todo P2 (mirandolo a ojo, sin módulo de clasificción)
 
 MAÑANA: Voy a probar:
 
@@ -351,7 +351,7 @@ GENOME FILTERING OPTIONS:
 
 GENOME QUALITY ASSESSMENT OPTIONS:
 
-[**FIXME**]{style="color: red;"}: En teoría nosotros ya limpiamos los genomas por checkM info (si se habilita la flag) PERO no conviene mezclar información de lNCBI.
+ En teoría nosotros ya limpiamos los genomas por checkM info (si se habilita la flag) PERO no conviene mezclar información de lNCBI.
 Así que vamos a intentar correr externamente CheckM2 y de ahí pasarle la información a dRep
 
 - **--ignoreGenomeQuality**: Don't run checkM or do any quality filtering. NOT RECOMMENDED! This is useful for use with bacteriophages or eukaryotes or things where checkM scoring does not work. 

@@ -30,7 +30,7 @@ conda env update -f environment_pruebas.yml --prune
 
 ``` 
 
-- [**FIXME**]{style="color: red;"} He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)
+- He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)
 
 ### Primeras pruebas con Integron_Finder
 
@@ -90,14 +90,14 @@ Usando la herramienta seqkit (añadida al .yml:   - bioconda::seqkit), descargam
 ```bash
 # EJEMPLO DE ESA LINEA en el output de IntegronFinder
 # integron_01	NZ_PV022879.1	Pc_int1	29735	29761	-1	NA	Promoter	Pc_1	NA	complete	Yes	NA	lin
-## para dar alog más de margen se extraen -10 y +10 nt extra ####FIXME ->????
+## para dar alog más de margen se extraen -10 y +10 nt extra 
 fasta=data/Klebsiella/ncbi_dataset/data/GCF_059958715.2/GCF_059958715.2_ASM5995871v2_genomic.fna
 seqkit subseq --chr NZ_PV022879.1 -r 29725:29771 \
   $fasta \
   | seqkit seq -r -p  > pc_region.fasta
 
 ```
-[**FIXME:**]{style="color: red;"}
+
 
 aquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es
 
@@ -230,7 +230,7 @@ He generado el código (scripts/T2_descarga_genomas.py) pero se peuden añadir m
 -  para ello habría que ejecutar *datasets summary genome ...* con la flag *--as-json-lines*. En ese JSON se puede filtrar numéricamente y los válidos pasarlos al script creado
 
 
-He añadido la parte de las métricas, pero fatla definir los umbrales correctamente ([**FIXME**]{style="color: red;"})
+He añadido la parte de las métricas, pero fatla definir los umbrales correctamente 
 - falta además limpiar un poco el código y comentarlo
 - hacer alguna prueba de errores también
 
@@ -269,7 +269,7 @@ En integron-filtering hay dos posibles scripts de filtrado:
 - IntI-screening.sh (Prodigal + hmmsearch del dominio IntI): se solapa con lo que ya hace IntegronFinder2 internamente. 
 
 
-[**FIXME**]{style="color: red;"} : por ahora solo voy a usar integron-filtering el script de attC-screening.sh
+ por ahora solo voy a usar integron-filtering el script de attC-screening.sh
 
 ::: {.callout-important collapse="true"}
 #### Argumentos que acepta el script attC-screening.sh
@@ -312,7 +312,7 @@ Lo que hace es analizar el genoma pasado (ej. genoma con chr1 + plásmido1 + pl�
 El que interesa es el que acaba en **attC_filtered.fasta**, que mantiene el contexto entero (ej. chr1 entero) de aquellos accession en los que ha encontrado coincidencia con sitio attC.
 Nos interesa mantener el contexto para luego estudiar bien el promotor con IntegronFinder2
 
-[**FIXME**]{style="color: red;"}:
+
 Se podría cambiar el funcionamiento si no da buenos resultados, ya que este programa genera otros archivos donde concreta mucho más el sitio attC
 ¿Igual por requerimientos de tiempo?
 
