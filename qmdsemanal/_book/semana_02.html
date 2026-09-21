@@ -33,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./semana_03.html" rel="next">
 <link href="./semana_01.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -127,6 +128,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Semana del 14 al 18 de Septiembre</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./semana_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Semana del 21 al 25 de Septiembre</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w_futuro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">FUTURO</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -146,8 +159,28 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#problema-con-integronfinder2" id="toc-problema-con-integronfinder2" class="nav-link" data-scroll-target="#problema-con-integronfinder2">PROBLEMA CON IntegronFinder2</a></li>
   </ul></li>
-  <li><a href="#martes-1509" id="toc-martes-1509" class="nav-link" data-scroll-target="#martes-1509">Martes 15/09</a></li>
-  <li><a href="#pendiente-a-futuro" id="toc-pendiente-a-futuro" class="nav-link" data-scroll-target="#pendiente-a-futuro">PENDIENTE A FUTURO</a></li>
+  <li><a href="#martes-1509" id="toc-martes-1509" class="nav-link" data-scroll-target="#martes-1509">Martes 15/09</a>
+  <ul class="collapse">
+  <li><a href="#tutoría-con-modesto" id="toc-tutoría-con-modesto" class="nav-link" data-scroll-target="#tutoría-con-modesto">Tutoría con Modesto</a></li>
+  </ul></li>
+  <li><a href="#miércoles-1609" id="toc-miércoles-1609" class="nav-link" data-scroll-target="#miércoles-1609">Miércoles 16/09</a>
+  <ul class="collapse">
+  <li><a href="#revisión-de-scripts" id="toc-revisión-de-scripts" class="nav-link" data-scroll-target="#revisión-de-scripts">Revisión de scripts</a>
+  <ul class="collapse">
+  <li><a href="#script-1-t1_integrall_pc_abundance.py" id="toc-script-1-t1_integrall_pc_abundance.py" class="nav-link" data-scroll-target="#script-1-t1_integrall_pc_abundance.py">Script 1: T1_Integrall_Pc_abundance.py</a></li>
+  <li><a href="#script-1-t2_downloadgenomes.py" id="toc-script-1-t2_downloadgenomes.py" class="nav-link" data-scroll-target="#script-1-t2_downloadgenomes.py">Script 1: T2_downloadgenomes.py</a></li>
+  <li><a href="#clusterización-de-genomas" id="toc-clusterización-de-genomas" class="nav-link" data-scroll-target="#clusterización-de-genomas">Clusterización de genomas</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#jueves-1709" id="toc-jueves-1709" class="nav-link" data-scroll-target="#jueves-1709">Jueves 17/09</a>
+  <ul class="collapse">
+  <li><a href="#checkm2" id="toc-checkm2" class="nav-link" data-scroll-target="#checkm2">CheckM2</a></li>
+  <li><a href="#integronfinder2-blast" id="toc-integronfinder2-blast" class="nav-link" data-scroll-target="#integronfinder2-blast">IntegronFinder2 + BLAST</a></li>
+  </ul></li>
+  <li><a href="#viernes-1809" id="toc-viernes-1809" class="nav-link" data-scroll-target="#viernes-1809">Viernes 18/09</a>
+  <ul class="collapse">
+  <li><a href="#blast" id="toc-blast" class="nav-link" data-scroll-target="#blast">BLAST</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -284,7 +317,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="problema-con-integronfinder2" class="level2">
 <h2 class="anchored" data-anchor-id="problema-con-integronfinder2">PROBLEMA CON IntegronFinder2</h2>
 <p><span style="color: red;"><strong>FIXME</strong></span> Por ahora, al extraer la secuencia, me obtiene todo P2 (mirandolo a ojo, sin módulo de clasificción)</p>
-<p>MAÑANA: Voy a probar: - con otra especie, - probar hacineodlo sin la flag de filtering????</p>
+<p>MAÑANA: Voy a probar:</p>
+<ul>
+<li><p>con otra especie,</p></li>
+<li><p>probar hacineodlo sin la flag de filtering????</p></li>
+</ul>
 <p>y luego sino habrá que generar algún modulo de detección de promotores??? ver si existe????</p>
 </section>
 </section>
@@ -300,13 +337,392 @@ ul.task-list li input[type="checkbox"] {
 <li><p>tomar decision en base a los resultados obtenidos</p></li>
 <li><p>preparar tutoría</p></li>
 </ul>
+<p>RESULTADOS: Con otras especies: - con Acinetobacter baumannii solo detecta P2 también - con Escherichia coli solo detecta P2 también</p>
+<p>Con el flag de filtrado en false en esas dos especies ocurre lo mismo</p>
+<p>¿Posible solución? -&gt; En lugar de usar la flag de –promoter–attI extraer algo upstream de la región de integrón idenfiticada y ahí utilzar las secuencias teóricas de promotores para comprar directamente</p>
+<section id="tutoría-con-modesto" class="level2">
+<h2 class="anchored" data-anchor-id="tutoría-con-modesto">Tutoría con Modesto</h2>
+<ul>
+<li><p>Opción a conectarme vía VPN-UAM a un ordenador de su laboratorio si la workstation no conseguimos ponerla a punto</p></li>
+<li><p>Los umbrales para el filtrado de genomas los podemos sacar de papers de re-ensamblar y re-anotar genomas (ej. All the bacteria) –&gt; Completeness y contaminacion</p></li>
+<li><p>Añadir un módulo para hacer un CLUSTERIZADO de genomas (al 99% o 95% de similitud, idealmente al 95% pero ir probando). Así nos quedamos con el genoma representativo y reducimos mucho la carga computacional en pasos posteriores</p></li>
+<li><p>Aprender sí o sí a PARALELIZAR en python. Por ejemplo, ir de 100 en 100 genomas: mientras los 100 primeros están rehidratandose, no pasa nada más, pero en los siguientes 100 genomas, mientras estos se rehidratan, los anteriores se están ya procesando (integron-filtering ect…)</p></li>
+<li><p>Añadido en a futuro, pero poder hacer un TIPADO DE GENOMAS, es decir, buscar la relación y poder clasificar el integrón por el tipo de genoma (ej. A,B,C,D en Ecoli // multilocus sequence: mls) –&gt; ya hay programas que lo hacen (para relacionarlo con la literatura).</p>
+<ul>
+<li><p>Esto se hace en entorno conda diferente ya que pueden estar desactualizados y puede dar problemas (coli phylogroups github // pyMLST github)</p></li>
+<li><p>Así conseguimos evitar que la seleccción de genomas (ej. filtrado) sesgue los resultados que obtenemos</p></li>
+</ul></li>
+<li><p>Respecto a IF2: usar siempre –local-max; y probablemente haya que subir bastante el E-value (&gt;1)</p>
+<ul>
+<li><p>Además, la flag de identificar promotores como habíamos visto funciona fatal, entonces acotar directamente la región que interpreta como integron y buscar ahí con BLAST (NCBI en terminal) los prommotores (haciendo una bbdd teórica con los 13 promotores identificados)</p></li>
+<li><p>El output podemos pedirselo en blast en una tabla que nos los ordena por los E-value (por ejemplo)</p></li>
+<li><p>Preguntar a Jose si hay que trabajar con COMPLETOS o INCOMPLETOS (clasificación que da IF2) -&gt; Modesto opina que mejor completos!!!!</p></li>
+</ul></li>
+<li><p>Revisar si los programas ya tienen checkpoints de parada -&gt; si se para la ejecución del programa no hay ningún tipo de problema siempre que se indiqué qué ha fallado (si ya tienen los programas, no hacer otro checkpoint!)</p></li>
+<li><p>Si no se ha encontrado integron en el genoma -&gt; se borran todos los datos (incluso el genoma entero descargado, lo de interon-filtering…) todo para liberar espacio</p>
+<ul>
+<li>En relación con esto generar una tabla con los datos positivos y de ahí puedo coger el ID assembly (y esos al IF2 solo) -&gt; TABLA SOLO CON LOS DATOS POSITIVOS</li>
+</ul></li>
+<li><p>para hacer esquemas de forma mucho más rápida podemos usar mermaid (GITHUB)</p></li>
+</ul>
 </section>
-<section id="pendiente-a-futuro" class="level1">
-<h1>PENDIENTE A FUTURO</h1>
-<p>añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2</p>
-<p><strong>file</strong> es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????</p>
+</section>
+<section id="miércoles-1609" class="level1">
+<h1>Miércoles 16/09</h1>
+<p>OBJETIVOS INICIAL</p>
+<ul>
+<li><p>ir traduciendo el código desde el inicio</p></li>
+<li><p>cambiar los checkpoints que sobren</p></li>
+<li><p>añadir el módulo de clusterizado (se añade la función pero no tiene porqué ejecutarse siempre)</p></li>
+<li><p>leer sobre los umbrales de filtrado¿¿¿¿?</p></li>
+</ul>
+<section id="revisión-de-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="revisión-de-scripts">Revisión de scripts</h2>
+<section id="script-1-t1_integrall_pc_abundance.py" class="level3">
+<h3 class="anchored" data-anchor-id="script-1-t1_integrall_pc_abundance.py">Script 1: T1_Integrall_Pc_abundance.py</h3>
+<p>El script 1 (scripts/T1_Integrall_Pc_abundance.py) en teoría está ya acabado -&gt; He modificado la función que había y la he dividido en 4:</p>
+<ul>
+<li><p>calcular la abundancia de Pc en todas las especies (lee .xlsx y calcula)</p></li>
+<li><p>calcular sobre la tabla de conteo para las espcies eskapee</p></li>
+<li><p>genera un .xlsx con la abundancia de ambas tablas</p></li>
+<li><p>genera los plots para ambas tablas</p></li>
+</ul>
+</section>
+<section id="script-1-t2_downloadgenomes.py" class="level3">
+<h3 class="anchored" data-anchor-id="script-1-t2_downloadgenomes.py">Script 1: T2_downloadgenomes.py</h3>
+<p>Se han cambiado las métricas de calidad (se pueden introducir nuevas). Para fijar los valores default he utilizado el proyecto AllTheBacteria: Indican que utilizan en su <a href="https://allthebacteria.org/docs/release_history/#:~:text=The%20defaults%20were%20used%20to%20define%20the,15Mbp.%20*%20Maximum%20number%20of%20contigs%202%2C000">documentacion</a> los siguientes parámetros:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The species calls and high quality dataset are generated with the script make_hq_sample_list.py. The high quality dataset has 1,858,610 samples.</p>
+<p>This script is updated since version 0.1 to expose all parameters to the user, so it can be rerun with different cutoffs. The defaults were used to define the high quality dataset here, which meant a sample must pass all of these requirements to be included as high quality:</p>
+<ul>
+<li><p>Have a sylph call with at least 99 percent minimum abundance.</p></li>
+<li><p>If a sample has more than one call (eg where it has more than one run), then require all species calls to be the same</p></li>
+<li><p>Minimum checkm2 completeness of 90%</p></li>
+<li><p>Maximum checkm2 contamination of 5%</p></li>
+<li><p>Total assembly length between 100kbp and 15Mbp</p></li>
+<li><p>Maximum number of contigs 2,000</p></li>
+<li><p>Minimum N50 2,000</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p><span style="color: red;"><strong>#### FIXME</strong></span> –&gt; se pueden añadir entonces más métricas basandonos en este proyecto (sylph call, more than one call…, total assembly length, max num of contigs…)</p>
+<p>Para descargar el script, desde la <a href="https://osf.io/xv7q9/overview">web</a> &gt; Files Preview &gt; Metadata &gt; make_hq_sample_list.py</p>
+<p>Además, en el script, si no hay checkm info, se analiza también ese acc, así que procedo de la misma forma</p>
+<p>Luego:</p>
+<ul>
+<li><p>he traducido completamente el script y limpiado el main code de abajo</p></li>
+<li><p>he quitado los chekcpoints que había introducido manualmente para que se usen directamente los del comadno datasets (he miardo y están bastgante bien explicados)</p></li>
+<li><p>he añadido los umbrales indicados en AllTheBacteria</p></li>
+</ul>
+<p>Para añadir el módulo de clusterización:</p>
+</section>
+<section id="clusterización-de-genomas" class="level3">
+<h3 class="anchored" data-anchor-id="clusterización-de-genomas">Clusterización de genomas</h3>
+<p>Para hacer la clusterización de genomas tiene que ser POSTERIOR a la descarga de los genomas (–rehydrate) y vamos a probar la herramienta skani:</p>
+<p><a href="https://github.com/bluenote-1577/skani">Skani</a> permite calcular ANI (average nucleotide identity) y AF (aligned fraction) para secuencias. &gt;&gt; Lo vamos a usar ya que es mucho más rápido que los BLAST-based y casi igual de precisos</p>
+<p>ADEMÁS, vamos a utlizar la herramienta <a href="https://github.com/MrOlm/drep">dRep</a> que utliza este algoritmo de skani y lo que hace es…</p>
+<p>Lo introducimos en el .yml del entorno conda y creamos un nuevo archivo para clsuterizar (previo a integron-filtering), pero usamos ya las funciones creadas en el T3 entero.</p>
+<pre><code>dRep dereplicate [-p PROCESSORS] [-d] [-h] [-g [GENOMES ...]] [-l LENGTH] [-comp COMPLETENESS] 
+                 [-con CONTAMINATION] [--ignoreGenomeQuality] [--genomeInfo GENOMEINFO]
+                 [--checkM_method {lineage_wf,taxonomy_wf}] [--set_recursion SET_RECURSION] 
+                 [--checkm_group_size CHECKM_GROUP_SIZE] [--S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}]
+                 [-ms MASH_SKETCH] [--SkipMash] [--SkipSecondary] [--skani_extra SKANI_EXTRA] 
+                 [--n_PRESET {normal,tight}] [-pa P_ANI] [-sa S_ANI] [-nc COV_THRESH] [-cm {total,larger}]
+                 [--clusterAlg {single,ward,complete,weighted,average,centroid,median}] [--low_ram_primary_clustering] 
+                 [--multiround_primary_clustering] [--primary_chunksize PRIMARY_CHUNKSIZE] 
+                 [--greedy_secondary_clustering] [--run_tertiary_clustering] [-comW COMPLETENESS_WEIGHT] 
+                 [-conW CONTAMINATION_WEIGHT] [-strW STRAIN_HETEROGENEITY_WEIGHT] [-N50W N50_WEIGHT] 
+                 [-sizeW SIZE_WEIGHT] [-centW CENTRALITY_WEIGHT] [-extraW EXTRA_WEIGHT_TABLE] [--gen_warnings]
+                 [--warn_dist WARN_DIST] [--warn_sim WARN_SIM] [--warn_aln WARN_ALN] [--skip_plots]
+                 work_directory</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Argumentos que acepta dRep
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>He marcado en azul aquellos argumentos que pueden tener sentido para la búsqueda y clasificación de Pcs:</em></p>
+<p>positional arguments:</p>
+<ul>
+<li><span style="color: blue;"><strong>work_directory</strong></span>: Directory where data and output are stored *** USE THE SAME WORK DIRECTORY FOR ALL DREP OPERATIONS ***</li>
+</ul>
+<p>SYSTEM PARAMETERS:</p>
+<ul>
+<li><p><span style="color: blue;"><strong>-p PROCESSORS, –processors PROCESSORS</strong></span>: threads (default: 6)</p></li>
+<li><p><strong>-d, –debug</strong>: make extra debugging output (default: False)</p></li>
+<li><p><strong>-h, –help</strong>: show this help message and exit</p></li>
+</ul>
+<p>GENOME INPUT:</p>
+<ul>
+<li><span style="color: blue;"><strong>-g [GENOMES …], –genomes [GENOMES …]</strong></span>: genomes to filter in .fasta format. Can also input a text file with paths to genomes, which results in fewer OS issues than wildcard expansion (default: None)</li>
+</ul>
+<p>GENOME FILTERING OPTIONS:</p>
+<ul>
+<li><p><span style="color: blue;"><strong>-l LENGTH, –length LENGTH</strong></span>: Minimum genome length (default: 50000) -&gt; habría que añadirlo si usamosc ontigs o scaffolds pro si acaso</p></li>
+<li><p><span style="color: blue;"><strong>-comp COMPLETENESS, –completeness COMPLETENESS</strong></span>: Minimum genome completeness (default: 75)</p></li>
+<li><p><span style="color: blue;"><strong>-con CONTAMINATION, –contamination CONTAMINATION</strong></span>: Maximum genome contamination (default: 25)</p></li>
+</ul>
+<p>GENOME QUALITY ASSESSMENT OPTIONS:</p>
+<p><span style="color: red;"><strong>FIXME</strong></span>: En teoría nosotros ya limpiamos los genomas por checkM info (si se habilita la flag) PERO no conviene mezclar información de lNCBI. Así que vamos a intentar correr externamente CheckM2 y de ahí pasarle la información a dRep</p>
+<ul>
+<li><p><strong>–ignoreGenomeQuality</strong>: Don’t run checkM or do any quality filtering. NOT RECOMMENDED! This is useful for use with bacteriophages or eukaryotes or things where checkM scoring does not work. Will only choose genomes based on length and N50 (default: False) NO vamos a usarlo</p></li>
+<li><p><strong>–genomeInfo GENOMEINFO</strong>: location of .csv file containing quality information on the genomes. Must contain: [“genome”(filename of .fasta file of that genome, including extension e.g.&nbsp;genome.fasta), “completeness”(0-100 value for completeness of the genome), “contamination”(0-100 value of the contamination of the genome)] (default: None)</p></li>
+<li><p><strong>–checkM_method {lineage_wf,taxonomy_wf}</strong>: Either lineage_wf (more accurate) or taxonomy_wf (faster) (default: lineage_wf)</p></li>
+<li><p><strong>–set_recursion SET_RECURSION</strong>: Increases the python recursion limit. NOT RECOMMENDED unless checkM is crashing due to recursion issues. Recommended to set to 2000 if needed, but setting this could crash python (default: 0)</p></li>
+<li><p><strong>–checkm_group_size CHECKM_GROUP_SIZE</strong>: The number of genomes passed to checkM at a time. Increasing this increases RAM but makes checkM faster (default: 2000)</p></li>
+</ul>
+<p>GENOME COMPARISON OPTIONS:</p>
+<ul>
+<li><p><span style="color: blue;"><strong>–S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}</strong></span>: Algorithm for secondary clustering comaprisons: fastANI = Kmer-based approach; very fast <strong>skani</strong> = Even faster Kmer-based approacht ANImf = (DEFAULT) Align whole genomes with nucmer; filter alignment; compare aligned regions ANIn = Align whole genomes with nucmer; compare aligned regions gANI = Identify and align ORFs; compare aligned ORFS goANI = Open source version of gANI; requires nsmimscan (default: fastANI)</p></li>
+<li><p><strong>-ms MASH_SKETCH, –MASH_sketch MASH_SKETCH</strong>: MASH sketch size (default: 1000)</p></li>
+<li><p><strong>–SkipMash</strong>: Skip MASH clustering, just do secondary clustering on all genomes (default: False)</p></li>
+<li><p><strong>–SkipSecondary</strong>: Skip secondary clustering, just perform MASH clustering (default: False)</p></li>
+<li><p><span style="color: blue;"><strong>–skani_extra SKANI_EXTRA</strong></span>: Extra arguments to pass to skani triangle (default: )</p></li>
+<li><p><strong>–n_PRESET {normal,tight}</strong>: Presets to pass to nucmer tight = only align highly conserved regions normal = default ANIn parameters (default: normal)</p></li>
+</ul>
+<p>GENOME CLUSTERING OPTIONS:</p>
+<ul>
+<li><p><strong>-pa P_ANI, –P_ani P_ANI</strong>: ANI threshold to form primary (MASH) clusters (default: 0.9)</p></li>
+<li><p><span style="color: blue;"><strong>-sa S_ANI, –S_ani S_ANI</strong></span>: ANI threshold to form secondary clusters (default: 0.95)</p></li>
+<li><p><span style="color: blue;"><strong>-nc COV_THRESH, –cov_thresh COV_THRESH</strong></span>: Minmum level of overlap between genomes when doing secondary comparisons (default: 0.1)</p></li>
+<li><p><strong>-cm {total,larger}, –coverage_method {total,larger}</strong>: Method to calculate coverage of an alignment (for ANIn/ANImf only; gANI and fastANI can only do larger method) total = 2*(aligned length) / (sum of total genome lengths) larger = max((aligned length / genome 1), (aligned_length / genome2)) (default: larger)</p></li>
+<li><p><strong>–clusterAlg {single,ward,complete,weighted,average,centroid,median}</strong>: Algorithm used to cluster genomes (passed to scipy.cluster.hierarchy.linkage (default: average)</p></li>
+<li><p><span style="color: blue;"><strong>–low_ram_primary_clustering</strong></span>: Use a memory-efficient algorithm for primary clustering. This only affects primary clustering and not secondary clustering. (default: False)</p></li>
+</ul>
+<p>GREEDY CLUSTERING OPTIONS These decrease RAM use and runtime at the expense of a minor loss in accuracy.</p>
+<p>Recommended when clustering 5000+ genomes:</p>
+<ul>
+<li><p><span style="color: blue;"><strong>–multiround_primary_clustering</strong></span>: Cluster each primary clunk separately and merge at the end with single linkage. Decreases RAM usage and increases speed, and the cost of a minor loss in precision and the inability to plot primary_clustering_dendrograms. Especially helpful when clustering 5000+ genomes. Will be done with single linkage clustering (default: False)</p></li>
+<li><p><span style="color: blue;"><strong>–primary_chunksize PRIMARY_CHUNKSIZE</strong></span>: Impacts multiround_primary_clustering. If you have more than this many genomes, process them in chunks of this size. (default: 5000)</p></li>
+<li><p><strong>–greedy_secondary_clustering</strong>: Use a heuristic to avoid pair-wise comparisons when doing secondary clustering. Will be done with single linkage clustering. Only works for fastANI S_algorithm option at the moment (default: False) -&gt; NO para skani</p></li>
+<li><p><span style="color: blue;"><strong>–run_tertiary_clustering</strong></span>: Run an additional round of clustering on the final genome set. This is especially useful when greedy clustering is performed and/or to handle cases where similar genomes end up in different primary clusters. Only works with dereplicate, not compare. (default: False)</p></li>
+</ul>
+<p>SCORING CRITERIA Based off of the formula: A<em>Completeness - B</em>Contamination + C<em>(Contamination </em> (strain_heterogeneity/100)) + D<em>log(N50) + E</em>log(size) + F*(centrality - S_ani)</p>
+<p>A = completeness_weight; B = contamination_weight; C = strain_heterogeneity_weight; D = N50_weight; E = size_weight; F = cent_weight:</p>
+<ul>
+<li><p><strong>-comW COMPLETENESS_WEIGHT, –completeness_weight COMPLETENESS_WEIGHT</strong>: completeness weight (default: 1)</p></li>
+<li><p><strong>-conW CONTAMINATION_WEIGHT, –contamination_weight CONTAMINATION_WEIGHT</strong>: contamination weight (default: 5)</p></li>
+<li><p><strong>-strW STRAIN_HETEROGENEITY_WEIGHT, –strain_heterogeneity_weight STRAIN_HETEROGENEITY_WEIGHT</strong>: strain heterogeneity weight (default: 1)</p></li>
+<li><p><strong>-N50W N50_WEIGHT, –N50_weight N50_WEIGHT</strong>: weight of log(genome N50) (default: 0.5)</p></li>
+<li><p><strong>-sizeW SIZE_WEIGHT, –size_weight SIZE_WEIGHT</strong>: weight of log(genome size) (default: 0)</p></li>
+<li><p><strong>-centW CENTRALITY_WEIGHT, –centrality_weight CENTRALITY_WEIGHT</strong>: Weight of (centrality - S_ani) (default: 1)</p></li>
+<li><p><strong>-extraW EXTRA_WEIGHT_TABLE, –extra_weight_table EXTRA_WEIGHT_TABLE</strong>: Path to a tab-separated file with two-columns, no headers, listing genome and extra score to apply to that genome (default: None)</p></li>
+</ul>
+<p>WARNINGS:</p>
+<ul>
+<li><p><strong>–gen_warnings</strong>: Generate warnings (default: False)</p></li>
+<li><p><strong>–warn_dist WARN_DIST</strong>: How far from the threshold to throw cluster warnings (default: 0.25)</p></li>
+<li><p><strong>–warn_sim WARN_SIM</strong>: Similarity threshold for warnings between dereplicated genomes (default: 0.98)</p></li>
+<li><p><strong>–warn_aln WARN_ALN</strong>: Minimum aligned fraction for warnings between dereplicated genomes (ANIn) (default: 0.25)</p></li>
+</ul>
+<p>ANALYZE:</p>
+<ul>
+<li><span style="color: blue;"><strong>–skip_plots</strong></span>: Dont make plots (default: False)</li>
+</ul>
+<p>Example: dRep dereplicate output_dir/ -g /path/to/genomes/*.fasta</p>
+</div>
+</div>
+</div>
+<p>Es decir, el nuevo uso del comando quedaría como:</p>
+<pre><code>dRep dereplicate [-p PROCESSORS] [-g [GENOMES ...]] [-l LENGTH] [-comp COMPLETENESS] 
+                 [-con CONTAMINATION] [--genomeInfo GENOMEINFO]
+                 [--S_algorithm {ANIn,goANI,skani,gANI,fastANI,ANImf}]
+                 [--skani_extra SKANI_EXTRA] [-sa S_ANI] [-nc COV_THRESH] 
+                 [--low_ram_primary_clustering] [--multiround_primary_clustering] 
+                 [--primary_chunksize PRIMARY_CHUNKSIZE] 
+                 [--run_tertiary_clustering] [--skip_plots] work_directory</code></pre>
+<p>Me está dando problemas el dRep ya que me consume toda la RAM creo??? He añadido flags para ver si funciona mejor (al menos en este ordenador), pero aunque sea para poder adaptar el código al resultado que dé. Ej: [–low_ram_primary_clustering] [–multiround_primary_clustering] [–primary_chunksize PRIMARY_CHUNKSIZE] [–greedy_secondary_clustering] [–run_tertiary_clustering] [–skip_plots]</p>
+<p>Probar lo primero mañana ver si lo consigo aunuqe sea</p>
+<p>He empezdo a traducir el T3 pero aun así creo que no se ha guardado</p>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>Como algoritmo vamos a usar skani y antes para la info de CheckM para seleccionar el genoma dentro de los que se parecen -&gt; CheckM2</p>
+</blockquote>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="jueves-1709" class="level1">
+<h1>Jueves 17/09</h1>
+<p>OBJETIVOS INICIAL: Intentar arreglar lo de dRep y conseguir clusterizar Seguir traduciendo y adaptando T3 - (borrar la parte de extraer Pcs…) empezar a aprender a paralelizar?</p>
+<p>He probado a ejectuar el script de clustering con la opción: “–ignoreGenomeQuality”; y ahí sí consigo ejecutarlo. Hay que revisar bien las opciones que dejo finalmente para que clusterice bien.</p>
+<section id="checkm2" class="level2">
+<h2 class="anchored" data-anchor-id="checkm2">CheckM2</h2>
+<p>Voy a mirar para ejecutar primero <a href="https://github.com/chklovski/CheckM2">CheckM2</a> y meterle la información por un .csv vía “–genomeInfo”</p>
+<p>Información de CheckM2:</p>
+<pre><code>            ...::: CheckM2 v1.1.0 :::...</code></pre>
+<p>General usage:</p>
+<pre><code>predict         -&gt; Predict the completeness and contamination of genome bins in a folder. Example usage: 
+
+    checkm2 predict --threads 30 --input &lt;folder_with_bins&gt; --output-directory &lt;output_folder&gt;
+
+testrun         -&gt; Runs Checkm2 on internal test genomes to ensure it runs without errors. Example usage: 
+
+     checkm2 testrun --threads 10
+
+database        -&gt; Download and set up required CheckM2 DIAMOND database for annotation</code></pre>
+<p>Use checkm2 <command> -h for command-specific help.</command></p>
+<pre><code>checkm2 predict [-h] [--debug] [--version] [--quiet] [--lowmem] --input INPUT [INPUT ...] 
+                --output-directory OUTPUT_DIRECTORY [--general] [--specific] [--allmodels] 
+                [--genes] [-x EXTENSION] [--tmpdir TMPDIR] [--force] [--resume] 
+                [--threads num_threads] [--stdout] [--remove_intermediates] [--ttable ttable] 
+                [--database_path DATABASE_PATH] [--dbg_cos] [--dbg_vectors]</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Argumentos que acepta checkm2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>He marcado en azul aquellos argumentos que pueden tener sentido para la búsqueda y clasificación de Pcs:</em></p>
+<p>Predict the completeness and contamination of genome bins in a folder. Example usage:</p>
+<pre><code>    checkm2 predict --threads 30 --input &lt;folder_with_bins&gt; --output-directory &lt;output_folder&gt;</code></pre>
+<p>options:</p>
+<ul>
+<li><p><strong>-h, –help</strong>: show this help message and exit</p></li>
+<li><p><strong>–debug</strong>: output debug information</p></li>
+<li><p><strong>–version</strong>: output version information and quit</p></li>
+<li><p><strong>–quiet</strong>: only output errors</p></li>
+<li><p><span style="color: blue;"><strong>–lowmem</strong></span>: Low memory mode. Reduces DIAMOND blocksize to significantly reduce RAM usage at the expense of longer runtime</p></li>
+</ul>
+<p>required arguments:</p>
+<ul>
+<li><p><span style="color: blue;"><strong>–input INPUT [INPUT …], -i INPUT [INPUT …]</strong></span>: Path to folder containing MAGs or list of MAGS to be analyzed</p></li>
+<li><p><span style="color: blue;"><strong>–output-directory OUTPUT_DIRECTORY, –output_directory OUTPUT_DIRECTORY, -o OUTPUT_DIRECTORY</strong></span>:<br>
+Path output to folder</p></li>
+</ul>
+<p>additional arguments:</p>
+<ul>
+<li><p><strong>–general</strong>: Force the use of the general quality prediction model (gradient boost)</p></li>
+<li><p><strong>–specific</strong>: Force the use of the specific quality prediction model (neural network)</p></li>
+<li><p><strong>–allmodels</strong>: Output quality prediction for both models for each genome.</p></li>
+<li><p><strong>–genes</strong>: Treat input files as protein files. [Default: False]</p></li>
+<li><p><span style="color: blue;"><strong>-x EXTENSION, –extension EXTENSION</strong></span>: Extension of input files. [Default: .fna]</p></li>
+<li><p><strong>–tmpdir TMPDIR</strong>: specify an alternative directory for temporary files</p></li>
+<li><p><span style="color: blue;"><strong>–force</strong></span>: overwrite output directory [default: do not overwrite]</p></li>
+<li><p><strong>–resume</strong>: Reuse Prodigal and DIAMOND results found in output directory [default: not set]</p></li>
+<li><p><span style="color: blue;"><strong>–threads num_threads, -t num_threads</strong></span>: number of CPUS to use [default: 1]</p></li>
+<li><p><strong>–stdout</strong>: Print results to stdout [default: write to file]</p></li>
+<li><p><span style="color: blue;"><strong>–remove_intermediates</strong></span>: Remove all intermediate files (protein files, diamond output) [default: don’t]</p></li>
+<li><p><strong>–ttable ttable</strong>: Provide a specific progidal translation table for bins [default: automatically determine either 11 or 4]</p></li>
+<li><p><strong>–database_path DATABASE_PATH</strong>: Provide a location for the CheckM2 database for a given predict run [default: use either internal path set via <checkm2 database=""> or CHECKM2DB environmental variable]</checkm2></p></li>
+<li><p><strong>–dbg_cos</strong>: DEBUG: write cosine similarity values to file [default: don’t]</p></li>
+<li><p><strong>–dbg_vectors</strong>: DEBUG: dump pickled feature vectors to file [default: don’t]</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Entonces el uso queda tal que:</p>
+<pre><code>checkm2 predict [--lowmem] --input INPUT [INPUT ...] [--force]
+                --output-directory OUTPUT_DIRECTORY 
+                [-x EXTENSION] [--threads num_threads] [--remove_intermediates] </code></pre>
+<p>he acabdo el script de T3_0_clusters.py para poder clusterizar (primero hacer CheckM2 para obtener info + dRep)</p>
+</section>
+<section id="integronfinder2-blast" class="level2">
+<h2 class="anchored" data-anchor-id="integronfinder2-blast">IntegronFinder2 + BLAST</h2>
+<p>Voy a intentar extraer la parte del integron y empezar a hacer la bbdd de blast para empezar a clasificar los Pc</p>
+<p>Hay que hacer cambios en los argumentos que usa IntegronFinder2 tras la tutoría con Modesto.</p>
+<ul>
+<li><p>Por un lado, –local-max debe ir siempre obligatorio</p></li>
+<li><p>Además, como ya no vamos a extraer el Pc que encuentra IF2 sino que vamos a acotar directamente la región, vamos a eliminar el flag de –promoter</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Voy a probar a extraer la secuenica del integrón entera (con 100 pb upstream) y ahí hacer blast</p>
+</blockquote>
+</section>
+</section>
+<section id="viernes-1809" class="level1">
+<h1>Viernes 18/09</h1>
+<p>Acabar de extraer bien la secuencia de Pc</p>
+<p>hacer blast generando una bbdd con los promotores???</p>
+<p>Empezar a aprender a paralelizar</p>
+<section id="blast" class="level2">
+<h2 class="anchored" data-anchor-id="blast">BLAST</h2>
+<p>Para utilizar <a href="https://github.com/evanpeikon/BLAST">blast</a>, primero hay que crear la base de datos de referencia:</p>
+<pre><code>makeblastdb -in ABP49492.fasta -dbtype prot -out ABP49492_db</code></pre>
+<p>Una vez generado el .fasta con las secuencias de promotores encontradas del <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000793">artículo</a> vamos a hacer que ahga el blast</p>
+<p>PERO hay qeu cambiar comandos porque el Pc es una región muy pequeña:</p>
+<pre><code>  blastn [-h] [-help] [-import_search_strategy filename]
+    [-export_search_strategy filename] [-task task_name] [-db database_name]
+    [-dbsize num_letters] [-gilist filename] [-seqidlist filename]
+    [-negative_gilist filename] [-negative_seqidlist filename]
+    [-taxids taxids] [-negative_taxids taxids] [-taxidlist filename]
+    [-negative_taxidlist filename] [-no_taxid_expansion]
+    [-entrez_query entrez_query] [-db_soft_mask filtering_algorithm]
+    [-db_hard_mask filtering_algorithm] [-subject subject_input_file]
+    [-subject_loc range] [-query input_file] [-out output_file]
+    [-evalue evalue] [-word_size int_value] [-gapopen open_penalty]
+    [-gapextend extend_penalty] [-perc_identity float_value]
+    [-qcov_hsp_perc float_value] [-max_hsps int_value]
+    [-xdrop_ungap float_value] [-xdrop_gap float_value]
+    [-xdrop_gap_final float_value] [-searchsp int_value] [-penalty penalty]
+    [-reward reward] [-no_greedy] [-min_raw_gapped_score int_value]
+    [-template_type type] [-template_length int_value] [-dust DUST_options]
+    [-filtering_db filtering_database]
+    [-window_masker_taxid window_masker_taxid]
+    [-window_masker_db window_masker_db] [-soft_masking soft_masking]
+    [-ungapped] [-culling_limit int_value] [-best_hit_overhang float_value]
+    [-best_hit_score_edge float_value] [-subject_besthit]
+    [-window_size int_value] [-off_diagonal_range int_value]
+    [-use_index boolean] [-index_name string] [-lcase_masking]
+    [-query_loc range] [-strand strand] [-parse_deflines] [-outfmt format]
+    [-show_gis] [-num_descriptions int_value] [-num_alignments int_value]
+    [-line_length line_length] [-html] [-sorthits sort_hits]
+    [-sorthsps sort_hsps] [-max_target_seqs num_sequences]
+    [-num_threads int_value] [-mt_mode int_value] [-remote] [-version]</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Argumentos que acepta blast
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>DESCRIPTION: Nucleotide-Nucleotide BLAST 2.17.0+</p>
+<p>*** Input query options</p>
+<ul>
+<li><strong>-query <file_in></file_in></strong>: Input file name Default = <code>-'  -query_loc &lt;String&gt;  Location on the query sequence in 1-based offsets (Format: start-stop)  -strand &lt;String,</code>both’, <code>minus',</code>plus’&gt; Query strand(s) to search against database/subject Default = `both’</li>
+</ul>
+<p>*** General search options -task &lt;String, Permissible values: ‘blastn’ ‘blastn-short’ ‘dc-megablast’ ‘megablast’ ‘rmblastn’ &gt; Task to execute Default = <code>megablast'  -db &lt;String&gt;    BLAST database name     * Incompatible with:  subject, subject_loc  -out &lt;File_Out, file name length &lt; 256&gt;    Output file name    Default =</code>-’ -evalue <real> Expectation value (E) threshold for saving hits. Default = 10 (1000 for blastn-short) -word_size &lt;Integer, &gt;=4&gt; Word size for wordfinder algorithm (length of best perfect match) -gapopen <integer> Cost to open a gap -gapextend <integer> Cost to extend a gap -penalty &lt;Integer, &lt;=0&gt; Penalty for a nucleotide mismatch -reward &lt;Integer, &gt;=0&gt; Reward for a nucleotide match -use_index <boolean> Use MegaBLAST database index Default = `false’ -index_name <string> MegaBLAST database index name (deprecated; use only for old style indices)</string></boolean></integer></integer></real></p>
+<p>*** BLAST-2-Sequences options -subject <file_in> Subject sequence(s) to search * Incompatible with: no_taxid_expansion, db, gilist, seqidlist, negative_gilist, negative_seqidlist, taxids, taxidlist, negative_taxids, negative_taxidlist, no_taxid_expansion, db_soft_mask, db_hard_mask -subject_loc <string> Location on the subject sequence in 1-based offsets (Format: start-stop) * Incompatible with: no_taxid_expansion, db, gilist, seqidlist, negative_gilist, negative_seqidlist, taxids, taxidlist, negative_taxids, negative_taxidlist, no_taxid_expansion, db_soft_mask, db_hard_mask, remote</string></file_in></p>
+<p>*** Formatting options -outfmt <string> alignment view options: 0 = Pairwise, 1 = Query-anchored showing identities, 2 = Query-anchored no identities, 3 = Flat query-anchored showing identities, 4 = Flat query-anchored no identities, 5 = BLAST XML, 6 = Tabular, 7 = Tabular with comment lines, 8 = Seqalign (Text ASN.1), 9 = Seqalign (Binary ASN.1), 10 = Comma-separated values, 11 = BLAST archive (ASN.1), 12 = Seqalign (JSON), 13 = Multiple-file BLAST JSON, 14 = Multiple-file BLAST XML2, 15 = Single-file BLAST JSON, 16 = Single-file BLAST XML2, 17 = Sequence Alignment/Map (SAM), 18 = Organism Report, 20 = Comma-separated values with header lines</string></p>
+<p>Options 6, 7, 10, 17 and 20 can be additionally configured to produce a custom format specified by space delimited format specifiers, or in the case of options 6, 7, and 10, by a token specified by the delim keyword. E.g.: “17 delim=@ qacc sacc score”. The delim keyword must appear after the numeric output format specification. The supported format specifiers for options 6, 7 and 10 are: qseqid means Query Seq-id qgi means Query GI qacc means Query accession qaccver means Query accession.version qlen means Query sequence length sseqid means Subject Seq-id sallseqid means All subject Seq-id(s), separated by a ‘;’ sgi means Subject GI sallgi means All subject GIs sacc means Subject accession saccver means Subject accession.version sallacc means All subject accessions slen means Subject sequence length qstart means Start of alignment in query qend means End of alignment in query sstart means Start of alignment in subject send means End of alignment in subject qseq means Aligned part of query sequence sseq means Aligned part of subject sequence evalue means Expect value bitscore means Bit score score means Raw score length means Alignment length pident means Percentage of identical matches nident means Number of identical matches mismatch means Number of mismatches positive means Number of positive-scoring matches gapopen means Number of gap openings gaps means Total number of gaps ppos means Percentage of positive-scoring matches frames means Query and subject frames separated by a ‘/’ qframe means Query frame sframe means Subject frame btop means Blast traceback operations (BTOP) staxid means Subject Taxonomy ID ssciname means Subject Scientific Name scomname means Subject Common Name sblastname means Subject Blast Name sskingdom means Subject Super Kingdom staxids means unique Subject Taxonomy ID(s), separated by a ‘;’ (in numerical order) sscinames means unique Subject Scientific Name(s), separated by a ‘;’ scomnames means unique Subject Common Name(s), separated by a ‘;’ sblastnames means unique Subject Blast Name(s), separated by a ‘;’ (in alphabetical order) sskingdoms means unique Subject Super Kingdom(s), separated by a ‘;’ (in alphabetical order) stitle means Subject Title salltitles means All Subject Title(s), separated by a ‘&lt;&gt;’ sstrand means Subject Strand qcovs means Query Coverage Per Subject qcovhsp means Query Coverage Per HSP qcovus means Query Coverage Per Unique Subject (blastn only) When not provided, the default value is: ‘qaccver saccver pident length mismatch gapopen qstart qend sstart send evalue bitscore’, which is equivalent to the keyword ‘std’ The supported format specifier for option 17 is: SQ means Include Sequence Data SR means Subject as Reference Seq Default = <code>0'  -show_gis    Show NCBI GIs in deflines?  -num_descriptions &lt;Integer, &gt;=0&gt;    Number of database sequences to show one-line descriptions for    Not applicable for outfmt &gt; 4    Default =</code>500’ * Incompatible with: max_target_seqs -num_alignments &lt;Integer, &gt;=0&gt; Number of database sequences to show alignments for Default = <code>250'     * Incompatible with:  max_target_seqs  -line_length &lt;Integer, &gt;=1&gt;    Line length for formatting alignments    Not applicable for outfmt &gt; 4    Default =</code>60’ -html Produce HTML output? -sorthits &lt;Integer, (&gt;=0 and =&lt;4)&gt; Sorting option for hits: alignment view options: 0 = Sort by evalue, 1 = Sort by bit score, 2 = Sort by total score, 3 = Sort by percent identity, 4 = Sort by query coverage Not applicable for outfmt &gt; 4 -sorthsps &lt;Integer, (&gt;=0 and =&lt;4)&gt; Sorting option for hps: 0 = Sort by hsp evalue, 1 = Sort by hsp score, 2 = Sort by hsp query start, 3 = Sort by hsp percent identity, 4 = Sort by hsp subject start Not applicable for outfmt != 0</p>
+<p>*** Query filtering options -dust <string> Filter query sequence with DUST (Format: ‘yes’, ‘level window linker’, or ‘no’ to disable) Default = ‘20 64 1’ (‘no’ for blastn-short) -filtering_db <string> BLAST database containing filtering elements (i.e.: repeats) -window_masker_taxid <integer> Enable WindowMasker filtering using a Taxonomic ID * Incompatible with: no_taxid_expansion -window_masker_db <string> Enable WindowMasker filtering using this repeats database. * Incompatible with: remote -soft_masking <boolean> Apply filtering locations as soft masks Default = `true’ -lcase_masking Use lower case filtering in query and subject sequence(s)?</boolean></string></integer></string></string></p>
+<p>*** Restrict search or results -gilist <string> Restrict search of database to list of GIs * Incompatible with: no_taxid_expansion, seqidlist, taxids, taxidlist, negative_gilist, negative_seqidlist, negative_taxids, negative_taxidlist, remote, subject, subject_loc -seqidlist <string> Restrict search of database to list of SeqIDs * Incompatible with: no_taxid_expansion, gilist, taxids, taxidlist, negative_gilist, negative_seqidlist, negative_taxids, negative_taxidlist, remote, subject, subject_loc -negative_gilist <string> Restrict search of database to everything except the specified GIs * Incompatible with: no_taxid_expansion, gilist, seqidlist, taxids, taxidlist, negative_seqidlist, negative_taxids, negative_taxidlist, remote, subject, subject_loc -negative_seqidlist <string> Restrict search of database to everything except the specified SeqIDs * Incompatible with: no_taxid_expansion, gilist, seqidlist, taxids, taxidlist, negative_gilist, negative_taxids, negative_taxidlist, remote, subject, subject_loc -taxids <string> Restrict search of database to include only the specified taxonomy IDs and their descendants (multiple IDs delimited by ‘,’) * Incompatible with: gilist, seqidlist, taxidlist, negative_gilist, negative_seqidlist, negative_taxids, negative_taxidlist, remote, subject, subject_loc -negative_taxids <string> Restrict search of database to everything except the specified taxonomy IDs and their descendants (multiple IDs delimited by ‘,’) * Incompatible with: gilist, seqidlist, taxids, taxidlist, negative_gilist, negative_seqidlist, negative_taxidlist, remote, subject, subject_loc -taxidlist <string> Restrict search of database to include only the specified taxonomy IDs and their descendants * Incompatible with: gilist, seqidlist, taxids, negative_gilist, negative_seqidlist, negative_taxids, negative_taxidlist, remote, subject, subject_loc -negative_taxidlist <string> Restrict search of database to everything except the specified taxonomy IDs and their descendants * Incompatible with: gilist, seqidlist, taxids, taxidlist, negative_gilist, negative_seqidlist, negative_taxids, remote, subject, subject_loc -no_taxid_expansion Do not expand the taxonomy IDs provided to their descendant taxonomy IDs * Incompatible with: subject, subject_loc, window_masker_taxid, gilist, seqidlist, negative_gilist, negative_seqidlist, subject, subject_loc -entrez_query <string> Restrict search with the given Entrez query * Requires: remote -db_soft_mask <string> Filtering algorithm ID to apply to the BLAST database as soft masking * Incompatible with: db_hard_mask, subject, subject_loc -db_hard_mask <string> Filtering algorithm ID to apply to the BLAST database as hard masking * Incompatible with: db_soft_mask, subject, subject_loc -perc_identity &lt;Real, 0..100&gt; Percent identity -qcov_hsp_perc &lt;Real, 0..100&gt; Percent query coverage per hsp -max_hsps &lt;Integer, &gt;=1&gt; Set maximum number of HSPs per subject sequence to save for each query -culling_limit &lt;Integer, &gt;=0&gt; If the query range of a hit is enveloped by that of at least this many higher-scoring hits, delete the hit * Incompatible with: best_hit_overhang, best_hit_score_edge -best_hit_overhang &lt;Real, (&gt;0 and &lt;0.5)&gt; Best Hit algorithm overhang value (recommended value: 0.1) * Incompatible with: culling_limit -best_hit_score_edge &lt;Real, (&gt;0 and &lt;0.5)&gt; Best Hit algorithm score edge value (recommended value: 0.1) * Incompatible with: culling_limit -subject_besthit Return only the best HSP for each non overlapping query region -max_target_seqs &lt;Integer, &gt;=1&gt; Maximum number of aligned sequences to keep (value of 5 or more is recommended) Default = `500’ * Incompatible with: num_descriptions, num_alignments</string></string></string></string></string></string></string></string></string></string></string></p>
+<p>*** Discontiguous MegaBLAST options -template_type &lt;String, <code>coding',</code>coding_and_optimal’, `optimal’&gt; Discontiguous MegaBLAST template type * Requires: template_length -template_length &lt;Integer, Permissible values: ‘16’ ‘18’ ‘21’ &gt; Discontiguous MegaBLAST template length * Requires: template_type</p>
+<p>*** Statistical options -dbsize <int8> Effective length of the database -searchsp &lt;Int8, &gt;=0&gt; Effective length of the search space</int8></p>
+<p>*** Search strategy options -import_search_strategy <file_in> Search strategy to use * Incompatible with: export_search_strategy -export_search_strategy <file_out> File name to record the search strategy used * Incompatible with: import_search_strategy</file_out></file_in></p>
+<p>*** Extension options -xdrop_ungap <real> X-dropoff value (in bits) for ungapped extensions -xdrop_gap <real> X-dropoff value (in bits) for preliminary gapped extensions -xdrop_gap_final <real> X-dropoff value (in bits) for final gapped alignment -no_greedy Use non-greedy dynamic programming extension -min_raw_gapped_score <integer> Minimum raw gapped score to keep an alignment in the preliminary gapped and traceback stages -ungapped Perform ungapped alignment only? -window_size &lt;Integer, &gt;=0&gt; Multiple hits window size, use 0 to specify 1-hit algorithm -off_diagonal_range &lt;Integer, &gt;=0&gt; Number of off-diagonals to search for the 2nd hit, use 0 to turn off Default = `0’</integer></real></real></real></p>
+<p>*** Miscellaneous options -parse_deflines Should the query and subject defline(s) be parsed? -num_threads &lt;Integer, &gt;=1&gt; Number of threads (CPUs) to use in the BLAST search Default = <code>1'     * Incompatible with:  remote  -mt_mode &lt;Integer, (&gt;=0 and =&lt;2)&gt;    Multi-thread mode to use in BLAST search:     0 auto split by database or queries      1 split by queries     2 split by database    Default =</code>0’ * Requires: num_threads -remote Execute search remotely? * Incompatible with: gilist, seqidlist, taxids, taxidlist, negative_gilist, negative_seqidlist, negative_taxids, negative_taxidlist, subject_loc, window_masker_db, num_threads</p>
+</div>
+</div>
+</div>
+<p>Aun así, PROBLEMA -&gt; creo que blast para secuencias tan peuqeñas como son los Pc no es útli. Por ello voy a intentar hacerlo con expresiones regulares, ya que ya me sé las secuencias bien de los promotores:</p>
+<p>He añadido el retso de Pc para completar la bbdd, pero en ralidad ahora en lugar de bbdd lo hacemos con RE</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -717,6 +1133,9 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./semana_03.html" class="pagination-link" aria-label="Semana del 21 al 25 de Septiembre">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Semana del 21 al 25 de Septiembre</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
