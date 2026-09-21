@@ -30,13 +30,12 @@ def extract_integron_info_gbk(genome_acc, gbk_files):
                 - "calin" (bool): False.
                 - "start" (int): Start position of the integrase feature.
                 - "end" (int): End position of the integrase feature.
-                - "sequence" (Bio.Seq.Seq): The extracted sequence of the integrase and its upstream region.
+                - "sequence" (Bio.Seq.Seq): The extracted sequence of the integrase.
     """
     # List to store integron information
     integron_info = []
     # Iterate through the .gbk files
     for gbk_file in gbk_files: # (more than one file can be generated from 1 genome)
-        
         record = SeqIO.read(gbk_file, "genbank") # Read .gbk file
         locus_id = record.id # Store replicon id
 
@@ -76,30 +75,11 @@ def extract_integron_info_gbk(genome_acc, gbk_files):
                                           "end": end,
                                           "sequence": seq
                         }) 
-
+    
     return integron_info
 
-
-variantes_pc = {
-    "PcS": ("TTGACA", 17, "TAAACT"),
-    "PcW": ("TGGACA", 17, "TAAGCT"),
-    "PcWTGN-10": ("TGGACA", 14, "TG", 1, "TAAGCT"),
-    "PcH1": ("TGGACA", 17, "TAAACT"),
-    "PcH1TGN-10": ("TGGACA", 14, "TG", 1, "TAAACT"),
-    "PcH2": ("TTGACA", 17, "TAAGCT"),
-    "PcH2TGN-10": ("TTGACA", 14, "TG", 1, "TAAGCT"),
-    "TGGGCA-N14-TGn-TAAGCT": ("TGGGCA", 14, "TG", 1, "TAAGCT"),
-    "PcSS": ("TTGATA", 17, "TAAACT"),
-    "Pcln42": ("TTGGCA", 17, "TAAACT"),
-    "Pcln116": ("TTGACA", 17, "TGAACT"),
-    "PcPUO": ("TCGACA", 17, "TAAACT"),
-    "P2": ("TTGTTA", 17, "TACAGT"),
-    "P2m1":("TTGTTA", 17, "GACAGT"),
-    "P2m2": ("TTGTTA", 17, "TACACA")
-}
-
-
-variantes_pc_regex = {
+# Regular Expressions of the pc variants
+pc_variants_regex = {
     "PcS": ("TTGACA[ACGT]{17}TAAACT"),
     "PcW": ("TGGACA[ACGT]{17}TAAGCT"),
     "PcWTGN-10": ("TGGACA[ACGT]{14}TG[ACGT]TAAGCT"),
@@ -117,72 +97,131 @@ variantes_pc_regex = {
     "P2m2": ("TTGTTA[ACGT]{17}TACACA")
 }
 
+#------------------------ Function to search and classify Pc in Integrase sequences
+def classify_pc_regex(sequence, variants = pc_variants_regex):
+    """
+    Searches and classifies Pc promoter variants within an integrase sequence using regular expressions. 
+    
+    Args:
+    ------
+    sequence (str): The nucleotide sequence of the integrase to be analyzed.
+    variants (dict, optional): A dictionary containing:
+                                -key: names of the Pc variant.
+                                -value: their corresponding regular expression patterns. 
+                               Defaults to pc_variants_regex.
 
-def clasificar_Pc_regex(seq, variantes = variantes_pc_regex):
+    Return:
+    ------
+    results (dict): A dictionary containing the classification results of the matched Pc variant. 
+                    Returns None if no match is found. 
     """
-    """
-    sequence = str(Seq(seq).reverse_complement())
-    resultados = None
-    for name_pc_variant, pc_sequence in variantes.items():
-        matches = re.finditer(pc_sequence, sequence)
-        for match in matches:
-            resultados = {
-                "variante": name_pc_variant,
+    # As the Pc is in the opposite direction of Integrase, the reverse complement is analyzed
+    seq = str(Seq(sequence).reverse_complement())
+    # Initialize a variable to store results
+    results = None 
+    # Get the name of the Pc and the RE of the sequence (.items() returns key and value)
+    for name_pc_variant, pc_sequence in variants.items():
+        # Find the pc sequence into the RC seq of the Integrase
+        matches = re.finditer(pc_sequence, seq) 
+        for match in matches: # For each match, stores the name, the positions and the sequence
+            results = {
+                "Pc_variant": name_pc_variant,
                 "start": match.start(),
                 "end": match.end(),
-                "secuencia": match.group()
-            }
+                "sequence": match.group()
+                }
+    return results
 
-    return resultados
-
+#------------------------ Function to store information from dictionaries into a csv file
 def info_to_csv(dict_info, path_out_file):
+    """
+    Appends the information from a dictionary into a CSV file. 
     
+    Args:
+    ------
+    dict_info (dict): A dictionary containing the data to be stored. 
+    path_out_file (str): The file path where the CSV file will be saved.
+    """
+    # Open the file in appending mode
     with open(path_out_file, "a", newline="") as out_csv:
-        csvwriter = csv.writer(out_csv)
+        csvwriter = csv.writer(out_csv) # Writer
+        # If the file is new, writes as header the keys of the dictionary
         if os.path.getsize(path_out_file) == 0:
-            #quiero que escriba las keys
             csvwriter.writerow(dict_info.keys())
-        #quiero que escriba las keys
+        # Writes the values of the dictionary
         csvwriter.writerow(dict_info.values())
     return
 
-def adjust_Pc_info(general_info, Pc_info, path_out_file, Pc_seq = None):
-    """docstring"""
-    # from general info: (extract_pc_gbk...)
+#------------------------ Function to merge general and Pc information into a single dictionary
+def adjust_Pc_info(general_info, # From extract_integron_info_gbk() function
+                   Pc_info, # From classify_pc_regex() function
+                   path_out_file, flag_Pc_seq = None): # Flag to store the sequence of the Pc 
+    """
+    Merges general integron information and Pc variant classification details into a single 
+    dictionary and appends the resulting data to a CSV file.
 
-    acc_genoma = general_info["acc"]
+    Args:
+    ------
+    general_info (dict): A dictionary containing general integron information.
+                         It must include the keys "acc", "integron_id", and "locus_id".
+    Pc_info (dict): A dictionary containing the classification results of the Pc variant. 
+                    It must include the keys "start", "end", and "Pc_variant", and 
+                    "sequence" if the sequence is to be stored.
+    path_out_file (str): The file path where the merged information will be saved as a CSV.
+    flag_Pc_seq (bool, optional): A flag indicating whether to include the exact Pc sequence. 
+                             Defaults to None.
+    """
+    # Extract values from general_info dictionary
+    acc_genome = general_info["acc"]
     integron_id = general_info["integron_id"]
     locus_id = general_info["locus_id"]
 
-    # from Pc_info (clasificar Pc regex)
-
+    # Extract values from Pc_info dictionary
     start = Pc_info["start"]
     end = Pc_info["end"]
-    pc_variant = Pc_info["variante"]
+    Pc_variant = Pc_info["Pc_variant"]
 
-    final_results = {"acc_genoma" : acc_genoma,
+    # Final dictionary with all the information
+    final_results = {"acc_genome" : acc_genome,
                      "integron_id" : integron_id,
                      "locus_id" : locus_id,
                      "start_Pc": start,
                      "end_Pc": end,
-                     "Pc_variant": pc_variant}
+                     "Pc_variant": Pc_variant}
+    # If flag is True, the sequence of the Pc is added
+    if flag_Pc_seq:
+        final_results["sequence"] = Pc_info["sequence"]
 
-    if Pc_seq:
-        final_results["sequence"] = seq
+    # Stores the final dictionary into the csv file
     info_to_csv(final_results, path_out_file)
     return 
 
-def adjust_calin_info(general_info, path_out_file):
-    """docstring"""
-    # from general info: (extract_pc_gbk...)
+#------------------------ Function to sort general information into a dictionary
+def adjust_calin_info(general_info, # From extract_integron_info_gbk() function
+                      path_out_file):
+    """
+    Formats and extracts specific general information for CALIN integrons 
+    into a new dictionary, and appends the resulting data to a CSV file.
 
-    acc_genoma = general_info["acc_genoma"]
+    Args:
+    ------
+    general_info (dict): A dictionary containing general integron information. 
+                         It must include the keys "acc_genome", "integron_id", and "locus_id".
+    path_out_file (str): The file path where the extracted information will be saved as a CSV.
+    """
+    
+    # Extract values from general_info dictionary
+    acc_genome = general_info["acc"]
     integron_id = general_info["integron_id"]
     locus_id = general_info["locus_id"]
 
-    final_results = {"acc_genoma" : acc_genoma,
+    # Final dictionary with all the information
+    final_results = {"acc_genome" : acc_genome,
                      "integron_id" : integron_id,
                      "locus_id" : locus_id}
+
+    # Stores the final dictionary into the csv file
     info_to_csv(final_results, path_out_file)
+
     return 
 

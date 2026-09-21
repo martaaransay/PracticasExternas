@@ -5,7 +5,7 @@ import csv
 from T3_0_clusters import cluster_genomes
 from T3_1_integronfiltering import integron_filtering
 from T3_2_integronfinder import Integron_Finder
-from T3_3_Pc import extract_integron_info_gbk, clasificar_Pc_regex, adjust_Pc_info, adjust_calin_info
+from T3_3_Pc import extract_integron_info_gbk, classify_pc_regex, adjust_Pc_info, adjust_calin_info
 
 # --------Definition of functions
 #------------------------ Function to define flags for genome download (datasets download)
@@ -97,14 +97,13 @@ def recorrer_genomas(rutas_genomas,
         os.makedirs(directorio_pc, exist_ok=True)  # FIXME -> LO HACE MCUHAS VECES
         
         integron_info = extract_integron_info_gbk(acc_genoma, archivos_gbk_integronfinder)
-
         for each_integron in integron_info:
             if each_integron["calin"]:
                 calin_file = os.path.join(directorio_pc, "calin.csv")
                 adjust_calin_info(each_integron, calin_file)
 
             else:
-                Pc_info = clasificar_Pc_regex(each_integron["sequence"])
+                Pc_info = classify_pc_regex(each_integron["sequence"])
                 if not Pc_info:
                     continue
                 Pc_file = os.path.join(directorio_pc, "pc.csv")

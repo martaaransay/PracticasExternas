@@ -7,7 +7,13 @@ number-sections: false
 
 OBJETIVOS INICIALES:
 
-- Dejar bien hechos scripts T3_3 y T3_complete
+- Dejar bien hecho scripts T3_3
 
 - Aprender a paralelizar 
 
+## Script T3_3_Pc.py
+
+he dejado bien hecho (comentado + traducido) el script de extracción, búsqueda y clasificación de Pcs
+
+[**FIXME**]{style="color: red;"}:
+Aun así, Creo que da problemas porque detecta dos Pc como en la misma región¿ revisar eso
