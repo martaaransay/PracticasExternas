@@ -3,6 +3,7 @@ import subprocess # to execute cmd
 import shlex # to check what is sent to the console
 import json # to parse .json correctly
 import os 
+import random
 
 # --------Definition of functions
 #------------------------ Function to define flags for genome download (datasets download)
@@ -106,10 +107,13 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
                            filename, # Filename to keep the same directory
                            min_n50 = 2000, 
                            max_contamination = 5, 
-                           min_completeness = 90): 
+                           min_completeness = 90,
+                           target_num = None,
+                           seed = 1,
+                           flags = None): 
     """
     Queries genome metadata in NCBI datasets, filters by quality metrics, and saves valid accessions in a text file.
-
+ # fixme falta cambair este docstring
     Args
     ------------
     source (str): Source type for the query.
@@ -127,54 +131,64 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
     accessions_tuple (tuple): Tuple with the generated file name if there are genomes that pass the filters
                               None if there are no valid results.
     """
+    if not flags:
+        flags = []
     # To get the JSON with the genome data 
     summary_cmd = ["datasets", "summary", "genome", 
-                    *taxon_acc_flag(source, name), "--as-json-lines"]
+                    *taxon_acc_flag(source, name), *flags, "--as-json-lines"]
     
     print(f"Executing: \n{shlex.join(summary_cmd)}")
+    valid_accs = [] # List to store valid accessions 
     #FIXME: tomar decisión de como gestionar las excepciones!
     try:
-        summary_json = subprocess.run(summary_cmd, 
-                                      capture_output = True, # Captures stdout and stderr
-                                      text = True, # stdout and stderr files in text mode
-                                      check = True) # To capture if an error occurs (CalledProcessError exception)
-    except subprocess.CalledProcessError as e: # Captures the exception
-        print(f"Error executing datasets summary:\n{e.stderr}")
+        process = subprocess.Popen(summary_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        
+        for line in process.stdout:
+            if not line.strip(): continue # Skips empty lines
+            datos = json.loads(line) # Deserialization
+            acc = datos.get("accession") # Get the accession
+                
+            # Quality metrics:
+            #------------------- N50
+            assembly_stats = datos.get("assembly_stats", {}) # Safely get stats (if not present, empty dict)
+            n50 = assembly_stats.get("scaffold_n50", 0)
+            
+            #------------------- CheckM info
+            checkm_info = datos.get("checkm_info", {})
+            # If there is no checkm info, the default values are set
+            # Contamination 
+            contamination = checkm_info.get("contamination", 5) 
+            # Completeness
+            completeness = checkm_info.get("completeness", 90) 
+
+            # Check if it meets the selected filters 
+            if n50 >= min_n50 and contamination <= max_contamination and completeness >= min_completeness:
+                valid_accs.append(acc)
+                # EARLY EXIT: If we have enough genomes, stop downloading the summary.
+                # We collect a pool slightly larger (e.g., x5) than target_num to still allow for random sampling.
+                if target_num and len(valid_accs) >= (target_num * 5):
+                    process.terminate()
+                    break
+
+        process.wait() 
+    except Exception as e: 
+        print(f"Error executing datasets summary:\n{e}")
         return
-
-    valid_accs = [] # List to store valid accessions 
-    summary_text = summary_json.stdout.splitlines() # .json obtained (separated by lines)
-
-    for line in summary_text:
-        if not line.strip(): continue # Skips empty lines
-        datos = json.loads(line) # Deserialization
-        acc = datos.get("accession") # Get the accession
-        
-        # Quality metrics:
-        #------------------- N50
-        assembly_stats = datos.get("assembly_stats", {}) # Safely get stats (if not present, empty dict)
-        n50 = assembly_stats.get("scaffold_n50", 0)
-        
-        #------------------- CheckM info
-        checkm_info = datos.get("checkm_info", {})
-        # If there is no checkm info, the default values are set
-        # Contamination 
-        contamination = checkm_info.get("contamination", 5) 
-        # Completeness
-        completeness = checkm_info.get("completeness", 90) 
-
-        # Check if it meets the selected filters 
-        if n50 >= min_n50 and contamination <= max_contamination and completeness >= min_completeness:
-            valid_accs.append(acc)
 
     if not valid_accs:
         print("No genome meets the quality criteria.")
         return
     
+    if target_num:
+        if len(valid_accs) > target_num:
+            random.seed(seed)
+            valid_accs = random.sample(valid_accs, target_num)
+        elif len(valid_accs) < target_num:
+            print(f"only {len(valid_accs)} genomes met the quality criteria ")
+    
     accs_file_name = f"accessions_{os.path.basename(filename).split('.')[0]}.txt" # Name of the file
     accs_file_path = os.path.join(os.path.dirname(filename), accs_file_name)
-    print(accs_file_path)
-    
+
     with open(accs_file_path, "w") as f: # Create a file with the valid accs (one per line)
         for each_acc in valid_accs:
             f.write(f"{each_acc}\n")
@@ -236,8 +250,12 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                      quality_filter_flag = False, # Flag to filter by quality metrics is needed
                      filename = "ncbi_dataset.zip", # Name of the file that will contain the genomes 
                                                   # Can have a path to specify a target directory
-                     flags = None): # Flags for the datasets command
+                     flags = None, # Flags for the datasets command
+                     target_num = None,
+                     seed = 1
+                     ): 
     """
+    #fixme hay q cambiar el docstring
     Executes the NCBI datasets command to download genomes (--dehydrated), allowing prior quality filtering.
 
     Args
@@ -257,7 +275,8 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
         os.makedirs(out_dir, exist_ok=True) 
 
     if quality_filter_flag:
-        filter_result = quality_filter_genomes(source, name, filename) # Executes the filtering function
+        filter_result = quality_filter_genomes(source, name, filename, # Executes the filtering function
+                                               target_num = target_num, seed = seed) 
         if not filter_result: # If there is no accession, the datasets command cannot be used
             # The created directories are removed:
             if out_dir and os.path.exists(out_dir):

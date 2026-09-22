@@ -16,3 +16,4 @@ dependencies:
   - bioconda::skani
   - drep
   - openpyxl
+  - blast

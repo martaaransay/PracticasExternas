@@ -67,3 +67,32 @@ Para el TFM centrarnos en: clasificación de promotores + casettes + análisis b
 - Comprobar si en los metadatos está el ID del Bioproyecto
 
 - OJO -> Hay que guardar el genoma entero si da + 
+
+
+## Optimización BLAST con varios fragmentos
+
+Jose me ha pasado la secuencia de la Integrasa y mediante la reverse_complement() he buscado y lo qeu tiene es un PcW
+Por ello, le voy a quitar esos nt voy a poner ocmo N para que considere todos los posibles Promotores (y luego quiero fragmentar quitando la parte de los promotores)
+
+Osea vamos a hacer blast con 3 query a nivel de nt:
+
+- Seq de la int tal cual (tiene un PcW) (1014 pb)
+
+- Seq de la Int entera (1014 pb) -> donde vamos a añadir N las posiciones que pueden variar en los Pc para que no afecte:
+
+    - no aporta score positivo pero tampoco penaliza como mismatch real
+
+- Seq de la Int sin la parte del promotor (y -100 pb upstream) (798 pb)
+
+Script para generar los fasta: scripts/generate_Int1_fasta.py
+
+
+
+FALTA ARREGLAR LA PARTE DE LOS FIXME DE T2_DOWNLOAD
+
+ACABAR DE GENERAR BIEN LA BASE DE DATOS:
+
+Traceback (most recent call last):
+  File "/home/marta/CNB/PracticasExternas/./scripts/generate_db.py", line 61, in <module>
+    generate_db(multifasta = "data/genomes/multifasta_genomes.fasta",
+TypeError: generate_db() got an unexpected keyword argument 'out'
