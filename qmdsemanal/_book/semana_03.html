@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./w_futuro.html" rel="next">
+<link href="./sup.html" rel="next">
 <link href="./semana_02.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -136,8 +136,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./sup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Supp</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./w_futuro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">FUTURO</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FUTURO</span></span></a>
   </div>
 </li>
     </ul>
@@ -150,7 +156,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lunes-2109" id="toc-lunes-2109" class="nav-link active" data-scroll-target="#lunes-2109">Lunes 21/09</a></li>
+  <li><a href="#lunes-2109" id="toc-lunes-2109" class="nav-link active" data-scroll-target="#lunes-2109">Lunes 21/09</a>
+  <ul class="collapse">
+  <li><a href="#script-t3_3_pc.py" id="toc-script-t3_3_pc.py" class="nav-link" data-scroll-target="#script-t3_3_pc.py">Script T3_3_Pc.py</a></li>
+  <li><a href="#script-t3_0_clusters" id="toc-script-t3_0_clusters" class="nav-link" data-scroll-target="#script-t3_0_clusters">Script T3_0_clusters</a></li>
+  </ul></li>
+  <li><a href="#martes-2209" id="toc-martes-2209" class="nav-link" data-scroll-target="#martes-2209">Martes 22/09</a>
+  <ul class="collapse">
+  <li><a href="#reunión-modestojose" id="toc-reunión-modestojose" class="nav-link" data-scroll-target="#reunión-modestojose">REUNIÓN MODESTO+JOSE</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -180,11 +194,52 @@ ul.task-list li input[type="checkbox"] {
 <h1>Lunes 21/09</h1>
 <p>OBJETIVOS INICIALES:</p>
 <ul>
-<li><p>Dejar bien hechos scripts T3_3 y T3_complete</p></li>
+<li><p>Dejar bien hecho scripts T3_3</p></li>
 <li><p>Aprender a paralelizar</p></li>
+</ul>
+<section id="script-t3_3_pc.py" class="level2">
+<h2 class="anchored" data-anchor-id="script-t3_3_pc.py">Script T3_3_Pc.py</h2>
+<p>he dejado bien hecho (comentado + traducido) el script de extracción, búsqueda y clasificación de Pcs</p>
+<p><span style="color: red;"><strong>FIXME</strong></span>: Aun así, Creo que da problemas porque detecta dos Pc como en la misma región¿ revisar eso -&gt; igual con clustering se solcuionarlo</p>
+</section>
+<section id="script-t3_0_clusters" class="level2">
+<h2 class="anchored" data-anchor-id="script-t3_0_clusters">Script T3_0_clusters</h2>
+<p>Sigo sin poder hacer clustering ya que no me da el ordenador, probar ya con la workstation</p>
+</section>
+</section>
+<section id="martes-2209" class="level1">
+<h1>Martes 22/09</h1>
+<p><span style="color: red;"><strong>FIXME</strong></span>: Tengoq ue cambiar el código en la detección de promtoores porque, el P2 se encuentra justo en el final del gen de la integrasa, donde la att1 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3416418/">Información Pc y P2</a></p>
+<p>In ∼10% of class 1 integrons, a second promoter (P2) is also present, created by the insertion of a GGG triplet within the attI1 recombination site that optimizes the spacing between the −35 and −10 boxes (from 14 nucleotides [nt] to 17 nt) (5). Usually, the presence of P2 compensates for the weak strength of Pc, enhancing gene cassette expression without interfering with the expression of the integrase gene (4, 5).</p>
+<p>Altogether, more than 20 Pc-P2 combinations have been identified in class 1 integrons, regardless of their origin (5, 15). The most frequent configurations are as follows, according to their strength (5): PcW &lt; PcW-P2 &lt; PcH1 &lt; PcH1-P2 &lt; PcWTGN-10-P2 &lt; PcWTGN-10 &lt; PcH2 &lt; PcS-P2 &lt; PcS.</p>
+<section id="reunión-modestojose" class="level2">
+<h2 class="anchored" data-anchor-id="reunión-modestojose">REUNIÓN MODESTO+JOSE</h2>
+<ol type="1">
+<li><p>Cambiar IF2 (mantenerlo a posteriori) por búsqueda vía HMM -&gt; Hacer una optimización considerando:</p>
+<ul>
+<li><p>TIEMPO</p></li>
+<li><p>SENSIBILIDAD.</p></li>
+</ul></li>
+</ol>
+<p>Hacerlo sobre dos datasets:</p>
+<ul>
+<li><p>Sobre un dataset de unos 6000 genomas (1000 de cada especie ESKAPEE por ejemplo¿ ***Incluir genomas con IS).</p></li>
+<li><p>Ídem en un dataset más pequeño para el principio</p></li>
+</ul>
+<p>Comparar:</p>
+<ul>
+<li><p>A partir del genoma nt -&gt; traducirlo -&gt; búsqueda con perfil HMM (usa uno IF2 - creo que PF00589)</p></li>
+<li><p>Hacer un HMM de nt -&gt; búsqueda</p></li>
+<li><p>Probar con HMM de prots más corto (ej. solo la parte inicial de la Integrasa)</p></li>
+<li><p>Probar con HMM de nt más corto (ej. solo la parte inicial de la Integrasa)</p></li>
+</ul>
+<p>Para el TFM centrarnos en: clasificación de promotores + casettes + análisis biológico de resultados (introducir bioproyecos blablabla)</p>
+<ul>
+<li>Comprobar si en los metadatos está el ID del Bioproyecto</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -595,8 +650,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./w_futuro.html" class="pagination-link" aria-label="FUTURO">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">FUTURO</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sup.html" class="pagination-link" aria-label="Supp">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Supp</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

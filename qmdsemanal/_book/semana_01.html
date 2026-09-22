@@ -171,8 +171,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./sup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Supp</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./w_futuro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">FUTURO</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FUTURO</span></span></a>
   </div>
 </li>
     </ul>
@@ -257,7 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6"></a><span class="ex">conda</span> env update <span class="at">-f</span> environment_pruebas.yml <span class="at">--prune</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="co"># --prune elimina del entorno los paquetes que hayas quitado del yml, sino no borra </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><span style="color: red;"><strong>FIXME</strong></span> He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)</li>
+<li>He tenido que pasar de Windows a WSL para la instalación de Integron_Finder (https://github.com/gem-pasteur/Integron_Finder)</li>
 </ul>
 </section>
 <section id="primeras-pruebas-con-integron_finder" class="level3">
@@ -307,12 +313,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Usando la herramienta seqkit (añadida al .yml: - bioconda::seqkit), descargamos esa zona del genoma:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># EJEMPLO DE ESA LINEA en el output de IntegronFinder</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co"># integron_01   NZ_PV022879.1   Pc_int1 29735   29761   -1  NA  Promoter    Pc_1    NA  complete    Yes NA  lin</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">## para dar alog más de margen se extraen -10 y +10 nt extra ####FIXME -&gt;????</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">## para dar alog más de margen se extraen -10 y +10 nt extra </span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="va">fasta</span><span class="op">=</span>data/Klebsiella/ncbi_dataset/data/GCF_059958715.2/GCF_059958715.2_ASM5995871v2_genomic.fna</span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="ex">seqkit</span> subseq <span class="at">--chr</span> NZ_PV022879.1 <span class="at">-r</span> 29725:29771 <span class="dt">\</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a>  <span class="va">$fasta</span> <span class="dt">\</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">|</span> <span class="ex">seqkit</span> seq <span class="at">-r</span> <span class="at">-p</span>  <span class="op">&gt;</span> pc_region.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><span style="color: red;"><strong>FIXME:</strong></span></p>
 <p>aquí debería hacer un blast??????? o comparrlo con las secuenicas teóricas de promotores y así decidir qué promotor es</p>
 </section>
 </section>
@@ -403,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>He generado el código (scripts/T2_descarga_genomas.py) pero se peuden añadir más métricas que sean por umbrales numéricos: - para ello habría que ejecutar <em>datasets summary genome …</em> con la flag <em>–as-json-lines</em>. En ese JSON se puede filtrar numéricamente y los válidos pasarlos al script creado</p>
-<p>He añadido la parte de las métricas, pero fatla definir los umbrales correctamente (<span style="color: red;"><strong>FIXME</strong></span>) - falta además limpiar un poco el código y comentarlo - hacer alguna prueba de errores también</p>
+<p>He añadido la parte de las métricas, pero fatla definir los umbrales correctamente - falta además limpiar un poco el código y comentarlo - hacer alguna prueba de errores también</p>
 </section>
 </section>
 <section id="jueves-1009" class="level1">
@@ -429,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>attC-screening.sh</strong> (HattCI + Infernal): No hace predicción génica ni hmmsearch, busca la secuencia/estructura secundaria del attC directamente sobre la secuencia de ADN.</p></li>
 <li><p>IntI-screening.sh (Prodigal + hmmsearch del dominio IntI): se solapa con lo que ya hace IntegronFinder2 internamente.</p></li>
 </ul>
-<p><span style="color: red;"><strong>FIXME</strong></span> : por ahora solo voy a usar integron-filtering el script de attC-screening.sh</p>
+<p>por ahora solo voy a usar integron-filtering el script de attC-screening.sh</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -474,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="output-de-integron-filtering" class="level4">
 <h4 class="anchored" data-anchor-id="output-de-integron-filtering">Output de integron-filtering</h4>
 <p>Lo que hace es analizar el genoma pasado (ej. genoma con chr1 + plásmido1 + plásmido2… -&gt; archivo multifasta) y genera varios archivos. El que interesa es el que acaba en <strong>attC_filtered.fasta</strong>, que mantiene el contexto entero (ej. chr1 entero) de aquellos accession en los que ha encontrado coincidencia con sitio attC. Nos interesa mantener el contexto para luego estudiar bien el promotor con IntegronFinder2</p>
-<p><span style="color: red;"><strong>FIXME</strong></span>: Se podría cambiar el funcionamiento si no da buenos resultados, ya que este programa genera otros archivos donde concreta mucho más el sitio attC ¿Igual por requerimientos de tiempo?</p>
+<p>Se podría cambiar el funcionamiento si no da buenos resultados, ya que este programa genera otros archivos donde concreta mucho más el sitio attC ¿Igual por requerimientos de tiempo?</p>
 </section>
 <section id="dependencias-de-integron-filtering-hattci" class="level4">
 <h4 class="anchored" data-anchor-id="dependencias-de-integron-filtering-hattci">Dependencias de integron-filtering –&gt; HattCI</h4>

@@ -22,3 +22,48 @@ Aun así, Creo que da problemas porque detecta dos Pc como en la misma región¿
 
 Sigo sin poder hacer clustering ya que no me da el ordenador, probar ya con la workstation
 
+# Martes 22/09
+
+[**FIXME**]{style="color: red;"}:
+Tengoq ue cambiar el código en la detección de promtoores porque, el P2 se encuentra justo en el final del gen de la integrasa, donde la att1
+[Información Pc y P2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3416418/)
+
+In ∼10% of class 1 integrons, a second promoter (P2) is also present, created by the insertion of a GGG triplet within the attI1 recombination site that optimizes the spacing between the −35 and −10 boxes (from 14 nucleotides [nt] to 17 nt) (5). Usually, the presence of P2 compensates for the weak strength of Pc, enhancing gene cassette expression without interfering with the expression of the integrase gene (4, 5).
+
+Altogether, more than 20 Pc-P2 combinations have been identified in class 1 integrons, regardless of their origin (5, 15). The most frequent configurations are as follows, according to their strength (5): 
+PcW < PcW-P2 < PcH1 < PcH1-P2 < PcWTGN-10-P2 < PcWTGN-10 < PcH2 < PcS-P2 < PcS.
+
+## REUNIÓN MODESTO+JOSE
+
+1. Cambiar IF2 (mantenerlo a posteriori) por búsqueda vía HMM -> Hacer una optimización considerando: 
+
+    - TIEMPO
+    
+    - SENSIBILIDAD. 
+
+Hacerlo sobre dos datasets: *qeu estén ya descargados en el equipo
+
+- Sobre un dataset de unos 6000 genomas (1000 de cada especie ESKAPEE por ejemplo¿ ***Incluir genomas con IS ++ ¿alguno Salmonella?). 
+
+- Ídem en un dataset más pequeño para el principio
+
+Comparar:
+
+- A partir del genoma nt -> traducirlo -> búsqueda con perfil HMM (usa uno IF2 - creo que PF00589)
+
+- Hacer un HMM de nt -> búsqueda
+
+- Probar con HMM de prots más corto (ej. solo la parte inicial de la Integrasa)
+
+- Probar con HMM de nt más corto (ej. solo la parte inicial de la Integrasa)
+
+Con esto se hace un plot del E-value y se ve qué threshold tenemos que usar (vemos como el corte que vamos a poner en cada una de las opciones)
+++++¿Mirar el E-value que usan IF2 e integron-filtering?
+
+
+
+Para el TFM centrarnos en: clasificación de promotores + casettes + análisis biológico de resultados (introducir bioproyecos blablabla)
+
+- Comprobar si en los metadatos está el ID del Bioproyecto
+
+- OJO -> Hay que guardar el genoma entero si da + 

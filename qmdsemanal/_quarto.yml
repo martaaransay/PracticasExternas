@@ -8,6 +8,7 @@ book:
     - semana_01.qmd
     - semana_02.qmd
     - semana_03.qmd
+    - sup.qmd
     - w_futuro.qmd
 
 format:

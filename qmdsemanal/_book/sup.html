@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>FUTURO – Diario Prácticas</title>
+<title>Supp – Diario Prácticas</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sup.html" rel="prev">
+<link href="./w_futuro.html" rel="next">
+<link href="./semana_03.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -84,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./w_futuro.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FUTURO</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sup.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Supp</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,13 +136,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sup.html" class="sidebar-item-text sidebar-link">
+  <a href="./sup.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Supp</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w_futuro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./w_futuro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FUTURO</span></span></a>
   </div>
 </li>
@@ -155,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pendiente-a-futuro" id="toc-pendiente-a-futuro" class="nav-link active" data-scroll-target="#pendiente-a-futuro">PENDIENTE A FUTURO</a></li>
+  <li><a href="#mermaid" id="toc-mermaid" class="nav-link active" data-scroll-target="#mermaid">Mermaid</a></li>
   </ul>
 </nav>
     </div>
@@ -164,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">FUTURO</span></h1>
+<h1 class="title"><span class="chapter-title">Supp</span></h1>
 </div>
 
 
@@ -181,29 +182,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="pendiente-a-futuro" class="level1">
-<h1>PENDIENTE A FUTURO</h1>
-<p>Jose:</p>
-<ul>
-<li><p>Preguntar a Jose si hay que trabajar con COMPLETOS o INCOMPLETOS (clasificación que da IF2) -&gt; Modesto opina que mejor completos!!!!</p></li>
-<li><p>A qué nivel de assembly_level vamos a trabajar??? -&gt; En función del nivel podríamos definir un –topology-file para IF2 (o directamente –circular)</p></li>
-<li><p>Definir las métricas de calidad que vamos a usar para el filtrado!</p></li>
-<li><p>Igual sí que podemos quitar los contigs o filtrar por el N50 -&gt; ( o directamente hacerlo a la inversa y luego con los datos ya descargados de IF2 filtrar a posterior)</p></li>
-</ul>
-<p>datasets permite descargar también todos los metadatos del genoma (creo recordad que es con la función summary, pero no estoy seguro) y eso te puede venir bien también para clasificar los integrones por el ambiente, hospedador, etc. Es algo que está en el título de la propuesta de Prácticas pero se me había pasado y puede merecer la pena que lo tengas en cuenta ahora.</p>
-<p>añadir módulo que genere un TOPOLOGY_FILE para IntegronFinder2 de forma correcta en función del nivel de ensamblado en la T2</p>
-<p>Se puede incorporar un umbral de N50 para decidir si hacer el blast en: todo el assembly o en 1 contig concreto –&gt; en función también del assembly_level que hayamos puesto</p>
-<p><strong>file</strong> es una variable que python rellena automáticamente con la ruta del .py qye se está ejecutando, luego con eso se podría automatizar un poco más algo?????</p>
-<ul>
-<li><p>Añadido en a futuro, pero poder hacer un TIPADO DE GENOMAS, es decir, buscar la relación y poder clasificar el integrón por el tipo de genoma (ej. A,B,C,D en Ecoli // multilocus sequence: mls) –&gt; ya hay programas que lo hacen (para relacionarlo con la literatura).</p>
-<ul>
-<li><p>Esto se hace en entorno conda diferente ya que pueden estar desactualizados y puede dar problemas (coli phylogroups github // pyMLST github)</p></li>
-<li><p>Así conseguimos evitar que la seleccción de genomas (ej. filtrado) sesgue los resultados que obtenemos</p></li>
-</ul></li>
-<li><p>mirar IF2 que detecta integrones de clase 1, 2 y 3 -&gt; ver si los Pc de clase 2 y clase 3 se parecen a los de clase 1 y sino con el blsat se van</p></li>
-</ul>
-<p>se podría acotar aun más la secuencia extraida para reducir carga computacional a, en lugar del integrón entero, la integrasa (que es donde se encuentra el Pc)</p>
-<p>posibilidad a añadir que busque en los CALIN en la parte upstream la integradsa (el inciio por ejemplo, 40 pb) y en aquellos qeu dé positivo buscar el Pc (por ejemplo) * las enterobact los integrones que tienen son todos moviles (exógenos), pero bact como vibrio por ejemplo pueden tener calin que se haya fragmetado la Integrasaf</p>
+<section id="mermaid" class="level1">
+<h1>Mermaid</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./image/mermaid.png" class="img-fluid figure-img"></p>
+<figcaption>qmd</figcaption>
+</figure>
+</div>
+<pre><code>---
+config:
+  layout: fixed
+---
+flowchart LR
+ subgraph s1["script T2_downloadgenomes.py"]
+        A["datasets_flags()"]
+        B["taxon_acc_flag()"]
+        C["quality_filter_genomes() [OPT]"]
+        E["unzip_rehydrate()"]
+        D["download_genomes()"]
+  end
+ subgraph s2["script T3_complete.py"]
+        G["adjust_path()"]
+        F["recorrer_genomas()"]
+        H["list_fasta_files()"]
+  end
+ subgraph s3["script T3_0_clisters.py -&gt; OPTIONAL"]
+        I["cluster_genomes()"]
+        J["run_checkm2()"]
+        K["checkm2_to_genome_info()"]
+  end
+ subgraph s4["script T3_1_integronfiltering.py -&amp;gt; OPTIONAL"]
+        L["integron_filtering()"]
+        M["output_integronfiltering()"]
+  end
+ subgraph s5["script T3_2_integronfinder.py"]
+        N["integron_finder()"]
+        O["output_integronfinder()"]
+  end
+ subgraph s6["script T3_3_pc.py"]
+        P["extract_integron_info_gbk()"]
+        Q["adjust_calin_info()"]
+        R["classify_Pc_regex()"]
+        S["adjust_Pc_info()"]
+        T["info_to_csv()"]
+  end
+    A --&gt; B &amp; C
+    D --&gt; E
+    F --&gt; G &amp; H &amp; I &amp; L &amp; N &amp; P
+    I --&gt; J &amp; K
+    L --&gt; M
+    N --&gt; O
+    P -- calin --&gt; Q
+    P -- NOT calin --&gt; R
+    R --&gt; S
+    Q --&gt; T
+    S --&gt; T
+
+    style A fill:#E1BEE7
+    style C fill:#FFF9C4
+    style D fill:#E1BEE7
+    style F fill:#E1BEE7
+    style I fill:#FFF9C4
+    style J fill:#FFF9C4
+    style K fill:#FFF9C4
+    style L fill:#FFF9C4
+    style M fill:#FFF9C4</code></pre>
 
 
 </section>
@@ -611,11 +655,14 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./sup.html" class="pagination-link" aria-label="Supp">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Supp</span></span>
+      <a href="./semana_03.html" class="pagination-link" aria-label="Semana del 21 al 25 de Septiembre">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Semana del 21 al 25 de Septiembre</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./w_futuro.html" class="pagination-link" aria-label="FUTURO">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">FUTURO</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
