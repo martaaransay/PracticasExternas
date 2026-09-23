@@ -113,25 +113,29 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
                            flags = None): 
     """
     Queries genome metadata in NCBI datasets, filters by quality metrics, and saves valid accessions in a text file.
- # fixme falta cambair este docstring
     Args
     ------------
     source (str): Source type for the query.
     name (str): Value or identifier associated with the source.
     filename (str): Name of the resulting .zip file. 
-    n50_threshold (int, optional): Minimum acceptable value for the scaffold N50. 
+    min_n50 (int, optional): Minimum acceptable value for the scaffold N50. 
                                    Default is 2000.
     max_contamination (float | int, optional): Maximum tolerated contamination percentage according to CheckM. 
                                                Default is 5%.
     min_completeness (float | int, optional): Minimum required completeness percentage according to CheckM. 
-                                                    Default is 90%.
+                                               Default is 90%.
+    target_num (int, optional): Maximum number of genomes to download.
+                                Default is None (no limit).
+    seed (int, optional): Seed for random sampling of genomes if target_num is specified.
+    flags (list, optional): List of additional flags to add to the 'datasets summary' command. 
+                            Default is None.
 
     Return
     --------------
     accessions_tuple (tuple): Tuple with the generated file name if there are genomes that pass the filters
                               None if there are no valid results.
     """
-    if not flags:
+    if not flags: # If no flags were added, empty list
         flags = []
     # To get the JSON with the genome data 
     summary_cmd = ["datasets", "summary", "genome", 
@@ -141,9 +145,12 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
     valid_accs = [] # List to store valid accessions 
     #FIXME: tomar decisión de como gestionar las excepciones!
     try:
-        process = subprocess.Popen(summary_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # Start the process 
+        process = subprocess.Popen(summary_cmd, 
+                                   stdout = subprocess.PIPE, # Capture the output
+                                   text = True)
         
-        for line in process.stdout:
+        for line in process.stdout: # Reads the output line by line
             if not line.strip(): continue # Skips empty lines
             datos = json.loads(line) # Deserialization
             acc = datos.get("accession") # Get the accession
@@ -164,13 +171,13 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
             # Check if it meets the selected filters 
             if n50 >= min_n50 and contamination <= max_contamination and completeness >= min_completeness:
                 valid_accs.append(acc)
-                # EARLY EXIT: If we have enough genomes, stop downloading the summary.
-                # We collect a pool slightly larger (e.g., x5) than target_num to still allow for random sampling.
-                if target_num and len(valid_accs) >= (target_num * 5):
-                    process.terminate()
+                # If the number of accessions exceeds twice the target number, terminate the process to avoid unnecessary processing
+                if target_num and len(valid_accs) >= (target_num * 2): # twice to allow random sampling
+                    process.terminate() # Stop the process
                     break
 
-        process.wait() 
+        process.wait() # Wait for the process to finish
+
     except Exception as e: 
         print(f"Error executing datasets summary:\n{e}")
         return
@@ -179,15 +186,16 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
         print("No genome meets the quality criteria.")
         return
     
-    if target_num:
-        if len(valid_accs) > target_num:
-            random.seed(seed)
-            valid_accs = random.sample(valid_accs, target_num)
-        elif len(valid_accs) < target_num:
-            print(f"only {len(valid_accs)} genomes met the quality criteria ")
-    
+    if target_num: 
+        if len(valid_accs) > target_num: # Limit the number of genomes
+            random.seed(seed) # Set seed
+            valid_accs = random.sample(valid_accs, target_num) # Random sampling
+        elif len(valid_accs) < target_num: # Not enough genomes
+            print(f"Only {len(valid_accs)} genomes met the quality criteria ")
+
+    # Store the valid accessions into a text file
     accs_file_name = f"accessions_{os.path.basename(filename).split('.')[0]}.txt" # Name of the file
-    accs_file_path = os.path.join(os.path.dirname(filename), accs_file_name)
+    accs_file_path = os.path.join(os.path.dirname(filename), accs_file_name) # Path of the file
 
     with open(accs_file_path, "w") as f: # Create a file with the valid accs (one per line)
         for each_acc in valid_accs:
@@ -256,7 +264,6 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                      seed = 1
                      ): 
     """
-    #fixme hay q cambiar el docstring
     Executes the NCBI datasets command to download genomes (--dehydrated), allowing prior quality filtering.
 
     Args
@@ -269,6 +276,10 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                               Default is "ncbi_dataset.zip".
     flags (list, optional): List of additional flags to add to the 'datasets download' command. 
                             Default is None.
+    target_num (int, optional): Maximum number of genomes to download.
+                                Default is None (no limit).
+    seed (int, optional): Seed for random sampling of genomes if target_num is specified.
+                          Default is 1.
     """
     # Check that the directories exist to prevent errors
     out_dir = os.path.dirname(filename)
@@ -277,7 +288,7 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
 
     if quality_filter_flag:
         filter_result = quality_filter_genomes(source, name, filename, # Executes the filtering function
-                                               target_num = target_num, seed = seed) 
+                                               target_num = target_num, seed = seed, flags = flags) 
         if not filter_result: # If there is no accession, the datasets command cannot be used
             # The created directories are removed:
             if out_dir and os.path.exists(out_dir):
@@ -287,13 +298,14 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
             return
         source, name = filter_result # Unpack tuple
 
-    # If no flags were added, empty list (control)
+    # If no flags were added, empty list
     if flags is None:
         flags = []
 
     ########### -------------------- datasets download
     download_cmd = ["datasets", "download", "genome", *taxon_acc_flag(source, name), 
                     "--dehydrated", "--filename", filename, *flags]
+    
     print(f"Executing: \n{shlex.join(download_cmd)}")
 
     try:
@@ -307,6 +319,7 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
             if not os.listdir(out_dir): 
                 os.removedirs(out_dir) # Removes empty directories (parent directories too)
         return None
+    
     unzip_rehydrate(filename)
 
 
