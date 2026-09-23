@@ -1,8 +1,12 @@
 import glob
 import os
+import shlex
+import subprocess
+import shutil
 from pipeline_inicial.T2_downloadgenomes import datasets_flags, download_genomes
 
 def build_database(species, outdir, target_num, flags):
+    os.makedirs(outdir, exist_ok = True)
     for short_name, long_name in species.items():
         path = os.path.join(outdir, short_name, f"{short_name}.zip")
         print(path)
@@ -39,18 +43,24 @@ def generate_db(multifasta, out_db):
         print(f"Error executing makeblastdb:\n{e.stderr}")
         return
 
+def clean_db(outdir):
+    #Removes multifasta + genomes + db
+    shutil.rmtree(outdir)
+    print("Everything removed")
+    return
 
 if __name__ == "__main__":
     # Downloading genomes
     flags = datasets_flags(assembly_level="complete,chromosome,contig",
-                                  exclude_atypical=True,
-                                  mag=False)
+                           exclude_atypical=True,
+                           mag=False)
     
     names = {"Ecoli" : "Escherichia coli", 
-               "Klebsiella" : "Klebsiella pneumoniae",
-               "Pseudomonas" : "Pseudomonas aeruginosa", 
-               "Acinetobacter" : "Acinetobacter baumannii",
-               "Enterobacter" : "Enterobacter spp."}
+             "Klebsiella" : "Klebsiella pneumoniae",
+             "Pseudomonas" : "Pseudomonas aeruginosa",
+             "Acinetobacter" : "Acinetobacter baumannii",
+             "Enterobacter" : "Enterobacter spp."}
+    
     build_database(species = names, 
                    outdir = "data/genomes", 
                    target_num = 10, 
@@ -59,4 +69,7 @@ if __name__ == "__main__":
     generate_multifasta(path_to_genomes = "data/genomes/*/*.fna",
                         outfile = "data/genomes/multifasta_genomes.fasta")
     generate_db(multifasta = "data/genomes/multifasta_genomes.fasta",
-                out = "data/genomes/db/db")
+                out_db = "data/genomes/db/db")
+    clean_flag = False
+    if clean_flag:
+        clean_db(outdir = "data/genomes")
