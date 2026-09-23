@@ -23,7 +23,6 @@ def build_database(species, outdir, target_num, flags):
 # Generate multifasta
 def generate_multifasta(path_to_genomes, outfile):
     files_to_db = sorted(glob.glob(path_to_genomes))
-
     with open(outfile, "w") as out:
         for file in files_to_db:
             with open(file, "r") as each_file:
@@ -34,7 +33,7 @@ def generate_db(multifasta, out_db):
     # Generate db
     os.makedirs("../data/genomes/db", exist_ok=True)
     makeblastdb_cmd = ["makeblastdb", "-in", multifasta, "-dbtype", "nucl", 
-                    "-out", out_db, "-parse_seqids"]
+                       "-out", out_db, "-parse_seqids"]
     print(f"Executing: \n{shlex.join(makeblastdb_cmd)}")
     try:
         subprocess.run(makeblastdb_cmd, 
@@ -50,26 +49,29 @@ def clean_db(outdir):
     return
 
 if __name__ == "__main__":
-    # Downloading genomes
-    flags = datasets_flags(assembly_level="complete,chromosome,contig",
-                           exclude_atypical=True,
-                           mag=False)
-    
-    names = {"Ecoli" : "Escherichia coli", 
-             "Klebsiella" : "Klebsiella pneumoniae",
-             "Pseudomonas" : "Pseudomonas aeruginosa",
-             "Acinetobacter" : "Acinetobacter baumannii",
-             "Enterobacter" : "Enterobacter spp."}
-    
-    build_database(species = names, 
-                   outdir = "data/genomes", 
-                   target_num = 10, 
-                   flags = flags)
-    # Executed once
-    generate_multifasta(path_to_genomes = "data/genomes/*/*.fna",
-                        outfile = "data/genomes/multifasta_genomes.fasta")
-    generate_db(multifasta = "data/genomes/multifasta_genomes.fasta",
-                out_db = "data/genomes/db/db")
-    clean_flag = False
+    clean_flag = True
     if clean_flag:
-        clean_db(outdir = "data/genomes")
+            clean_db(outdir = "data/genomes")
+
+    # # Downloading genomes
+    # flags = datasets_flags(assembly_level="complete,chromosome,contig",
+    #                        exclude_atypical=True,
+    #                        mag=False)
+    
+    # names = {"Ecoli" : "Escherichia coli", 
+    #          "Klebsiella" : "Klebsiella pneumoniae",
+    #          "Pseudomonas" : "Pseudomonas aeruginosa",
+    #          "Acinetobacter" : "Acinetobacter baumannii",
+    #          "Enterobacter" : "Enterobacter spp."}
+    
+    # build_database(species = names, 
+    #                outdir = "data/genomes", 
+    #                target_num = 15, 
+    #                flags = flags)
+    # # Executed once
+    # generate_multifasta(path_to_genomes = "data/genomes/*/*/ncbi_dataset/data/*/*.fna",
+    #                     outfile = "data/genomes/multifasta_genomes.fasta")
+    # generate_db(multifasta = "data/genomes/multifasta_genomes.fasta",
+    #             out_db = "data/genomes/db/db")
+    
+    

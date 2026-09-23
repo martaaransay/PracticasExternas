@@ -197,6 +197,7 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
     accessions_tuple = ("inputfile", accs_file_path)
 
     return accessions_tuple
+
 ##------------------------ Function to unzip and rehydrate the genomes
 def unzip_rehydrate(filename = "ncbi_dataset.zip"): 
     """
