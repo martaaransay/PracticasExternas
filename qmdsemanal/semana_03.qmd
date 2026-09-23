@@ -86,7 +86,29 @@ Osea vamos a hacer blast con 3 query a nivel de nt:
 
 Script para generar los fasta: scripts/generate_Int1_fasta.py
 
+## Tareas realizadas
 
+He hecho varios scripts para poder  hacer la comparativa de optimización de tiempo / sensibilidad:
+
+- generate_db.py: Para poder generar la  bbdd con x genomas de cada especie.
+
+    - Para ello además he tenido que ir modificando el script T2_downloadgenomes.py, para poder introducir un número límite de genoams a descargar (que puede venir bein a futuro)
+
+- generate_Int1_fasta.py: Para generar las secuencias de la Integrasa que se van a usar de query en BLAST
+
+- optimization.py: Con diversas funciones que permiten realizar el blast y plottear los resultados
+
+Aun así falta arreglar alguna parte de los FIXME dejados en el T2_downloadgenomes y solucionar el error del argumento out en generate_db()
+
+# Miércoles 23/09
+
+OBJETIVOS INICIALES:
+
+- ¿preparar workstation?
+
+- Solucionar los errores comentados del día anterior en los scripts T2 y generate_db()
+
+- Evaluar como optimizar el tiempo con proteínas
 
 FALTA ARREGLAR LA PARTE DE LOS FIXME DE T2_DOWNLOAD
 
