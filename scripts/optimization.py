@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 # --------Definition of functions
 #------------------------ Function to run blastn
-def run_blastn(query, output, db, evalue_threshold = 10):
+def run_blastn(query, output, db, max_target_evalue_threshold = 10):
     # FIXME FALTA AÑADIR COSAS DE EVALUES YA ARGS ADDED
     """
     Executes the blastn command with the specified query, output file, and database.
@@ -32,6 +32,7 @@ def run_blastn(query, output, db, evalue_threshold = 10):
     blast_cmd = ["blastn", "-query", query, # Query fasta file
                  "-db", db, # Blast database
                  "-out", output, 
+                 "-max_target_seqs", 
                  "-evalue", str(evalue_threshold),
                  "-outfmt", "6"] # Output format 6 (tabular)
     start = time.time() # Start time to measure execution time
