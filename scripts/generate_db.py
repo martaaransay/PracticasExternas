@@ -58,50 +58,74 @@ def generate_multifasta(path_to_genomes, outfile):
     return
 
 
-# FIXME _ FALTA COMENTAR A PARTIR DE AQUÍ:
+#------------------------ Function to generate the database from the multifasta file
 def generate_db(multifasta, out_db):
-    # Generate db
+    """
+    Generates a BLAST database from a multifasta file.
+
+    Args
+    ------
+    multifasta (str): Path to the multifasta file.
+    out_db (str): Path where the database will be saved.
+    """
+    # The output directory is created to avoid errores
     os.makedirs("../data/genomes/db", exist_ok=True)
-    makeblastdb_cmd = ["makeblastdb", "-in", multifasta, "-dbtype", "nucl", 
-                       "-out", out_db, "-parse_seqids"]
+    # Command to execute makeblastdb
+    makeblastdb_cmd = ["makeblastdb", "-in", multifasta, 
+                       "-dbtype", "nucl", # nucleotides database
+                       "-out", out_db, 
+                       "-parse_seqids"] # To include the sequence identifiers in the database
     print(f"Executing: \n{shlex.join(makeblastdb_cmd)}")
+    # Execute the command
     try:
         subprocess.run(makeblastdb_cmd, 
-                    check=True, capture_output=True, text=True)
+                       check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
         print(f"Error executing makeblastdb:\n{e.stderr}")
         return
-
-def clean_db(outdir):
-    #Removes multifasta + genomes + db
-    shutil.rmtree(outdir)
-    print("Everything removed")
     return
 
+#------------------------ Function to remove all the files related to the database
+def clean_db(outdir):
+    """
+    Removes all the files related to the database, including multifasta files, genomes, and the database itself.
+
+    Args
+    ------
+    outdir (str): The output directory where the files to be removed are located.
+    """
+    shutil.rmtree(outdir) # Removes the entire directory and its contents
+
+    return
+
+# -------- Main code
 if __name__ == "__main__":
+
     clean_flag = False
     if clean_flag:
             clean_db(outdir = "data/genomes")
 
     # Downloading genomes
+    # Flags:
     flags = datasets_flags(assembly_level="complete,chromosome,contig",
                            exclude_atypical=True,
                            mag=False)
-    
+
+    # species to download
     names = {"Ecoli" : "Escherichia coli", 
              "Klebsiella" : "Klebsiella pneumoniae",
              "Pseudomonas" : "Pseudomonas aeruginosa",
              "Acinetobacter" : "Acinetobacter baumannii",
-             "Enterobacter" : "Enterobacter spp."}
-    
-    download_species_genomes(species = names, 
-                   outdir = "data/5000genomes", 
-                   target_num = 5000, 
+             "Enterobacter" : "Enterobacter"}
+    names2 = {"Acinetobacter" : "Acinetobacter baumannii"}
+        
+    download_species_genomes(species = names2, 
+                   outdir = "data/1500genomes", 
+                   target_num = 1500, 
                    flags = flags)
-    # Executed once
-    generate_multifasta(path_to_genomes = "data/5000genomes/*/*/ncbi_dataset/data/*/*.fna",
-                        outfile = "data/5000genomes/multifasta_genomes.fasta")
-    generate_db(multifasta = "data/5000genomes/multifasta_genomes.fasta",
-                out_db = "data/5000genomes/db/db")
+
     
-    
+    generate_multifasta(path_to_genomes = "data/1500genomes/*/*/ncbi_dataset/data/*/*.fna",
+                        outfile = "data/1500genomes/multifasta_genomes.fasta")
+    generate_db(multifasta = "data/1500genomes/multifasta_genomes.fasta",
+                out_db = "data/1500genomes/db/db")

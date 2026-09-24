@@ -110,11 +110,29 @@ OBJETIVOS INICIALES:
 
 - Evaluar como optimizar el tiempo con proteínas
 
-FALTA ARREGLAR LA PARTE DE LOS FIXME DE T2_DOWNLOAD
+## Script T2_downloadgenomes
 
-ACABAR DE GENERAR BIEN LA BASE DE DATOS:
+He solucionado lo que pasaba que no se descargaban todos los accessions que le ponías en target_num (no le había pasado las flags a la función)
 
-Traceback (most recent call last):
-  File "/home/marta/CNB/PracticasExternas/./scripts/generate_db.py", line 61, in <module>
-    generate_db(multifasta = "data/genomes/multifasta_genomes.fasta",
-TypeError: generate_db() got an unexpected keyword argument 'out'
+Además he termindo de comentar lo que quedaba
+
+## Parte de optimización
+
+He generado tres plots que se guardan en results/plots:
+
+- Distribución de evaluates
+- Distribución de BitScore
+- Distribución de hits y unique_hits 
+
+# Jueves 24/09
+
+OBJETIVOS INICIALES
+
+- Comentar bien generate_db() y acabar de definitr optimization
+
+- Ejecutar ambos scripts para 5000 genomas de cada especie
+
+- Evaluar la comparativa de tiempo con prots (aminoácidos)
+
+- Empezar a paralelizar
+
