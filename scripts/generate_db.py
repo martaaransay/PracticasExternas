@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
         
     download_species_genomes(species = names, 
-                   outdir = "data/1000genomes", 
+                   outdir = f"data/{str(n_genomes)}genomes", 
                    target_num = n_genomes, 
                    flags = flags)
 

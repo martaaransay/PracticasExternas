@@ -132,7 +132,7 @@ OBJETIVOS INICIALES
 
 - Ejecutar ambos scripts para 1500 genomas de cada especie
 
-- Evaluar la comparativa de tiempo con prots (aminoácidos)1 ge
+- Evaluar la comparativa de tiempo con prots (aminoácidos)
 
 - Empezar a paralelizar
 
@@ -144,9 +144,12 @@ Ambos scripts acabados y hecho el análisis en 1500 genomas de cada especie
 
 Para comparar a nivel de proteínas vamos a usar tres estrategias:
 
-- HMM aislado (usando el HMM de IF2)
-
 - IF2
 
 - Integron-filtering + IF2
 
+(es inviable probarlo al mismo nivel en la bbdd con 7500 genomas)
+
+¿igual probar en una base de datos más pequeña (ej. 100 genomas en total?)
+
+he dejado los scripts preparados para hacer directamente el n_hits y n_hits_unique que encuentra -> probar mañana con bbdd más pequeña
