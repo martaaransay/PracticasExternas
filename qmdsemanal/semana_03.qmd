@@ -130,9 +130,23 @@ OBJETIVOS INICIALES
 
 - Comentar bien generate_db() y acabar de definitr optimization
 
-- Ejecutar ambos scripts para 5000 genomas de cada especie
+- Ejecutar ambos scripts para 1500 genomas de cada especie
 
-- Evaluar la comparativa de tiempo con prots (aminoácidos)
+- Evaluar la comparativa de tiempo con prots (aminoácidos)1 ge
 
 - Empezar a paralelizar
+
+## Script generate_db + optimization
+
+Ambos scripts acabados y hecho el análisis en 1500 genomas de cada especie
+
+## Comparativa a nivel de prots
+
+Para comparar a nivel de proteínas vamos a usar tres estrategias:
+
+- HMM aislado (usando el HMM de IF2)
+
+- IF2
+
+- Integron-filtering + IF2
 

@@ -110,22 +110,22 @@ if __name__ == "__main__":
     flags = datasets_flags(assembly_level="complete,chromosome,contig",
                            exclude_atypical=True,
                            mag=False)
-
+    n_genomes = 1000
     # species to download
     names = {"Ecoli" : "Escherichia coli", 
              "Klebsiella" : "Klebsiella pneumoniae",
              "Pseudomonas" : "Pseudomonas aeruginosa",
              "Acinetobacter" : "Acinetobacter baumannii",
              "Enterobacter" : "Enterobacter"}
-    names2 = {"Acinetobacter" : "Acinetobacter baumannii"}
+
         
-    download_species_genomes(species = names2, 
-                   outdir = "data/1500genomes", 
-                   target_num = 1500, 
+    download_species_genomes(species = names, 
+                   outdir = "data/1000genomes", 
+                   target_num = n_genomes, 
                    flags = flags)
 
     
-    generate_multifasta(path_to_genomes = "data/1500genomes/*/*/ncbi_dataset/data/*/*.fna",
-                        outfile = "data/1500genomes/multifasta_genomes.fasta")
-    generate_db(multifasta = "data/1500genomes/multifasta_genomes.fasta",
-                out_db = "data/1500genomes/db/db")
+    generate_multifasta(path_to_genomes = f"data/{str(n_genomes)}genomes/*/*/ncbi_dataset/data/*/*.fna",
+                        outfile = f"data/{str(n_genomes)}genomes/multifasta_genomes.fasta")
+    generate_db(multifasta = f"data/{str(n_genomes)}genomes/multifasta_genomes.fasta",
+                out_db = f"data/{str(n_genomes)}genomes/db/db")

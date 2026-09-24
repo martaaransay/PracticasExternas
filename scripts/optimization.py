@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 # --------Definition of functions
 #------------------------ Function to run blastn
-def run_blastn(query, output, db, max_target_evalue_threshold = 10):
+def run_blastn(query, output, db, max_target, evalue_threshold = 10):
     # FIXME FALTA AÑADIR COSAS DE EVALUES YA ARGS ADDED
     """
     Executes the blastn command with the specified query, output file, and database.
@@ -32,7 +32,7 @@ def run_blastn(query, output, db, max_target_evalue_threshold = 10):
     blast_cmd = ["blastn", "-query", query, # Query fasta file
                  "-db", db, # Blast database
                  "-out", output, 
-                 "-max_target_seqs", 
+                 "-max_target_seqs", str(max_target), # Max number of aligned seqs to keep
                  "-evalue", str(evalue_threshold),
                  "-outfmt", "6"] # Output format 6 (tabular)
     start = time.time() # Start time to measure execution time
@@ -235,19 +235,22 @@ if __name__ == "__main__":
                    "data/Int1/Int1_no_Pc.fa"]
     all_results = {}
     all_times = {}
+    num_genomes_each = 1000
     for each_query in fasta_files:
         name = os.path.basename(each_query)
 
         each_result, each_time = run_blastn(query = each_query, 
-                                 output = f"results/1500genomes/blast_{name}.tsv",
-                                 db = "data/1500genomes/db/db")
+                                 output = f"results/{str(num_genomes_each)}genomes/blast_{name}.tsv",
+                                 db = f"data/{str(num_genomes_each)}genomes/db/db",
+                                 max_target=num_genomes_each * 5 * 5) # max num of seqs to keep: size of db * 5
         
         all_results[each_query] = each_result
         all_times[each_query] = each_time
 
 
     dfs, evalues, bitscore, labels = process_tsv(all_results)
-    outdir = "results/plots/1500genomes"
-    plot_evalue(evalues, labels, title = "E-Values distribution - db: 1500 genomes * 5 species (7500)", outdir = outdir)
-    plot_bitscore(bitscore, labels, title = "BitScore distribution - db: 1500 genomes * 5 species (7500)", outdir = outdir)
-    plot_evalue_thresholds(dfs, all_times, title = "E-Values thresholds - db: 1500 genomes * 5 species (7500)", outdir = outdir)
+    outdir = f"results/plots/{str(num_genomes_each)}genomes"
+    general_title = f"- db: {str(num_genomes_each)} genomes * 5 species ({str(num_genomes_each*5)})"
+    plot_evalue(evalues, labels, title = f"E-Values distribution {general_title}", outdir = outdir)
+    plot_bitscore(bitscore, labels, title = f"BitScore distribution {general_title}", outdir = outdir)
+    plot_evalue_thresholds(dfs, all_times, title = f"E-Values thresholds {general_title}", outdir = outdir)
