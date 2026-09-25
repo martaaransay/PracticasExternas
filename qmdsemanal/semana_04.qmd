@@ -1,0 +1,33 @@
+---
+title: "Semana del 28 al 2 de Octubre"
+number-sections: false
+---
+
+# Lunes 28/09
+
+COSAS PENDIENTES DE LA SEMANA PASADA:
+
+PEIDNETE PARA LA SEMANA QUE VIENE:
+
+- ejecutar los scripts sobre una bbdd más grande (hecho con 50 genomas en total únicamnete, probar con 500 igual)
+
+- empezar a hacer el pipeline completo pero emepzar por paralelizar la descarga.
+
+- extraer la región del Pc por hacer una prueba y ejectuar la clasificación por Pc!
+datos de paralelizar:
+
+- Introducir lo hablado con Víctor:
+
+    - subprocess.run() --> EJecuta tal cual y se para el script
+
+    - a = subprocess.Popen() ---> Se ejecuta el process, pero se sigue ejecutando el script hasta la orden a.wait(), que lo espera
+
+    - Buscar el número de cores del ordenador (argumento --max-workers en subprocess.run()) -> el tenía 32, y le daba 30 (--max-workers 30)
+
+    - Buscar como hacer splits bien del archivo fetch que genera el dehydrated
+
+    - Tras hacer la comparativa con la bbdd más pequeña, empezar a vincular procesos?
+
+    - IMP: [**FIXME**]{style="color: red;"}: Comprobar con bacterias que no sean entero (ej ¿vibrio?) si es´ta tan conservada la Int
+
+    - como rehydrate a veces da fallo, añadir intentos! (n_intentos hasta x)

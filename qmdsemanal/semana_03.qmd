@@ -153,3 +153,44 @@ Para comparar a nivel de proteínas vamos a usar tres estrategias:
 ¿igual probar en una base de datos más pequeña (ej. 100 genomas en total?)
 
 he dejado los scripts preparados para hacer directamente el n_hits y n_hits_unique que encuentra -> probar mañana con bbdd más pequeña
+
+# Viernes 25/09
+
+- Probar el script de optimizacion de prots sobre una bbdd más pequeña
+
+- Introducir lo hablado con Víctor:
+
+    - subprocess.run() --> EJecuta tal cual y se para el script
+
+    - a = subprocess.Popen() ---> Se ejecuta el process, pero se sigue ejecutando el script hasta la orden a.wait(), que lo espera
+
+    - Buscar el número de cores del ordenador (argumento --max-workers en subprocess.run()) -> el tenía 32, y le daba 30 (--max-workers 30)
+
+    - Buscar como hacer splits bien del archivo fetch que genera el dehydrated
+
+    - Tras hacer la comparativa con la bbdd más pequeña, empezar a vincular procesos?
+
+    - IMP: [**FIXME**]{style="color: red;"}: Comprobar con bacterias que no sean entero (ej ¿vibrio?) si es´ta tan conservada la Int
+
+    - como rehydrate a veces da fallo, añadir intentos! (n_intentos hasta x)
+
+## Comparación de métodos
+
+He cambiado el script de comparación para ejecutar desde ese mismo los tres métodos:
+
+- blastn con los tres fastas como query
+
+- IF2 solo
+
+- Integron-filtering + IF2
+
+Y he añadido funciones de plotting para comparar estos tres métodos en cuanto a los hits que obtienen
+
+Dejo comentado el script de comparación de forma óptima (se ejecuta en conjunto con el de generate_db) y el de plotting.
+
+
+PEIDNETE PARA LA SEMANA QUE VIENE:
+
+- ejecutar los scripts sobre una bbdd más grande (hecho con 50 genomas en total únicamnete, probar con 500 igual)
+
+- empezar 

@@ -110,7 +110,7 @@ if __name__ == "__main__":
     flags = datasets_flags(assembly_level="complete,chromosome,contig",
                            exclude_atypical=True,
                            mag=False)
-    n_genomes = 1000
+    n_genomes = 10
     # species to download
     names = {"Ecoli" : "Escherichia coli", 
              "Klebsiella" : "Klebsiella pneumoniae",
