@@ -8,6 +8,9 @@ number-sections: false
 COSAS PENDIENTES DE LA SEMANA PASADA:
 
 PEIDNETE PARA LA SEMANA QUE VIENE:
+falta explicar bien lo de plotting con los cambios de ultima hora
+
+solucionar el overlap 
 
 - ejecutar los scripts sobre una bbdd más grande (hecho con 50 genomas en total únicamnete, probar con 500 igual)
 

@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 # Import functions from other scripts
 from pipeline_inicial.useful_funct import list_fasta_files
-from plotting import plot_evalue, plot_bitscore, plot_evalue_thresholds#, plot_hits_comparison, plot_hits_overlap
+from plotting import plot_evalue, plot_bitscore, plot_evalue_thresholds, plot_hits_comparison, plot_hits_overlap
 from pipeline_inicial.T3_2_integronfinder import Integron_Finder
 from pipeline_inicial.T3_1_integronfiltering import integron_filtering
 
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     all_results = {}
     all_times = {}
     
-    num_genomes_each = 10 # Number of genomes of each specie in the database
+    num_genomes_each = 5 # Number of genomes of each specie in the database
     
     for each_query in fasta_files: # For each query
         name = os.path.basename(each_query)
@@ -230,9 +230,9 @@ if __name__ == "__main__":
     times = {"BLAST": t_blast, 
              "IntegronFinder2": t_IF2, 
              "Integron-filtering+IF2": t_IntFiltIF2}
-
+    
     # Plotting comparision:
-    plot_hits_comparison(hits_summary, times)
+    plot_hits_comparison(hits_summary, times, title = f"Method comparision {general_title}", outdir = outdir)
 
     # Create sets to study overlapping with venn diagrams
     set_blast = set(blast_unique_genome)
@@ -245,4 +245,4 @@ if __name__ == "__main__":
                 "Integron-filtering+IF2": set_IntFiltIF2
                 }
     
-    plot_hits_overlap(sets_dict)
+    plot_hits_overlap(sets_dict, title = f"Method comparision {general_title}", outdir = outdir)

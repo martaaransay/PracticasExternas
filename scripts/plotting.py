@@ -160,46 +160,61 @@ def plot_hits_comparison(summary, total_times,
     # Creates the output directory to avoid errors
     os.makedirs(outdir, exist_ok=True)
 
-    methods = list(summary.keys()) # Number of methods (originallly: 3)
+    methods = list(summary.keys()) # List of methods
+    n = len(methods)
     # Lists to store results 
     totals = []
     uniques = []
     times = []
-
-    for meth in methods: # Store data from each method
+    list_colors = ["#35C40E", "#F791F4", "#F1BE3B"]
+    colors = {}
+    
+    for i, meth in enumerate(methods): # Store data from each method
+        colors[meth] = list_colors[i]
         totals.append(summary[meth][0])
         uniques.append(summary[meth][1])
         times.append(total_times[meth])
+        
 
     fig, axes = plt.subplots(1,2,figsize=(13,5)) # Creates axes for the plot
+    x = np.arange(2) # Two comparisions: total and unique
+    width = 0.8 / n
 
-    # Subplot 1: "Total hits vs. Unique hits"
-    # Plots the data of each method
-    axes[0].bar(methods, totals, label = "Total hits", color = "#35C40E")
-    axes[0].bar(methods, uniques, label = "Unique hits", color = "#F791F4")
-    # Axis, legends and labels for subplot 1
+    for i, m in enumerate(methods):
+        values = [totals[i], uniques[i]]
+        offset = i * width - (width * (n - 1) / 2)
+        axes[0].bar(x+offset, values, width=width, label=m, color=colors[m])
+
+    axes[0].set_xticks(x)
+    axes[0].set_xticklabels(["Total hits", "Unique hits"])
     axes[0].set_ylabel("Number of hits")
     axes[0].set_title("Total hits vs. Unique hits")
-    axes[0].legend()
+    axes[0].legend(title="Method")
 
     # Subplot 2: "Time of execution"
     # Plots the times of each method
-    axes[1].bar(methods, times, color="#F1BE3B")
-    # Axis and labels for subplot 2
-    axes[1].set_ylabel("Time (secs))")
+    axes[1].plot(range(n), times, "-", color="gray", alpha=0.5)
+    for i, m in enumerate(methods):
+        axes[1].plot(i, times[i], "o", color=colors[m])
+        axes[1].annotate(f"{times[i]:.2f}s", (i, times[i]),
+                          textcoords="offset points", xytext=(0, 10),
+                          ha="center", fontsize=9)
+
+    axes[1].set_xticks(range(n))
+    axes[1].set_xticklabels(methods)
+    axes[1].set_ylabel("Time (secs)")
     axes[1].set_title("Time of execution")
-    
-    # Rotation of x-axis
+    axes[1].margins(y=0.15)  # deja hueco arriba para las anotaciones
+
     for ax in axes:
         ax.tick_params(axis="x", rotation=20)
 
-    plt.suptitle(title) # Set the principal title
-
-    plt.tight_layout() # Adjusts the layout to avoid overlapping
-    # Saves the plot
+    plt.suptitle(title)
+    plt.tight_layout()
     plt.savefig(os.path.join(outdir, filename))
     plt.close()
     return
+    
 
 #------------------------ Function to analyze the overlapping
 def plot_hits_overlap(sets_dict,
@@ -221,7 +236,7 @@ def plot_hits_overlap(sets_dict,
     names = list(sets_dict.keys()) # List of names of the methods
     sets = list(sets_dict.values()) # List of the sets
 
-    fig, ax = plt.subplots(figsize=(13, 5)) # Creates axes for the plot
+    fig, ax = plt.subplots(figsize=(8, 8)) # Creates axes for the plot
 
     # Executes venn3 function to plot the Venn diagram
     venn3(sets, 
