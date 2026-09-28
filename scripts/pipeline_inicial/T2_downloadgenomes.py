@@ -207,9 +207,9 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
     return accessions_tuple
 
 ##------------------------ Function to unzip and rehydrate the genomes
-def unzip_rehydrate(filename = "ncbi_dataset.zip"): 
+def unzip(filename = "ncbi_dataset.zip"): 
     """
-    Unzips an NCBI ZIP file and executes the datasets rehydrate command.
+    Unzips an NCBI ZIP file.
 
     Args
     -------
@@ -238,20 +238,8 @@ def unzip_rehydrate(filename = "ncbi_dataset.zip"):
                        check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
         print(f"Error executing unzip:\n{e.stderr}")
-        return
+        return target_dir
 
-    ############ ------------------- datasets rehydrate
-    rehydrate_cmd = ["datasets", "rehydrate", 
-                     "--directory", target_dir]
-    print(f"Executing: \n{shlex.join(rehydrate_cmd)}")
-    try:
-        subprocess.run(rehydrate_cmd, 
-                        check=True, capture_output=True, text=True) 
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing datasets rehydrate:\n{e.stderr}")
-        return
-
-    return
 
 
 ##------------------------ Function to download genomes
@@ -285,7 +273,8 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
     out_dir = os.path.dirname(filename)
     if out_dir: # Prevents errors if the path has no folders 
         os.makedirs(out_dir, exist_ok=True) 
-
+    if target_num:
+        quality_filter_flag = True
     if quality_filter_flag:
         filter_result = quality_filter_genomes(source, name, filename, # Executes the filtering function
                                                target_num = target_num, seed = seed, flags = flags) 
@@ -320,39 +309,32 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                 os.removedirs(out_dir) # Removes empty directories (parent directories too)
         return None
     
-    unzip_rehydrate(filename)
+    target_dir = unzip(filename)
+    return target_dir
+
+def rehydrate(directory):
+    """
+    Executes the rehydrate datasets command.
+
+    Args
+    -------
+    directory (str): The directory where the fetched file is stored.  
+    """
+    ############ ------------------- datasets rehydrate
+    rehydrate_cmd = ["datasets", "rehydrate", 
+                     "--directory", directory]
+    print(f"Executing: \n{shlex.join(rehydrate_cmd)}")
+    try:
+        subprocess.run(rehydrate_cmd, 
+                        check=True, capture_output=True, text=True) 
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing datasets rehydrate:\n{e.stderr}")
+        return
+
+    return
 
 
 # -------- Main code
-
-if __name__ == "__main__":
-    # Code for Klebsiella pneumoniae without quality filtering
-    flags = datasets_flags(assembly_source = "RefSeq", 
-                        assembly_level = "complete,chromosome",
-                        exclude_atypical = True, 
-                        mag = False)
-
-    file = "results/T2_check/kpn_without_qfiltering.zip"
-
-    # check = download_genomes(source = "taxon", 
-    #                          name = "Klebsiella pneumoniae", 
-    #                          filename = file, 
-    #                          flags = flags)
-
-    # if check:
-    #     unzip_rehydrate(filename = file)
-
-    # Code for Klebsiella pneumoniae WITH quality filtering
-    filtered_file = "results/T2_check/kpn_filtered.zip"
-
-    # filtered_check = download_genomes(source = "taxon", 
-    #                                   name = "Klebsiella pneumoniae", 
-    #                                   quality_filter_flag = True,
-    #                                   filename = filtered_file, 
-    #                                   flags = flags)
-
-    # if filtered_check:
-    #     unzip_rehydrate(filename = filtered_file)
 
 
 # FIXME -> no salen las barras de progreso al ejecutar este script, pero si quitamos el argumento (capture_output=True)
@@ -381,7 +363,9 @@ if __name__ == "__main__":
 
     file_general = "results/T2_check/Klebsiella.zip"
 
-    download_genomes(source = "taxon", 
+    dir = download_genomes(source = "taxon", 
                      name = "Klebsiella pneumoniae", 
                      filename = file_general, 
-                     flags = flags_general)
+                     flags = flags_general,
+                     target_num = 250)
+    rehydrate(dir)

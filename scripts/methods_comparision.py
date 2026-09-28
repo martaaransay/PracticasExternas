@@ -114,14 +114,14 @@ if __name__ == "__main__":
     all_results = {}
     all_times = {}
     
-    num_genomes_each = 5 # Number of genomes of each specie in the database
+    num_genomes_each = 1 # Number of genomes of each specie in the database
     
     for each_query in fasta_files: # For each query
         name = os.path.basename(each_query)
 
         each_result, each_time = run_blastn(query = each_query, 
                                             output = f"results/{str(num_genomes_each)}genomes/blast/blast_{name}.tsv",
-                                            db = f"data/{str(num_genomes_each)}genomes/db/db",
+                                            db = f"../data/{str(num_genomes_each)}genomes/db/db",
                                             max_target = num_genomes_each * 5 * 5) # max num of seqs to keep: size of db * 5
         # Store results and times of each query
         all_results[each_query] = each_result
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     for i in analysis:
         # i=0 -> IntegronFinder2 
         # i=1 -> Integron-filtering + IntegronFinder2
-        genomes_dir = f"data/{str(num_genomes_each)}genomes"
+        genomes_dir = f"../data/{str(num_genomes_each)}genomes"
         list_files = list_fasta_files(genomes_dir, depth = 5) # List fasta files
         
         start = time.time() # Start time to measure execution time
@@ -186,7 +186,8 @@ if __name__ == "__main__":
             # Executes IF2
             gbk_files = Integron_Finder(genome_path = each_file,
                                         genome_acc = acc_for_IF2,
-                                        outdir = dir_IF2)
+                                        outdir = dir_IF2,
+                                        cpu = 18)
             # Stores the number of hits (= number of gbk files) per acc
             hits[original_acc] = len(gbk_files)
 

@@ -1,64 +1,58 @@
-
-import subprocess
 import os
-import re
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
-variantes_pc = {
-    "PcS": ("TTGACA", 17, "TAAACT"),
-    "PcW": ("TGGACA", 17, "TAAGCT"),
-    "PcWTGN-10": ("TGGACA", 14, "TG", 1, "TAAGCT"),
-    "PcH1": ("TGGACA", 17, "TAAACT"),
-    "PcH1TGN-10": ("TGGACA", 14, "TG", 1, "TAAACT"),
-    "PcH2": ("TTGACA", 17, "TAAGCT"),
-    "PcH2TGN-10": ("TTGACA", 14, "TG", 1, "TAAGCT"),
-    "TGGGCA-N14-TGn-TAAGCT": ("TGGGCA", 14, "TG", 1, "TAAGCT"),
-    "PcSS": ("TTGATA", 17, "TAAACT"),
-    "Pcln42": ("TTGGCA", 17, "TAAACT"),
-    "Pcln116": ("TTGACA", 17, "TGAACT"),
-    "PcPUO": ("TCGACA", 17, "TAAACT"),
-    "P2": ("TTGTTA", 17, "TACAGT"),
-    "P2m1":("TTGTTA", 17, "GACAGT"),
-    "P2m2": ("TTGTTA", 17, "TACACA")
-}
-
-def construir_patron(partes):
-    box35 = partes[0]
-    box10 = partes[-1]
-    medio = partes[1:-1]
-
-    patron = box35
-    for parte in medio:
-        if isinstance(parte, int):
-            patron += f"[ACGT]{parte}"
-            print(patron)
-        else:
-            patron += parte
-    patron += box10
-
-    return patron
+import subprocess
 
 
-def clasificar_Pc_regex(seq):
-    """
-    """
-    seq = str(seq).upper()
-    rc = str(Seq(seq).reverse_complement())
+def create_recovery_file(fetch_directory):
+    """Copia fetch.txt a recovery.txt y borra fetch.txt. Devuelve la ruta de recovery.txt."""
 
-    resultados = []
-    for strand_name, s in [("+", seq), ("-", rc)]:
-        for nombre, partes in variantes_pc.items():
-            patron = construir_patron(partes)
-            for match in re.finditer(patron, s):
-                resultados.append({
-                    "variante": nombre,
-                    "strand": strand_name,
-                    "start": match.start(),
-                    "end": match.end(),
-                    "secuencia": match.group()
-                })
-    return resultados
+    fetch_file = os.path.join(fetch_directory, "fetch.txt")
+    recovery_file = os.path.join(fetch_directory, "recovery.txt")
+
+    if not os.path.isfile(fetch_file):
+        print("no fetch file")
+        return None
+
+    with open(fetch_file, "r") as f_fetch, open(recovery_file, "w") as f_recovery:
+        for line in f_fetch:
+            f_recovery.write(line)
+
+    os.remove(fetch_file)
+    return recovery_file
 
 
-clasificar_Pc_regex(Seq("CASDCFSADFSDFASFD"))
+def splitting_fetch_file(recovery_file, n_split=100):
+    """Generador: devuelve listas de n_split líneas de recovery.txt."""
+
+    chunk = []
+    with open(recovery_file, "r") as f:
+        for line in f:
+            chunk.append(line)
+            if len(chunk) == n_split:
+                yield chunk
+                chunk = []
+    if chunk:  # último bloque, más corto
+        yield chunk
+
+
+def processing(directory, n_split=100, max_workers=10):
+    fetch_directory = os.path.join(directory, "ncbi_dataset")
+    recovery_file = create_recovery_file(fetch_directory)
+    if recovery_file is None:
+        return
+
+    new_fetch_file = os.path.join(fetch_directory, "fetch.txt")
+
+    for i, chunk in enumerate(splitting_fetch_file(recovery_file, n_split)):
+        # fetch.txt solo con este bloque
+        with open(new_fetch_file, "w") as f:
+            f.writelines(chunk)
+
+        print(f"Bloque {i}: {len(chunk)} genomas")
+        subprocess.run(
+            ["datasets", "rehydrate", "--directory", directory,
+             "--max-workers", str(max_workers)],
+            check=True,
+        )
+
+    # al terminar, restaurar el fetch.txt completo
+    os.replace(recovery_file, new_fetch_file)

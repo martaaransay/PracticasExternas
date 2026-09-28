@@ -6,7 +6,7 @@ channels:
 dependencies:
   - python=3.10
   - conda-forge::quarto
-  - bioconda::integron_finder
+  - bioconda::integron_finder>=2.0.3
   - bioconda::seqkit
   - bioconda::samtools
   - conda-forge::gcc  
@@ -17,5 +17,5 @@ dependencies:
   - drep
   - openpyxl
   - blast
-  - hmmsearch
+  - hmmer
   - conda-forge::matplotlib-venn

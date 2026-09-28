@@ -142,8 +142,8 @@ def plot_evalue_thresholds(dfs, times, evalues = np.logspace(1,-300,200),
 
 #------------------------ Function to plot the comparision between methods
 def plot_hits_comparison(summary, total_times,
-                         title="Method comparision", outdir="results/plots",
-                         filename="method_comparison.png"):
+                         title = "Method comparision", outdir = "results/plots",
+                         filename = "method_comparison.png"):
     """
     Saves a plot comparing the total hits, unique hits, and execution times across three methods.
 
@@ -161,16 +161,17 @@ def plot_hits_comparison(summary, total_times,
     os.makedirs(outdir, exist_ok=True)
 
     methods = list(summary.keys()) # List of methods
-    n = len(methods)
+    n = len(methods) # Number of methods
     # Lists to store results 
     totals = []
     uniques = []
     times = []
+    # Colors to plot
     list_colors = ["#35C40E", "#F791F4", "#F1BE3B"]
     colors = {}
     
     for i, meth in enumerate(methods): # Store data from each method
-        colors[meth] = list_colors[i]
+        colors[meth] = list_colors[i]# Set a color for each method
         totals.append(summary[meth][0])
         uniques.append(summary[meth][1])
         times.append(total_times[meth])
@@ -178,41 +179,48 @@ def plot_hits_comparison(summary, total_times,
 
     fig, axes = plt.subplots(1,2,figsize=(13,5)) # Creates axes for the plot
     x = np.arange(2) # Two comparisions: total and unique
-    width = 0.8 / n
+    width = 0.8 / n # Width of each bar
 
     for i, m in enumerate(methods):
-        values = [totals[i], uniques[i]]
-        offset = i * width - (width * (n - 1) / 2)
-        axes[0].bar(x+offset, values, width=width, label=m, color=colors[m])
-
+        values = [totals[i], uniques[i]] # Pairs to plot for each method
+        center = (n - 1) / 2 # Middle bar 
+        offset = width * (i - center) # Horizontal shift
+        # Plot the bars
+        axes[0].bar(x + offset, # Shift
+                    values, width = width, 
+                    label = m, color = colors[m])
+    # Labels, titles and axes
     axes[0].set_xticks(x)
     axes[0].set_xticklabels(["Total hits", "Unique hits"])
     axes[0].set_ylabel("Number of hits")
     axes[0].set_title("Total hits vs. Unique hits")
-    axes[0].legend(title="Method")
+    axes[0].legend(title = "Method")
 
     # Subplot 2: "Time of execution"
-    # Plots the times of each method
-    axes[1].plot(range(n), times, "-", color="gray", alpha=0.5)
+    # Background plot to plot times
+    axes[1].plot(range(n), times, "-", color = "gray")
     for i, m in enumerate(methods):
-        axes[1].plot(i, times[i], "o", color=colors[m])
-        axes[1].annotate(f"{times[i]:.2f}s", (i, times[i]),
-                          textcoords="offset points", xytext=(0, 10),
-                          ha="center", fontsize=9)
-
+        # Plot time of each method
+        axes[1].plot(i, times[i], "o", color = colors[m])
+        # Annotate the time of each method
+        axes[1].annotate(f"{times[i]:.2f}s", (i, times[i]), 
+                         textcoords = "offset points", xytext = (0, 10),
+                          ha="center")
+    
+    # Labels, titles and axes
     axes[1].set_xticks(range(n))
     axes[1].set_xticklabels(methods)
     axes[1].set_ylabel("Time (secs)")
     axes[1].set_title("Time of execution")
     axes[1].margins(y=0.15)  # deja hueco arriba para las anotaciones
 
-    for ax in axes:
-        ax.tick_params(axis="x", rotation=20)
+    plt.suptitle(title) # Set the principal title
 
-    plt.suptitle(title)
-    plt.tight_layout()
+    plt.tight_layout()# Adjusts the layout to avoid overlapping
+    # Saves the plot
     plt.savefig(os.path.join(outdir, filename))
     plt.close()
+
     return
     
 
@@ -239,12 +247,19 @@ def plot_hits_overlap(sets_dict,
     fig, ax = plt.subplots(figsize=(8, 8)) # Creates axes for the plot
 
     # Executes venn3 function to plot the Venn diagram
-    venn3(sets, 
-          set_labels = names, # Names of the methods
-          ax = ax)
- 
+    venn_diagram = venn3(sets, 
+                         set_labels = names, # Names of the methods
+                         ax = ax)
+    # Vertical shift to avoid overlapping
+    dy = 0
+    for label in venn_diagram.set_labels:
+        if label:
+            x, y = label.get_position()
+            label.set_position((x, y + dy)) # Add the vertical shift
+            dy += 0.05 # Increase the vertical shift
+
     plt.title(title)  # Set the principal title
-    # Saves the plot
+    # Saves the plot and 
     plt.savefig(os.path.join(outdir, filename))
     plt.close()
     return
