@@ -114,7 +114,7 @@ if __name__ == "__main__":
     all_results = {}
     all_times = {}
     
-    num_genomes_each = 1 # Number of genomes of each specie in the database
+    num_genomes_each = 1500 # Number of genomes of each specie in the database
     
     for each_query in fasta_files: # For each query
         name = os.path.basename(each_query)

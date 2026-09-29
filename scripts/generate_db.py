@@ -6,6 +6,7 @@ import subprocess
 import shutil
 from pipeline_inicial.T2_downloadgenomes import datasets_flags, download_genomes
 
+
 # --------Definition of functions
 #------------------------ Function to download genomes for specific species
 def download_species_genomes(species, outdir, target_num, flags):
@@ -22,20 +23,22 @@ def download_species_genomes(species, outdir, target_num, flags):
     """
     # Creates the output directory to avoid errors
     os.makedirs(outdir, exist_ok = True)
+    dirs = {}
     # Iterates over the dictionary
     for short_name, long_name in species.items():
         # Generates the path to save the genomes
         path = os.path.join(outdir, short_name, f"{short_name}.zip")
         # Executes download function
-        download_genomes(source = "taxon",
+        dir = download_genomes(source = "taxon",
                         name = long_name, # Species to download
                         quality_filter_flag = True,
                         filename = path,
                         flags = flags,
                         target_num = target_num # number of genomes to download
                         )
-        
-    return
+        dirs[short_name] = dir
+
+    return dirs
 
 #------------------------ Function to generate a multifasta file
 def generate_multifasta(path_to_genomes, outfile):
@@ -69,7 +72,7 @@ def generate_db(multifasta, out_db):
     out_db (str): Path where the database will be saved.
     """
     # The output directory is created to avoid errores
-    os.makedirs("../data/genomes/db", exist_ok=True)
+    os.makedirs(out_db, exist_ok=True)
     # Command to execute makeblastdb
     makeblastdb_cmd = ["makeblastdb", "-in", multifasta, 
                        "-dbtype", "nucl", # nucleotides database
@@ -119,11 +122,12 @@ if __name__ == "__main__":
              "Enterobacter" : "Enterobacter"}
 
         
-    download_species_genomes(species = names, 
+    dirs = download_species_genomes(species = names, 
                    outdir = f"../data/{str(n_genomes)}genomes", 
                    target_num = n_genomes, 
                    flags = flags)
-
+    for short_name, genome_dir in dirs.items():
+        processing(genome_dir)
     
     generate_multifasta(path_to_genomes = f"../data/{str(n_genomes)}genomes/*/*/ncbi_dataset/data/*/*.fna",
                         outfile = f"../data/{str(n_genomes)}genomes/multifasta_genomes.fasta")

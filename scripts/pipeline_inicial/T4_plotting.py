@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-path = "./results/T2_check/EC/results_Pc/pc.csv"
+path = "/home/mba/Documents/AransayMarta/PracticasExternas/results/final/500genomes/final.csv"
 df = pd.read_csv(path) 
 df.columns = df.columns.str.strip() 
 count_table = df["Pc_variant"].value_counts()

@@ -194,7 +194,7 @@ def quality_filter_genomes(source, name, # Arguments for the taxon_acc_flag(sour
             print(f"Only {len(valid_accs)} genomes met the quality criteria ")
 
     # Store the valid accessions into a text file
-    accs_file_name = f"accessions_{os.path.basename(filename).split('.')[0]}.txt" # Name of the file
+    accs_file_name = f"accessions_{os.path.splitext(os.path.basename(filename))[0]}.txt" # Name of the file
     accs_file_path = os.path.join(os.path.dirname(filename), accs_file_name) # Path of the file
 
     with open(accs_file_path, "w") as f: # Create a file with the valid accs (one per line)
@@ -238,7 +238,8 @@ def unzip(filename = "ncbi_dataset.zip"):
                        check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
         print(f"Error executing unzip:\n{e.stderr}")
-        return target_dir
+        return None
+    return target_dir
 
 
 
@@ -249,7 +250,8 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                                                   # Can have a path to specify a target directory
                      flags = None, # Flags for the datasets command
                      target_num = None,
-                     seed = 1
+                     seed = 1,
+                     n_tries = 5
                      ): 
     """
     Executes the NCBI datasets command to download genomes (--dehydrated), allowing prior quality filtering.
@@ -268,6 +270,8 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                                 Default is None (no limit).
     seed (int, optional): Seed for random sampling of genomes if target_num is specified.
                           Default is 1.
+    n_tries (int, optional): Number of tries to try the download in case of error.
+                             Default is 5.
     """
     # Check that the directories exist to prevent errors
     out_dir = os.path.dirname(filename)
@@ -296,19 +300,21 @@ def download_genomes(source, name, # Arguments for the taxon_acc_flag(source, na
                     "--dehydrated", "--filename", filename, *flags]
     
     print(f"Executing: \n{shlex.join(download_cmd)}")
-
-    try:
-        subprocess.run(download_cmd, 
-                       check=True, capture_output=True, text=True) 
-    # Capture the exception
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing datasets download:\n{e.stderr}")
-        # The created directories are removed (provided they are completely empty)
-        if out_dir and os.path.exists(out_dir):
-            if not os.listdir(out_dir): 
-                os.removedirs(out_dir) # Removes empty directories (parent directories too)
-        return None
-    
+    for n in range(1, n_tries+1):
+        try:
+            subprocess.run(download_cmd, 
+                        check=True, capture_output=True, text=True) 
+            break
+        # Capture the exception
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing datasets download:\n{e.stderr}.\nNumber of try: {n}.")
+            # The created directories are removed (provided they are completely empty)
+            if n == n_tries:
+                if out_dir and os.path.exists(out_dir):
+                    if not os.listdir(out_dir): 
+                        os.removedirs(out_dir) # Removes empty directories (parent directories too)
+                return None
+        
     target_dir = unzip(filename)
     return target_dir
 

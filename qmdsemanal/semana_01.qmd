@@ -330,6 +330,7 @@ No está disponible en bioconda/conda, así que lo que he tenido que hacer ha si
 
 ```
 git clone https://github.com/maribuon/HattCI.git
+cd HattCI
 make
 ```
 

@@ -7,7 +7,7 @@ from xml.parsers.expat import errors
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib_venn import venn2, venn3
+from matplotlib_venn import venn3
 
 # Plotting
 #------------------------ Function to plot e-values distribution
@@ -75,6 +75,7 @@ def plot_bitscore(bitscore_data, labels,
 
 #------------------------ Function to plot e-value thresholds
 def plot_evalue_thresholds(dfs, times, evalues = np.logspace(1,-300,200),
+                           colors = ["#963FB0", "#41B883", "#1A6D70"],
                            title = "E-Values thresholds", outdir = "results/plots", 
                            filename = "evalue_thresholds.png"):
     """
@@ -87,6 +88,7 @@ def plot_evalue_thresholds(dfs, times, evalues = np.logspace(1,-300,200),
     times (dict): A dictionary where keys are the names of the queries and
                   values are the corresponding execution times.
     evalues (numpy.ndarray, optional): An array of e-values to evaluate.
+    colors (list, optional): List of colors to use.
     title (str, optional): The title of the plot.
     outdir (str, optional): The directory where the plot will be saved.
     filename (str, optional): The name of the file where the plot will be saved.
@@ -99,7 +101,6 @@ def plot_evalue_thresholds(dfs, times, evalues = np.logspace(1,-300,200),
     fig, axes = plt.subplots(1,2,figsize=(13,5)) # Creates axes for the plot
     col_counter = 0 # Counter to assign colors to each query
     dict_colors = {} # Dictionary to store colors for each query
-    colors = ["#963FB0", "#41B883", "#1A6D70"] # Colors for the queries
     for query, df in dfs.items(): # For each query and its df
         dict_colors[query] = colors[col_counter] # Assigns a color to the corresponding query
         col_counter += 1 # Increase the counter
