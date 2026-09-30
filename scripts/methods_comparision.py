@@ -114,7 +114,7 @@ if __name__ == "__main__":
     all_results = {}
     all_times = {}
     
-    num_genomes_each = 1500 # Number of genomes of each specie in the database
+    num_genomes_each = 500 # Number of genomes of each specie in the database
     
     for each_query in fasta_files: # For each query
         name = os.path.basename(each_query)
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     plot_evalue_thresholds(dfs, all_times, title = f"E-Values thresholds {general_title}", outdir = outdir)
 
     # Store the blastn result of a unique query to compare with other methods:
-    chosen_query = "data/Int1/Int1.fa"  
+    chosen_query = "data/Int1/Int1_Pc_pattern.fa"  
     blast_df = dfs[chosen_query]
     blast_general_hits = len(blast_df)
     blast_unique_hits = blast_df["seq_id"].nunique()

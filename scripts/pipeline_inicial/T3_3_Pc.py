@@ -130,6 +130,13 @@ def classify_pc_regex(sequence, variants = pc_variants_regex):
                 "end": match.end(),
                 "sequence": match.group()
                 }
+        if not results:
+            results = {
+                "Pc_variant": "NA",
+                "start": "NA",
+                "end":  "NA",
+                "sequence": seq
+                }
     return results
 
 #------------------------ Function to store information from dictionaries into a csv file

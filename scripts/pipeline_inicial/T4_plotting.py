@@ -16,8 +16,9 @@ colors = ["#984FB3", "#AAAA00", "#FF5733",
 
 plt.figure(figsize=(10, 6))
 count_table.plot(kind="bar", color = colors, edgecolor="black")
-plt.xlabel("Variante")
+plt.xlabel("Pc variant")
 plt.ylabel("count")
+plt.title("Distribution of Pc variants - bbdd: 7500 genomes ESKAPEE")
 plt.xticks(rotation=45, ha="right") 
 plt.tight_layout()
 plt.show()

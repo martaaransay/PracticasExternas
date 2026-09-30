@@ -51,6 +51,7 @@ def generate_multifasta(path_to_genomes, outfile):
     outfile (str): The output file where the multifasta will be saved.
     """
     # Process the path to genomes to evaluate the wildcard correctly
+    print("Generating multifasta")
     files_to_db = sorted(glob.glob(path_to_genomes))
     # Writes the multifasta file
     with open(outfile, "w") as out:

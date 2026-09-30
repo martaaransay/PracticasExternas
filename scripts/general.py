@@ -62,8 +62,7 @@ def processing(directory, n_split = 100, max_workers = 18, n_tries = 5):
         
 if __name__ == "__main__":
     n_genomes = 1500
-
-
+    
     flag_db_created = False
     if not flag_db_created:
         flags = datasets_flags(assembly_level="complete,chromosome,contig",
@@ -87,17 +86,18 @@ if __name__ == "__main__":
 
         for short_name, genome_dir in dirs.items():
             processing(genome_dir)
+
     multifasta_path = f"../data/{str(n_genomes)}genomes/multifasta_genomes.fasta"
        
     generate_multifasta(path_to_genomes = f"../data/{str(n_genomes)}genomes/*/*/ncbi_dataset/data/*/*.fna",
                                 outfile = multifasta_path)
     generate_db(multifasta = multifasta_path,
                         out_db = f"../data/{str(n_genomes)}genomes/db/db")
-    """
+    
+    
     query_file = "data/Int1/Int1_Pc_pattern.fa"
-
+    multifasta_path = f"../data/{str(n_genomes)}genomes/multifasta_genomes.fasta"
     genomes_dir = f"../data/{n_genomes}genomes"
-
     result = run_blastn(query = query_file, 
                         output = f"results/final/{str(n_genomes)}genomes/blast/blast.tsv",
                         db = f"../data/{str(n_genomes)}genomes/db/db",
@@ -109,7 +109,6 @@ if __name__ == "__main__":
 
 
     for row in hits_df.itertuples():
-        pc_info = classify_pc_regex(row.sequence)  # None si no hay Pc
+        pc_info = classify_pc_regex(row.sequence) 
         if pc_info:
             info_to_csv(pc_info, f"results/final/{str(n_genomes)}genomes/final.csv")
-"""
