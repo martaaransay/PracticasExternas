@@ -1,13 +1,12 @@
 # Import libraries 
-import subprocess
-import shlex
-import time
+
 import os
 from xml.parsers.expat import errors
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn3
+from matplotlib.patches import Patch
 
 # Plotting
 #------------------------ Function to plot e-values distribution
@@ -74,76 +73,63 @@ def plot_bitscore(bitscore_data, labels,
     return
 
 #------------------------ Function to plot e-value thresholds
-def plot_evalue_thresholds(dfs, times, evalues = np.logspace(1,-300,200),
-                           colors = ["#963FB0", "#41B883", "#1A6D70"],
-                           title = "E-Values thresholds", outdir = "results/plots", 
-                           filename = "evalue_thresholds.png"):
+def plot_evalue_thresholds(dfs, times, mapping=None, key_func=None,
+                           evalues=np.logspace(1, -300, 200),
+                           colors=["#963FB0", "#41B883", "#1A6D70"],
+                           title="E-Values thresholds", outdir="results/plots",
+                           filename="evalue_thresholds.png"):
     """
-    Saves a plot of the number of hits and unique hits for each query at different e-value thresholds.
+    Saves a plot of the number of hits and unique genomes for each query
+    at different e-value thresholds.
 
     Args
     -----
-    dfs (dict): A dictionary where keys are the names of the queries and
-                values are the corresponding pandas dataframes.
-    times (dict): A dictionary where keys are the names of the queries and
-                  values are the corresponding execution times.
-    evalues (numpy.ndarray, optional): An array of e-values to evaluate.
-    colors (list, optional): List of colors to use.
-    title (str, optional): The title of the plot.
-    outdir (str, optional): The directory where the plot will be saved.
-    filename (str, optional): The name of the file where the plot will be saved.
+    dfs (dict): query name -> blastn dataframe.
+    times (dict): query name -> execution time.
+    mapping (dict, optional): contig -> genome. If given, unique hits are
+                              counted as genomes instead of contigs.
+    key_func (callable, optional): normalizes the genome name (e.g. genome_key).
+    ...
     """
-    # Creates the output directory to avoid errors
     os.makedirs(outdir, exist_ok=True)
-    # Range of e-values to evaluate
-    range_evalues = evalues
-    # Divides figure into two subplots
-    fig, axes = plt.subplots(1,2,figsize=(13,5)) # Creates axes for the plot
-    col_counter = 0 # Counter to assign colors to each query
-    dict_colors = {} # Dictionary to store colors for each query
-    for query, df in dfs.items(): # For each query and its df
-        dict_colors[query] = colors[col_counter] # Assigns a color to the corresponding query
-        col_counter += 1 # Increase the counter
-        # Lists to store hits
-        n_hits = [] 
-        n_unique_hits = []
-        for evalue in range_evalues: # For each df, all thresholds are evaluated
-            evalues_in_threshold = df["Evalue"] <= evalue # Stores the evalues <= threshold
-            n_hits.append(evalues_in_threshold.sum()) # Counts the hits with <= evalue
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
-            seq_ids_in_threshold = df.loc[evalues_in_threshold, "seq_id"] # Extracts the seq_id column
-            n_unique_hits.append(seq_ids_in_threshold.nunique()) # Counts unique hits
+    for (query, df), color in zip(dfs.items(), colors):
+        df = df.copy()
+        # Unit for "unique hits": genome if mapping is given, otherwise contig
+        if mapping is not None:
+            genome = df["seq_id"].map(mapping)
+            if key_func is not None:
+                genome = genome.map(lambda g: key_func(g) if pd.notna(g) else g)
+            df["unit"] = genome.fillna(df["seq_id"])  # unmapped -> keeps the contig
+        else:
+            df["unit"] = df["seq_id"]
 
-        # Plots the data of each evalue threshold
-        axes[0].plot(range_evalues, n_hits, label = query, color = dict_colors[query])
-        axes[1].plot(range_evalues, n_unique_hits, label = query, color = dict_colors[query])
+        n_hits, n_unique = [], []
+        for evalue in evalues:
+            mask = df["Evalue"] <= evalue
+            n_hits.append(mask.sum())
+            n_unique.append(df.loc[mask, "unit"].nunique())
 
-    # Axis, legends and labels:
+        label = f"{query} - {times[query]:.2f} secs"
+        axes[0].plot(evalues, n_hits, label=label, color=color)
+        axes[1].plot(evalues, n_unique, label=label, color=color)
 
-    for ax in axes: 
-        ax.set_xscale("log") # Log x-axis for the plots
-        ax.set_xlabel("E-value threshold") # Same labels for x-axis
-    # Set y-axis
-    axes[0].set_ylabel("Total Hits")
-    axes[1].set_ylabel("Unique Hits (seq_id)")
+    for ax in axes:
+        ax.set_xscale("log")
+        ax.set_xlabel("E-value threshold")
+        ax.legend()
+    axes[0].set_ylabel("Total hits")
+    axes[1].set_ylabel("Unique genomes" if mapping is not None else "Unique hits (seq_id)")
 
-    # List to store the query + its execution time
-    labels_for_legend = [] 
-    for query, time in times.items():
-        labels_for_legend.append(f"{query} - {time:.2f} secs") # Two decimal numbers
-    plt.legend(labels = labels_for_legend) # Set legend
+    fig.suptitle(title)
+    fig.tight_layout()
+    fig.savefig(os.path.join(outdir, filename))
+    plt.close(fig)
 
-    plt.suptitle(title) # Set the principal title
-
-    plt.tight_layout() # Adjusts the layout to avoid overlapping
-    # Saves the plot
-    plt.savefig(os.path.join(outdir, filename))
-    plt.close()
-    return
-
-#------------------------ Function to plot the comparision between methods
+#------------------------ Function to plot the comparison between methods
 def plot_hits_comparison(summary, total_times,
-                         title = "Method comparision", outdir = "results/plots",
+                         title = "Method comparison", outdir = "results/plots",
                          filename = "method_comparison.png"):
     """
     Saves a plot comparing the total hits, unique hits, and execution times across three methods.
@@ -179,7 +165,7 @@ def plot_hits_comparison(summary, total_times,
         
 
     fig, axes = plt.subplots(1,2,figsize=(13,5)) # Creates axes for the plot
-    x = np.arange(2) # Two comparisions: total and unique
+    x = np.arange(2) # Two comparisons: total and unique
     width = 0.8 / n # Width of each bar
 
     for i, m in enumerate(methods):
@@ -226,41 +212,19 @@ def plot_hits_comparison(summary, total_times,
     
 
 #------------------------ Function to analyze the overlapping
-def plot_hits_overlap(sets_dict,
-                      title="Hits overlapping", outdir="results/plots",
+def plot_hits_overlap(sets_dict, title="Hits overlapping", outdir="results/plots",
                       filename="hits_overlap.png"):
-    """
-    Saves a Venn diagram showing the overlap of detected hits between three methods.
-
-    Args
-    -----
-    sets_dict (dict): A dictionary where keys are the names of the methods and values are sets 
-                      with the accession of the genomes with at least one hit for that method.
-    title (str, optional): The title of the plot.
-    outdir (str, optional): The directory where the plot will be saved.
-    filename (str, optional): The name of the file where the plot will be saved.
-    """
-    # Creates the output directory to avoid errors
     os.makedirs(outdir, exist_ok=True)
-    names = list(sets_dict.keys()) # List of names of the methods
-    sets = list(sets_dict.values()) # List of the sets
+    names = list(sets_dict.keys())
+    sets = list(sets_dict.values())
+    colors = ["#35C40E", "#F791F4", "#F1BE3B"]   # mismos que plot_hits_comparison
 
-    fig, ax = plt.subplots(figsize=(8, 8)) # Creates axes for the plot
+    fig, ax = plt.subplots(figsize=(8, 8))
+    venn3(sets, set_labels=("", "", ""), set_colors=colors, alpha=0.5, ax=ax)
 
-    # Executes venn3 function to plot the Venn diagram
-    venn_diagram = venn3(sets, 
-                         set_labels = names, # Names of the methods
-                         ax = ax)
-    # Vertical shift to avoid overlapping
-    dy = 0
-    for label in venn_diagram.set_labels:
-        if label:
-            x, y = label.get_position()
-            label.set_position((x, y + dy)) # Add the vertical shift
-            dy += 0.05 # Increase the vertical shift
+    handles = [Patch(facecolor=c, alpha=0.5, label=n) for c, n in zip(colors, names)]
+    ax.legend(handles=handles, loc="upper right")
 
-    plt.title(title)  # Set the principal title
-    # Saves the plot and 
-    plt.savefig(os.path.join(outdir, filename))
-    plt.close()
-    return
+    ax.set_title(title)
+    fig.savefig(os.path.join(outdir, filename))
+    plt.close(fig)

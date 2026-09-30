@@ -1,5 +1,6 @@
 import os
 import subprocess
+from concurrent.futures import ThreadPoolExecutor, as_completed 
 from pipeline_inicial.T2_downloadgenomes import datasets_flags, download_genomes
 from generate_db import download_species_genomes, generate_multifasta, generate_db
 from blastn import run_blastn, process_hits, contig_to_genome
@@ -35,7 +36,7 @@ def processing(directory, n_split = 100, max_workers = 18, n_tries = 5):
     fetch_directory = os.path.join(directory, "ncbi_dataset")
     recovery_file = create_recovery_file(fetch_directory)
     if recovery_file is None:
-        return
+        return False
     
     new_fetch_file = os.path.join(fetch_directory, "fetch.txt")
     rehydrate_cmd = ["datasets", "rehydrate", "--directory", directory,
@@ -54,14 +55,44 @@ def processing(directory, n_split = 100, max_workers = 18, n_tries = 5):
             except subprocess.CalledProcessError as e:
                 print(f"Error executing datasets rehydrate:\n{e.stderr}.\nNumber of try: {n}.")       
                 if n == n_tries:
-                    return None
+                    return False
         with open(recovery_file, "w") as f:
             f.writelines(recovery)
+    return True
 
+def process_all(dirs, total_workers=30, n_split=500, n_tries=5):
+    # 1) Repartir workers entre especies
+    n_especies = len(dirs)                        # 5 especies
+    per_dir = max(1, total_workers // n_especies) # 30 // 5 = 6 workers por especie
+
+    failed = []  # aquí apuntaremos las especies que fallen
+
+    # 2) Crear un "equipo" de hilos: uno por especie
+    with ThreadPoolExecutor(max_workers=n_especies) as ex:
+
+        # 3) Lanzar una tarea por especie (no espera, solo las encola)
+        futs = {}  # diccionario: {tarea_futura: nombre_de_la_especie}
+        for name, d in dirs.items():
+            fut = ex.submit(processing, d, n_split, per_dir, n_tries)
+            futs[fut] = name
+
+        # 4) Ir recogiendo resultados según vayan terminando
+        for fut in as_completed(futs):
+            name = futs[fut]      # ¿qué especie era?
+            ok = fut.result()     # True/False que devolvió processing()
+
+            if ok:
+                print(f"{name}: terminado")
+            else:
+                print(f"{name}: FALLÓ o nada que rehidratar")
+                failed.append(name)
+
+    # 5) Al salir del "with", todos los hilos ya han acabado
+    return failed
 
         
 if __name__ == "__main__":
-    n_genomes = 1500
+    n_genomes = 500
     
     flag_db_created = False
     if not flag_db_created:
@@ -75,6 +106,7 @@ if __name__ == "__main__":
                 "Pseudomonas" : "Pseudomonas aeruginosa",
                 "Acinetobacter" : "Acinetobacter baumannii",
                 "Enterobacter" : "Enterobacter"}
+
         ## For downloading normal genomes --> download_genomes() directly
             
         file_general = "results/T2_check/EC.zip"
@@ -83,17 +115,21 @@ if __name__ == "__main__":
                                     outdir = f"../data/{str(n_genomes)}genomes", 
                                     target_num = n_genomes, 
                                     flags = flags)
-
+        failed = process_all(dirs, total_workers=30, n_split=500)
         for short_name, genome_dir in dirs.items():
             processing(genome_dir)
+        if failed:
+            print(f"Especies con problemas: {failed}. Relanza el script: recovery.txt retoma donde quedó.")
+            exit(1)
+
 
     multifasta_path = f"../data/{str(n_genomes)}genomes/multifasta_genomes.fasta"
        
     generate_multifasta(path_to_genomes = f"../data/{str(n_genomes)}genomes/*/*/ncbi_dataset/data/*/*.fna",
-                                outfile = multifasta_path)
+                        outfile = multifasta_path)
     generate_db(multifasta = multifasta_path,
                         out_db = f"../data/{str(n_genomes)}genomes/db/db")
-    
+    """
     
     query_file = "data/Int1/Int1_Pc_pattern.fa"
     multifasta_path = f"../data/{str(n_genomes)}genomes/multifasta_genomes.fasta"
@@ -112,3 +148,4 @@ if __name__ == "__main__":
         pc_info = classify_pc_regex(row.sequence) 
         if pc_info:
             info_to_csv(pc_info, f"results/final/{str(n_genomes)}genomes/final.csv")
+"""

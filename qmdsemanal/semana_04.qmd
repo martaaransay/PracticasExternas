@@ -64,3 +64,11 @@ GHe dejado en general hecho todo el codigo incluyendo hasta la extracción del t
 revisar bien el borrado bien de arhicvios y he dejado corrriendo el methdos comparision con 1500 genomas para mañana
 
 > escribir mañana tmb crreo a modesto y jose
+
+# Miércoles 30/09
+
+- Dejo ejecutando el methods_comaprision para 500 genomas para tener algo que poner en el informe de prácticas con los plots que genere de comparativa
+
+- Mando correo a Jose y Modesto con methods_comparision para 10 genomas (total 50) y clasificacion completa de 1500
+
+- 

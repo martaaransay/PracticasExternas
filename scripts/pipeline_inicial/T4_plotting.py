@@ -6,10 +6,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-path = "/home/mba/Documents/AransayMarta/PracticasExternas/results/final/500genomes/final.csv"
+path = "/home/mba/Documents/AransayMarta/PracticasExternas/results/final/1500genomes/final.csv"
 df = pd.read_csv(path) 
 df.columns = df.columns.str.strip() 
-count_table = df["Pc_variant"].value_counts()
+count_table = df["Pc_variant"].value_counts(dropna=False)
+print(count_table)
 # en teoría hay 15 pero beuno
 colors = ["#984FB3", "#AAAA00", "#FF5733", 
           "#FF8D1A", "#FFE400", "#FF96E8", "#96FFE5", "#4F80B3"]

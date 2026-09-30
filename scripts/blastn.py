@@ -9,7 +9,7 @@ from Bio import SeqIO
 
 # --------Definition of functions
 #------------------------ Function to run blastn
-def run_blastn(query, output, db, max_target, evalue_threshold = 10):
+def run_blastn(query, output, db, max_target, evalue_threshold = 10, threads = 18):
     """
     Executes the blastn command with the specified query, output file, and database.
 
@@ -19,8 +19,10 @@ def run_blastn(query, output, db, max_target, evalue_threshold = 10):
     output (str): The path to the output file where results will be saved.
     db (str): The path to the blast database.
     max_target (int): Maximum number of aligned sequences keeped into the results.
-    evalue_threshold (int): E-value threshold.
-                            Default to 10.
+    evalue_threshold (int, optional): E-value threshold.
+                                      Default to 10.
+    threads (int, optional): Number of threads to use.
+                             Default to 18.
 
     Return
     ------
@@ -35,6 +37,7 @@ def run_blastn(query, output, db, max_target, evalue_threshold = 10):
                  "-out", output, 
                  "-max_target_seqs", str(max_target), # Max number of aligned seqs to keep
                  "-evalue", str(evalue_threshold),
+                 "-num_threads", str(threads),
                  "-outfmt", "6"] # Output format 6 (tabular)
     # Execute the command and handle errors
     print(f"Executing: \n{shlex.join(blast_cmd)}")

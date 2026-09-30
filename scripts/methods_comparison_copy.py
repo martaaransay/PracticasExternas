@@ -3,14 +3,16 @@ import os
 import subprocess
 import time
 import shlex
-import glob
+import re
 import pandas as pd
 import numpy as np
+from concurrent.futures import ThreadPoolExecutor
 # Import functions from other scripts
 from pipeline_inicial.useful_funct import list_fasta_files
 from plotting import plot_evalue, plot_bitscore, plot_evalue_thresholds, plot_hits_comparison, plot_hits_overlap
 from pipeline_inicial.T3_2_integronfinder import Integron_Finder
 from pipeline_inicial.T3_1_integronfiltering import integron_filtering
+from general import contig_to_genome
 
 # --------Definition of functions
 #------------------------ Function to run blastn
@@ -102,6 +104,53 @@ def process_tsv(tsv_files):
 
     return dfs, log_data, bitscore_data, labels
 
+def genome_key(name):
+    """Normaliza a la accession GCF_/GCA_ (ej. GCF_000809905.3)."""
+    m = re.search(r"GC[FA]_\d+\.\d+", str(name))
+    return m.group(0) if m else str(name)
+
+
+
+def run_method(i, list_files, num_genomes_each, cpu):
+    """i=0 -> IF2 ; i=1 -> Integron-filtering + IF2"""
+    base = f"results/{num_genomes_each}genomes"
+    dir_IF2 = f"{base}/IF2" if i == 0 else f"{base}/IntFilt+IF2/IF2"
+    os.makedirs(dir_IF2, exist_ok=True)
+
+    start = time.time()
+    hits, failed = {}, []
+
+    for each_file in list_files:
+        original_acc = os.path.splitext(os.path.basename(each_file))[0]
+
+        if i == 1:
+            dir_IntFilt = f"{base}/IntFilt+IF2/IntFilt/{original_acc}"
+            os.makedirs(dir_IntFilt, exist_ok=True)
+            file = integron_filtering(genome_path=each_file, outdir=dir_IntFilt)
+            if not file:                      # sin integrón -> no IF2
+                hits[original_acc] = 0
+                continue
+            each_file = file
+
+        acc_for_IF2 = os.path.splitext(os.path.basename(each_file))[0]
+        gbk_files = Integron_Finder(genome_path=each_file,
+                                    genome_acc=acc_for_IF2,
+                                    outdir=dir_IF2,
+                                    cpu=cpu)
+        if gbk_files is None:
+            print(f"[método {i}] IF2 falló en {original_acc}")
+            failed.append(original_acc)
+            continue
+        hits[original_acc] = len(gbk_files)
+
+    unique_genomes = [g for g, n in hits.items() if n > 0]
+    return {"hits": hits,
+            "failed": failed,
+            "general_hits": sum(hits.values()),
+            "unique_genomes": unique_genomes,
+            "unique_hits": len(unique_genomes),
+            "time": time.time() - start}
+
 # --------Main code
 if __name__ == "__main__":
     ############################## 1) BLASTn:
@@ -129,6 +178,9 @@ if __name__ == "__main__":
 
     dfs, evalues, bitscore, labels = process_tsv(all_results) # Process tsv files
 
+    genomes_dir = f"../data/{num_genomes_each}genomes"
+    mapping = contig_to_genome(genomes_dir)  
+
     # Plotting blastn results
     outdir = f"results/plots/{str(num_genomes_each)}genomes"
     general_title = f"- db: {str(num_genomes_each)} genomes * 5 species ({str(num_genomes_each*5)})"
@@ -138,112 +190,48 @@ if __name__ == "__main__":
     plot_evalue_thresholds(dfs, all_times, title = f"E-Values thresholds {general_title}", outdir = outdir)
 
     # Store the blastn result of a unique query to compare with other methods:
-    chosen_query = "data/Int1/Int1_Pc_pattern.fa"  
+    chosen_query = "data/Int1/Int1_Pc_pattern.fa"
     blast_df = dfs[chosen_query]
     blast_general_hits = len(blast_df)
-    blast_unique_hits = blast_df["seq_id"].nunique()
-    blast_unique_genome = blast_df["seq_id"].unique()
-    t_blast = sum(all_times.values()) / len(all_times.values())
+
+
+    contigs = blast_df["seq_id"].unique()
+    print("Contigs sin mapear:", sum(c not in mapping for c in contigs))
+
+    set_blast = {genome_key(mapping[c]) for c in contigs if c in mapping}
+    blast_unique_hits = len(set_blast)          # genomas, no contigs
+    t_blast = all_times[chosen_query]           # solo la query comparada
 
     ############################## 2) IntegronFinder2 and 3) Integron-filtering + IntegronFinder2
-    analysis = [0, 1] 
-    for i in analysis:
-        # i=0 -> IntegronFinder2 
-        # i=1 -> Integron-filtering + IntegronFinder2
-        genomes_dir = f"../data/{str(num_genomes_each)}genomes"
-        list_files = list_fasta_files(genomes_dir, depth = 5) # List fasta files
-        
-        start = time.time() # Start time to measure execution time
-        
-        hits = {} # Dictionary to store results
+     
 
-        for each_file in list_files: 
-            original_acc = os.path.splitext(os.path.basename(each_file))[0] # accession of the current genome
-            
-            if i == 1: # For Integron-Filtering + IF2
-                # Directories to store the results of the programs
-                os.makedirs(f"results/{str(num_genomes_each)}genomes/IntFilt+IF2", exist_ok=True) # parental dir
+    list_files = list_fasta_files(genomes_dir, depth=5)
+    cpu_each = max(1, os.cpu_count() // 2)     # reparte los núcleos entre los 2 métodos
 
-                dir_IntFilt = f"results/{str(num_genomes_each)}genomes/IntFilt+IF2/IntFilt/{original_acc}"
-                os.makedirs(dir_IntFilt, exist_ok=True)
+    with ThreadPoolExecutor(max_workers=2) as ex:
+        fut_IF2 = ex.submit(run_method, 0, list_files, num_genomes_each, cpu_each)
+        fut_Int = ex.submit(run_method, 1, list_files, num_genomes_each, cpu_each)
+        res_IF2 = fut_IF2.result()
+        res_Int = fut_Int.result()
 
-                dir_IF2 = f"results/{str(num_genomes_each)}genomes/IntFilt+IF2/IF2"
-                
-                file = integron_filtering(genome_path = each_file,
-                                          outdir = dir_IntFilt)
-                if file: # If integron-filtering founded an integron, the path is updated to execute IF2
-                    each_file = file
-                    
-                else: # If no integron, no IF2
-                    hits[original_acc] = 0 
-                    continue
-                    
-            else: # For IF2 (only)
-                dir_IF2 = f"results/{str(num_genomes_each)}genomes/IF2"
-            acc_for_IF2 = os.path.splitext(os.path.basename(each_file))[0]
-            # Creates the propper dir IF2
-            os.makedirs(dir_IF2, exist_ok=True)
-            # Executes IF2
-            gbk_files = Integron_Finder(genome_path = each_file,
-                                        genome_acc = acc_for_IF2,
-                                        outdir = dir_IF2,
-                                        cpu = 18)
-            # Stores the number of hits (= number of gbk files) per acc
-            hits[original_acc] = len(gbk_files)
 
-        # Analyses the results obtained for each method
-        general_hits = sum(hits.values()) # Total hits
-        unique_genomes = [] # List to store the genomes with >0 hits
-        unique_hits = 0
-        for id_genome, num_hits, in hits.items():
-            if num_hits > 0:
-                unique_hits += 1 # Counts only genomes with >0 hits
-                unique_genomes.append(id_genome)
+    print("Fallos IF2:", res_IF2["failed"], "| Fallos IntFilt+IF2:", res_Int["failed"])
 
-        
-        total_time = time.time() - start # Execution time
-
-        print(f"Total analyzed = {len(hits)}")
-        print(f"Total hits = {general_hits}")
-        print(f"Total unique hits = {unique_hits}")
-        print(f"Total time = {total_time}")
-        
-        # Store the results of each method to compare 
-        if i == 0: # only IF2
-            hits_IF2 = hits
-            general_hits_IF2 = general_hits
-            unique_hits_IF2 = unique_hits
-            unique_genomes_IF2 = unique_genomes
-            t_IF2 = total_time
-
-        if i == 1: #Intfilt + IF2
-            hits_IntFiltIF2 = hits
-            general_hits_IntFiltIF2 = general_hits
-            unique_hits_IntFiltIF2 = unique_hits
-            unique_genomes_IntFiltIF2 = unique_genomes
-            t_IntFiltIF2 = total_time
-    
-    # Summary of all results
     hits_summary = {"BLAST": (blast_general_hits, blast_unique_hits),
-                    "IntegronFinder2": (general_hits_IF2, unique_hits_IF2),
-                    "Integron-filtering+IF2": (general_hits_IntFiltIF2, unique_hits_IntFiltIF2),
-                    }
-    times = {"BLAST": t_blast, 
-             "IntegronFinder2": t_IF2, 
-             "Integron-filtering+IF2": t_IntFiltIF2}
-    
-    # Plotting comparision:
-    plot_hits_comparison(hits_summary, times, title = f"Method comparision {general_title}", outdir = outdir)
+                    "IntegronFinder2": (res_IF2["general_hits"], res_IF2["unique_hits"]),
+                    "Integron-filtering+IF2": (res_Int["general_hits"], res_Int["unique_hits"])}
+    times = {"BLAST": t_blast,
+             "IntegronFinder2": res_IF2["time"],
+             "Integron-filtering+IF2": res_Int["time"]}
 
-    # Create sets to study overlapping with venn diagrams
-    set_blast = set(blast_unique_genome)
-    set_IF2 = set(unique_genomes_IF2) 
-    set_IntFiltIF2 = set(unique_genomes_IntFiltIF2)
-    
-    # Dictionary of sets
+    set_IF2 = {genome_key(g) for g in res_IF2["unique_genomes"]}
+    set_IntFiltIF2 = {genome_key(g) for g in res_Int["unique_genomes"]}
+    print(list(set_blast)[:3], list(set_IF2)[:3])
+
+    plot_hits_comparison(hits_summary, times,
+                         title=f"Method comparison {general_title}", outdir=outdir)
+
     sets_dict = {"BLAST": set_blast,
-                "IntegronFinder2": set_IF2,
-                "Integron-filtering+IF2": set_IntFiltIF2
-                }
-    
-    plot_hits_overlap(sets_dict, title = f"Method comparision {general_title}", outdir = outdir)
+                 "IntegronFinder2": set_IF2,
+                 "Integron-filtering+IF2": set_IntFiltIF2}
+    plot_hits_overlap(sets_dict, title=f"Method comparison {general_title}", outdir=outdir)
