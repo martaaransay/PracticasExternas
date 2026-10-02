@@ -9,10 +9,10 @@ from pipeline.analyze_Pc import classify_pc_regex, info_to_csv
 
         
 if __name__ == "__main__":
-    n_genomes = 500
+    n_genomes = 10
     
-    flag_db_created = False
-    if not flag_db_created:
+    db_created = False
+    if not db_created:
         flags = datasets_flags(assembly_level="complete,chromosome,contig",
                             exclude_atypical=True,
                             mag=False)
@@ -46,17 +46,34 @@ if __name__ == "__main__":
     query_file = "data/Int1/Int1_Pc_pattern.fa"
     multifasta_path = f"../data/{str(n_genomes)}genomes/multifasta_genomes.fasta"
     genomes_dir = f"../data/{n_genomes}genomes"
-    result = run_blastn(query = query_file, 
+
+    ### FIXME: CAMBIAR LAS COLUMNS PARA AÑADIR DESDE EL JSOn!
+    extra_columns = {"bioproject": "assemblyInfo.bioprojectLineage.bioprojects.accession",
+                         "biosample": "assemblyInfo.biosample.accession",
+                         "organism_name": "organism.organismName",
+                         "assembly_level": "assemblyInfo.assemblyLevel"}
+    
+    result, t = run_blastn(query = query_file, 
                         output = f"results/final/{str(n_genomes)}genomes/blast/blast.tsv",
                         db = f"../data/{str(n_genomes)}genomes/db/db",
                         max_target = len(contig_to_genome(genomes_dir))) # max num of seqs to keep: - mapping length
 
     hits_df = process_hits(result,
                            dir_genomes = f"../data/{n_genomes}genomes",
-                           multifasta = multifasta_path)
+                           multifasta = multifasta_path,
+                           extra_columns = extra_columns)
 
 
-    for row in hits_df.itertuples():
-        pc_info = classify_pc_regex(row.sequence) 
-        if pc_info:
-            info_to_csv(pc_info, f"results/final/{str(n_genomes)}genomes/final.csv")
+
+    for hit in hits_df.to_dict("records"):
+        pc_info = classify_pc_regex(hit["sequence"])
+
+ 
+        row_info = {"genome": hit["genome"],   
+                    "contig": hit["seq_id"],  
+                    "species": hit["species"]}
+        row_info.update({col: hit[col] for col in extra_columns})
+        row_info.update(pc_info)
+        info_to_csv(row_info, f"results/final/{str(n_genomes)}genomes/final.csv")
+
+

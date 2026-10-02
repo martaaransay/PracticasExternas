@@ -1,0 +1,2003 @@
+
+**************************************************************************
+ ___       _                               _____ _           _
+|_ _|_ __ | |_ ___  __ _ _ __ ___  _ __   |  ___(_)_ __   __| | ___ _ __
+ | || '_ \| __/ _ \/ _` | '__/ _ \| '_ \  | |_  | | '_ \ / _` |/ _ \ '__|
+ | || | | | ||  __/ (_| | | | (_) | | | | |  _| | | | | | (_| |  __/ |
+|___|_| |_|\__\___|\__, |_|  \___/|_| |_| |_|   |_|_| |_|\__,_|\___|_|
+                   |___/
+
+**************************************************************************
+
+integron_finder version 2.0.6 
+Using:
+ - Python 3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]
+ - numpy 2.2.6
+ - pandas 2.3.3
+ - matplolib 3.10.9
+ - biopython 1.88
+
+ - Prodigal V2.6.3: February, 2016
+ - INFERNAL 1.1.4 (Dec 2020)
+ - HMMER 3.3.2 (Nov 2020); http://hmmer.org/
+
+Authors:
+ - Jean Cury, Bertrand Neron, Eduardo Rocha,
+
+Citation:
+
+ Néron, B.; Littner, E.; Haudiquet, M.; Perrin, A.; Cury, J.; Rocha, E.P.C.
+ IntegronFinder 2.0: Identification and Analysis of Integrons across Bacteria, with a Focus on Antibiotic Resistance in Klebsiella.
+ Microorganisms 2022, 10, 700. https://doi.org/10.3390/microorganisms10040700
+
+ If you use --func-annot in conjunction with file NCBIfam-AMRFinder.hmm please also cite
+
+ Haft, DH et al., Nucleic Acids Res. 2018 Jan 4;46(D1):D851-D860
+ PMID: 29112715
+ 
+
+                     =======================
+
+integron_finder is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+integron_finder is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program (COPYING file).
+If not, see <http://www.gnu.org/licenses/>.
+
+                     =======================
+
+command used: integron_finder ../data/500genomes/Ecoli/Ecoli/ncbi_dataset/data/GCF_001284745.1/GCF_001284745.1_7790_1_91_genomic.fna --local-max --outdir results/500genomes/IF2 --gbk --cpu 4 -dt 4000 --evalue-attc 1 --max-attc-size 200 --min-attc-size 40
+
+                     =======================
+
+[0m
+INFO     : ############ Processing replicon NZ_CYCR01000001.1 (1/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000001.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000001.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000001.1
+INFO     : ############ Processing replicon NZ_CYCR01000002.1 (2/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000002.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000002.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000002.1
+INFO     : ############ Processing replicon NZ_CYCR01000003.1 (3/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000003.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000003.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000003.1
+INFO     : ############ Processing replicon NZ_CYCR01000004.1 (4/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000004.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000004.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000004.1
+INFO     : ############ Processing replicon NZ_CYCR01000005.1 (5/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000005.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000005.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000005.1
+INFO     : ############ Processing replicon NZ_CYCR01000006.1 (6/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000006.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000006.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000006.1
+INFO     : ############ Processing replicon NZ_CYCR01000007.1 (7/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000007.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000007.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000007.1
+INFO     : ############ Processing replicon NZ_CYCR01000008.1 (8/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000008.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000008.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000008.1
+INFO     : ############ Processing replicon NZ_CYCR01000009.1 (9/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000009.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000009.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000009.1
+INFO     : ############ Processing replicon NZ_CYCR01000010.1 (10/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000010.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000010.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000010.1
+INFO     : ############ Processing replicon NZ_CYCR01000011.1 (11/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000011.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000011.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000011.1
+INFO     : ############ Processing replicon NZ_CYCR01000012.1 (12/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000012.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000012.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000012.1
+INFO     : ############ Processing replicon NZ_CYCR01000013.1 (13/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000013.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000013.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000013.1
+INFO     : ############ Processing replicon NZ_CYCR01000014.1 (14/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000014.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000014.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000014.1
+INFO     : ############ Processing replicon NZ_CYCR01000015.1 (15/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000015.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000015.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000015.1
+INFO     : ############ Processing replicon NZ_CYCR01000016.1 (16/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000016.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000016.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000016.1
+INFO     : ############ Processing replicon NZ_CYCR01000017.1 (17/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000017.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000017.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000017.1
+INFO     : ############ Processing replicon NZ_CYCR01000018.1 (18/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000018.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000018.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000018.1
+INFO     : ############ Processing replicon NZ_CYCR01000019.1 (19/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000019.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000019.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000019.1
+INFO     : ############ Processing replicon NZ_CYCR01000020.1 (20/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000020.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000020.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000020.1
+INFO     : ############ Processing replicon NZ_CYCR01000021.1 (21/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000021.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000021.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000021.1
+INFO     : ############ Processing replicon NZ_CYCR01000022.1 (22/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000022.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000022.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000022.1
+INFO     : ############ Processing replicon NZ_CYCR01000023.1 (23/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000023.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000023.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000023.1
+INFO     : ############ Processing replicon NZ_CYCR01000024.1 (24/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000024.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000024.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000024.1
+INFO     : ############ Processing replicon NZ_CYCR01000025.1 (25/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000025.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000025.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000025.1
+INFO     : ############ Processing replicon NZ_CYCR01000026.1 (26/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000026.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000026.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000026.1
+INFO     : ############ Processing replicon NZ_CYCR01000027.1 (27/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000027.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000027.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000027.1
+INFO     : ############ Processing replicon NZ_CYCR01000028.1 (28/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000028.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000028.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000028.1
+INFO     : ############ Processing replicon NZ_CYCR01000029.1 (29/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000029.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000029.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000029.1
+INFO     : ############ Processing replicon NZ_CYCR01000030.1 (30/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000030.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000030.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000030.1
+INFO     : ############ Processing replicon NZ_CYCR01000031.1 (31/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000031.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000031.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000031.1
+INFO     : ############ Processing replicon NZ_CYCR01000032.1 (32/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000032.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000032.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000032.1
+INFO     : ############ Processing replicon NZ_CYCR01000033.1 (33/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000033.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000033.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000033.1
+INFO     : ############ Processing replicon NZ_CYCR01000034.1 (34/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000034.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000034.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000034.1
+INFO     : ############ Processing replicon NZ_CYCR01000035.1 (35/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000035.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000035.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000035.1
+INFO     : ############ Processing replicon NZ_CYCR01000036.1 (36/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000036.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000036.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000036.1
+INFO     : ############ Processing replicon NZ_CYCR01000037.1 (37/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000037.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000037.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000037.1
+INFO     : ############ Processing replicon NZ_CYCR01000038.1 (38/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000038.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000038.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000038.1
+INFO     : ############ Processing replicon NZ_CYCR01000039.1 (39/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000039.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000039.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000039.1
+INFO     : ############ Processing replicon NZ_CYCR01000040.1 (40/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000040.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000040.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000040.1
+INFO     : ############ Processing replicon NZ_CYCR01000041.1 (41/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000041.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000041.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000041.1
+INFO     : ############ Processing replicon NZ_CYCR01000042.1 (42/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000042.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000042.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000042.1
+INFO     : ############ Processing replicon NZ_CYCR01000043.1 (43/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000043.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000043.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000043.1
+INFO     : ############ Processing replicon NZ_CYCR01000044.1 (44/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000044.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000044.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000044.1
+INFO     : ############ Processing replicon NZ_CYCR01000045.1 (45/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000045.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000045.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000045.1
+INFO     : ############ Processing replicon NZ_CYCR01000046.1 (46/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000046.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000046.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000046.1
+INFO     : ############ Processing replicon NZ_CYCR01000047.1 (47/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000047.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000047.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000047.1
+INFO     : ############ Processing replicon NZ_CYCR01000048.1 (48/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000048.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000048.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000048.1
+INFO     : ############ Processing replicon NZ_CYCR01000049.1 (49/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000049.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000049.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000049.1
+INFO     : ############ Processing replicon NZ_CYCR01000050.1 (50/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000050.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000050.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000050.1
+INFO     : ############ Processing replicon NZ_CYCR01000051.1 (51/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000051.1, there are:
+INFO     : - 1 complete integron(s) found with a total 1 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000051.1, there are:
+INFO     : - 1 complete integron(s) found with a total 1 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Adding proteins ... :
+INFO     : Writing out results for replicon NZ_CYCR01000051.1
+INFO     : ############ Processing replicon NZ_CYCR01000052.1 (52/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000052.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000052.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000052.1
+INFO     : ############ Processing replicon NZ_CYCR01000053.1 (53/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000053.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000053.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000053.1
+INFO     : ############ Processing replicon NZ_CYCR01000054.1 (54/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000054.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000054.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000054.1
+INFO     : ############ Processing replicon NZ_CYCR01000055.1 (55/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000055.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000055.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000055.1
+INFO     : ############ Processing replicon NZ_CYCR01000056.1 (56/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000056.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000056.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000056.1
+INFO     : ############ Processing replicon NZ_CYCR01000057.1 (57/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000057.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000057.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000057.1
+INFO     : ############ Processing replicon NZ_CYCR01000058.1 (58/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000058.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000058.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000058.1
+INFO     : ############ Processing replicon NZ_CYCR01000059.1 (59/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000059.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000059.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000059.1
+INFO     : ############ Processing replicon NZ_CYCR01000060.1 (60/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000060.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000060.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000060.1
+INFO     : ############ Processing replicon NZ_CYCR01000061.1 (61/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000061.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000061.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000061.1
+INFO     : ############ Processing replicon NZ_CYCR01000062.1 (62/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000062.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000062.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000062.1
+INFO     : ############ Processing replicon NZ_CYCR01000063.1 (63/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000063.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000063.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000063.1
+INFO     : ############ Processing replicon NZ_CYCR01000064.1 (64/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000064.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000064.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000064.1
+INFO     : ############ Processing replicon NZ_CYCR01000065.1 (65/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000065.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000065.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000065.1
+INFO     : ############ Processing replicon NZ_CYCR01000066.1 (66/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000066.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000066.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000066.1
+INFO     : ############ Processing replicon NZ_CYCR01000067.1 (67/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000067.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000067.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000067.1
+INFO     : ############ Processing replicon NZ_CYCR01000068.1 (68/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000068.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000068.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000068.1
+INFO     : ############ Processing replicon NZ_CYCR01000069.1 (69/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000069.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000069.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000069.1
+INFO     : ############ Processing replicon NZ_CYCR01000070.1 (70/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000070.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000070.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000070.1
+INFO     : ############ Processing replicon NZ_CYCR01000071.1 (71/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000071.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000071.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000071.1
+INFO     : ############ Processing replicon NZ_CYCR01000072.1 (72/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000072.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000072.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000072.1
+INFO     : ############ Processing replicon NZ_CYCR01000073.1 (73/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000073.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000073.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000073.1
+INFO     : ############ Processing replicon NZ_CYCR01000074.1 (74/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000074.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000074.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000074.1
+INFO     : ############ Processing replicon NZ_CYCR01000075.1 (75/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000075.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000075.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000075.1
+INFO     : ############ Processing replicon NZ_CYCR01000076.1 (76/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000076.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000076.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000076.1
+INFO     : ############ Processing replicon NZ_CYCR01000077.1 (77/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000077.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000077.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000077.1
+INFO     : ############ Processing replicon NZ_CYCR01000078.1 (78/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000078.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000078.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000078.1
+INFO     : ############ Processing replicon NZ_CYCR01000079.1 (79/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000079.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000079.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000079.1
+INFO     : ############ Processing replicon NZ_CYCR01000080.1 (80/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000080.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000080.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000080.1
+INFO     : ############ Processing replicon NZ_CYCR01000081.1 (81/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000081.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000081.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000081.1
+INFO     : ############ Processing replicon NZ_CYCR01000082.1 (82/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000082.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000082.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000082.1
+INFO     : ############ Processing replicon NZ_CYCR01000083.1 (83/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000083.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000083.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000083.1
+INFO     : ############ Processing replicon NZ_CYCR01000084.1 (84/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000084.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000084.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000084.1
+INFO     : ############ Processing replicon NZ_CYCR01000085.1 (85/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000085.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000085.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000085.1
+INFO     : ############ Processing replicon NZ_CYCR01000086.1 (86/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000086.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000086.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000086.1
+INFO     : ############ Processing replicon NZ_CYCR01000087.1 (87/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000087.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000087.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000087.1
+INFO     : ############ Processing replicon NZ_CYCR01000088.1 (88/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000088.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000088.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000088.1
+INFO     : ############ Processing replicon NZ_CYCR01000089.1 (89/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000089.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000089.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000089.1
+INFO     : ############ Processing replicon NZ_CYCR01000090.1 (90/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000090.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000090.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000090.1
+INFO     : ############ Processing replicon NZ_CYCR01000091.1 (91/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000091.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000091.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000091.1
+INFO     : ############ Processing replicon NZ_CYCR01000092.1 (92/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000092.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000092.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000092.1
+INFO     : ############ Processing replicon NZ_CYCR01000093.1 (93/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000093.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000093.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000093.1
+INFO     : ############ Processing replicon NZ_CYCR01000094.1 (94/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000094.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000094.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000094.1
+INFO     : ############ Processing replicon NZ_CYCR01000095.1 (95/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000095.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000095.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000095.1
+INFO     : ############ Processing replicon NZ_CYCR01000096.1 (96/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000096.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000096.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000096.1
+INFO     : ############ Processing replicon NZ_CYCR01000097.1 (97/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000097.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000097.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000097.1
+INFO     : ############ Processing replicon NZ_CYCR01000098.1 (98/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000098.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000098.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000098.1
+INFO     : ############ Processing replicon NZ_CYCR01000099.1 (99/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000099.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000099.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000099.1
+INFO     : ############ Processing replicon NZ_CYCR01000100.1 (100/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000100.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000100.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000100.1
+INFO     : ############ Processing replicon NZ_CYCR01000101.1 (101/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000101.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000101.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000101.1
+INFO     : ############ Processing replicon NZ_CYCR01000102.1 (102/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000102.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000102.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000102.1
+INFO     : ############ Processing replicon NZ_CYCR01000103.1 (103/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000103.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000103.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000103.1
+INFO     : ############ Processing replicon NZ_CYCR01000104.1 (104/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000104.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000104.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000104.1
+INFO     : ############ Processing replicon NZ_CYCR01000105.1 (105/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000105.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000105.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000105.1
+INFO     : ############ Processing replicon NZ_CYCR01000106.1 (106/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000106.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000106.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000106.1
+INFO     : ############ Processing replicon NZ_CYCR01000107.1 (107/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000107.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000107.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000107.1
+INFO     : ############ Processing replicon NZ_CYCR01000108.1 (108/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000108.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000108.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000108.1
+INFO     : ############ Processing replicon NZ_CYCR01000109.1 (109/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000109.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000109.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000109.1
+INFO     : ############ Processing replicon NZ_CYCR01000110.1 (110/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000110.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000110.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000110.1
+INFO     : ############ Processing replicon NZ_CYCR01000111.1 (111/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000111.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000111.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000111.1
+INFO     : ############ Processing replicon NZ_CYCR01000112.1 (112/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000112.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000112.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000112.1
+INFO     : ############ Processing replicon NZ_CYCR01000113.1 (113/130) ############
+
+WARNING  : The protein file: '/home/mba/Documents/AransayMarta/PracticasExternas/results/500genomes/IF2/Results_Integron_Finder_GCF_001284745.1_7790_1_91_genomic/tmp_NZ_CYCR01000113.1/NZ_CYCR01000113.1.prt' is empty cannot perform hmmsearch on it.
+WARNING  : ############ Skip replicon NZ_CYCR01000113.1 ############
+INFO     : ############ Processing replicon NZ_CYCR01000114.1 (114/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000114.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000114.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000114.1
+INFO     : ############ Processing replicon NZ_CYCR01000115.1 (115/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000115.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000115.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000115.1
+INFO     : ############ Processing replicon NZ_CYCR01000116.1 (116/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000116.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000116.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000116.1
+INFO     : ############ Processing replicon NZ_CYCR01000117.1 (117/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000117.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000117.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000117.1
+INFO     : ############ Processing replicon NZ_CYCR01000118.1 (118/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000118.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000118.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000118.1
+INFO     : ############ Processing replicon NZ_CYCR01000119.1 (119/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000119.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000119.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000119.1
+INFO     : ############ Processing replicon NZ_CYCR01000120.1 (120/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000120.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000120.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000120.1
+INFO     : ############ Processing replicon NZ_CYCR01000121.1 (121/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000121.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000121.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000121.1
+INFO     : ############ Processing replicon NZ_CYCR01000122.1 (122/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000122.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000122.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000122.1
+INFO     : ############ Processing replicon NZ_CYCR01000123.1 (123/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000123.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000123.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000123.1
+INFO     : ############ Processing replicon NZ_CYCR01000124.1 (124/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000124.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000124.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000124.1
+INFO     : ############ Processing replicon NZ_CYCR01000125.1 (125/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000125.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000125.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000125.1
+INFO     : ############ Processing replicon NZ_CYCR01000126.1 (126/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000126.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000126.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000126.1
+INFO     : ############ Processing replicon NZ_CYCR01000127.1 (127/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000127.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000127.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000127.1
+INFO     : ############ Processing replicon NZ_CYCR01000128.1 (128/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000128.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000128.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000128.1
+INFO     : ############ Processing replicon NZ_CYCR01000129.1 (129/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000129.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000129.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000129.1
+INFO     : ############ Processing replicon NZ_CYCR01000130.1 (130/130) ############
+
+INFO     : Starting Default search ... :
+INFO     : Default search done... : 
+INFO     : In replicon NZ_CYCR01000130.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Starting search with local_max...:
+INFO     : Search with local_max done... :
+INFO     : In replicon NZ_CYCR01000130.1, there are:
+INFO     : - 0 complete integron(s) found with a total 0 attC site(s)
+INFO     : - 0 CALIN element(s) found with a total of 0 attC site(s)
+INFO     : - 0 In0 element(s) found with a total of 0 attC site
+INFO     : Writing out results for replicon NZ_CYCR01000130.1
+INFO     : Merging integrons results.
+

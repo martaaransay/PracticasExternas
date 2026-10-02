@@ -11,11 +11,12 @@ from concurrent.futures import ThreadPoolExecutor
 from pipeline.downloadgenomes import datasets_flags, download_genomes
 from pipeline.generate_db import download_species_genomes, generate_multifasta, generate_db
 from pipeline.blastn import run_blastn
-from pipeline.useful_funct import list_fasta_files, contig_to_genome
+from pipeline.useful_funct import list_fasta_files, contig_to_genome, genome_key, unique_genome_files
 from pipeline.parallel_download import process_all
 from plot.plotting import plot_evalue, plot_bitscore, plot_evalue_thresholds, plot_hits_comparison, plot_hits_overlap
 from pipeline.integronfinder import Integron_Finder
 from pipeline.integronfiltering import integron_filtering
+from pipeline.analyze_Pc import extract_integron_info_gbk
 
 
 # --------Definition of functions
@@ -74,28 +75,6 @@ def process_tsv2compare(tsv_files):
 
     return dfs, log_data, bitscore_data, labels
 
-#------------------------ Function to normalize the accession between results of methods
-def genome_key(name):
-    """
-    Extracts and normalizes the NCBI genome accession number from a given string.
-        
-    Args
-    ------
-    name (str): A genome path (without extension).
-
-    Return
-    ------
-    accession (str): The extracted accession number if the pattern is found. 
-                     If no match is found, it returns the original string.
-    """
-    pattern = r"GC[FA]_(\d+\.\d+)" # r"  to do not escape \d and \.
-    match = re.search(pattern, str(name)) # Search the pattern into the path
-    if match:
-        accession = match.group(1) # Extracts the match
-    else:
-        accession = str(name)
-    return accession
-
 
 #------------------------ Function to execute IF2 and Integron-filtering + IF2
 def run_method(idx_analysis, parent_results_dir, list_files, cpu):
@@ -145,11 +124,13 @@ def run_method(idx_analysis, parent_results_dir, list_files, cpu):
             file = integron_filtering(genome_path = each_file, 
                                       outdir = dir_IntFilt)
             
-            if not file: # If no integron detected by integron-filtering, adds a 0 into hits dict                      
-                hits[original_acc] = 0
-                continue # Skips the current genome
+            if file: # If no integron detected by integron-filtering, adds a 0 into hits dict                      
+                each_file = file
+            else:
+                continue
+                
             # If integron detected, updates the path to the genome filtered
-            each_file = file
+            
         # Updates the accession (adds _genomic)
         acc_for_IF2 = os.path.splitext(os.path.basename(each_file))[0]
         # Executes IntegronFinder2
@@ -163,7 +144,13 @@ def run_method(idx_analysis, parent_results_dir, list_files, cpu):
             failed.append(original_acc)
             continue # Skips the current genome
         # Adds the number of integrons detected by IF2 into hits dict
-        hits[original_acc] = len(gbk_files)
+        info = extract_integron_info_gbk(original_acc, gbk_files)
+        n_integrases = 0
+        for i in info:
+                if not i["calin"]:
+                    n_integrases += 1
+        hits[original_acc] = n_integrases
+                
 
     unique_genomes = [] # List to store genomes with 1 hit or more
     for accession, num_hits in hits.items():
@@ -183,7 +170,7 @@ def run_method(idx_analysis, parent_results_dir, list_files, cpu):
 if __name__ == "__main__":
     ### 0) Creating the database with genomes:
 
-    num_genomes_each = 500 # Number of genomes of each specie in the database
+    num_genomes_each = 250 # Number of genomes of each specie in the database
     flag_db_created = False
     if not flag_db_created:
 
@@ -285,12 +272,8 @@ if __name__ == "__main__":
     # List fasta files with 5 levels of depth using the root directory
     all_files = list_fasta_files(genomes_dir, depth = 5)
 
-    # Removes duplicated genomes (same assembly in GCF and GCA versions)
-    unique_files = {}
-    for file in all_files:
-        # Keep the first file of each genome
-        unique_files.setdefault(genome_key(file), file)  
-    
+    unique_files = unique_genome_files(all_files)
+
     list_files = list(unique_files.values())
     # Divides the cores between methods
     cpu_each = max(1, os.cpu_count() // 2) 
@@ -358,3 +341,43 @@ if __name__ == "__main__":
     plot_hits_overlap(sets_dict, 
                       title = f"Method comparison {general_title}", 
                       outdir = outdir)
+
+    #### To store plotted results:
+
+    # BLAST: number of hits per genome
+    blast_counts = {}
+    for each_contig in blast_df["seq_id"]:
+        if each_contig in mapping:
+            acc = genome_key(mapping[each_contig])
+            blast_counts[acc] = blast_counts.get(acc, 0) + 1
+
+    # IF2 and IntFilt+IF2: number of integrons per genome (normalized accession)
+    IF2_counts = {genome_key(k): v for k, v in res_IF2["hits"].items()}
+    IntIF2_counts = {genome_key(k): v for k, v in res_IntIF2["hits"].items()}
+
+
+    # Universe: all the genomes analyzed (including those without hits)
+    all_accs = sorted(unique_files.keys())
+
+    df_genomes = pd.DataFrame({
+        "genome": all_accs,
+        "path": [unique_files[a] for a in all_accs],
+        "BLAST_hits": [blast_counts.get(a, 0) for a in all_accs],
+        "IF2_hits": [IF2_counts.get(a, 0) for a in all_accs],
+        "IntFilt_IF2_hits": [IntIF2_counts.get(a, 0) for a in all_accs],
+    })
+
+    # Presence/absence (= unique hits)
+    df_genomes["in_BLAST"] = df_genomes["BLAST_hits"] > 0
+    df_genomes["in_IF2"] = df_genomes["IF2_hits"] > 0
+    df_genomes["in_IntFilt_IF2"] = df_genomes["IntFilt_IF2_hits"] > 0
+
+    df_genomes.to_csv(f"{outdir}/genomes_hits.csv", index=False)
+
+    # Summary of the comparison (general hits, unique hits and time)
+    df_summary = pd.DataFrame(
+        [{"method": m,
+          "general_hits": hits_summary[m][0],
+          "unique_hits": hits_summary[m][1],
+          "time_s": times[m]} for m in hits_summary])
+    df_summary.to_csv(f"{outdir}/methods_summary.csv", index=False)
